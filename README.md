@@ -11,3 +11,12 @@ This project focuses on **Human Activity Recognition (HAR)** for **health monito
 - Potential applications in **health monitoring and fitness tracking**  
 
 ## 📂 Project Structure  
+├── data/ # Raw & processed data
+├── notebooks/ # Jupyter notebooks for analysis
+├── models/ # Trained models
+├── src/ # Source code
+│ ├── preprocessing.py # Data preprocessing
+│ ├── training.py # Model training
+│ ├── inference.py # Activity recognition
+├── results/ # Model evaluation results
+├── README.md # Project documentation
