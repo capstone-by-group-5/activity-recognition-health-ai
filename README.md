@@ -20,7 +20,7 @@ This project focuses on **Human Activity Recognition (HAR)** for **health monito
  │ ├── training.py           # Model training </br>
  │ ├── inference.py          # Activity recognition </br>
  ├── results/                # Model evaluation results </br>
- ├── config/                 # Configuration files (Optional)  </br>
+ ├── config/                 # Configuration files (Optional) </br>
  ├── scripts/                # Utility scripts (Optional)  </br>
  ├── logs/                   # Training and evaluation logs (Optional)  </br>
  ├── README.md # Project documentation
