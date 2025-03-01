@@ -12,7 +12,7 @@ This project focuses on **Human Activity Recognition (HAR)** for **health monito
 
 ## 📂 Project Structure  
 
- ├── data/           #Raw & processed data </br>
+ ├── data/                   #Raw & processed data </br>
  ├── notebooks/              # Jupyter notebooks for analysis </br>
  ├── models/                 # Trained models </br>
  ├── src/                    # Source code </br>
