@@ -11,12 +11,22 @@ This project focuses on **Human Activity Recognition (HAR)** for **health monito
 - Potential applications in **health monitoring and fitness tracking**  
 
 ## 📂 Project Structure  
-├── data/ # Raw & processed data
-├── notebooks/ # Jupyter notebooks for analysis
-├── models/ # Trained models
-├── src/ # Source code
-│ ├── preprocessing.py # Data preprocessing
-│ ├── training.py # Model training
-│ ├── inference.py # Activity recognition
-├── results/ # Model evaluation results
-├── README.md # Project documentation
+
+ ├── data/ # Raw & processed data </br>
+ ├── notebooks/ # Jupyter notebooks for analysis </br>
+ ├── models/ # Trained models </br>
+ ├── src/ # Source code </br>
+ │ ├── preprocessing.py # Data preprocessing </br>
+ │ ├── training.py # Model training </br>
+ │ ├── inference.py # Activity recognition </br>
+ ├── results/ # Model evaluation results </br>
+ ├── config/             # Configuration files (Optional)  </br>
+ ├── scripts/            # Utility scripts (Optional)  </br>
+ ├── logs/               # Training and evaluation logs (Optional)  </br>
+ ├── README.md # Project documentation
+
+
+## 📥 Dataset
+Dataset from Kaggle:  
+[Human Activity Recognition with Smartphones](https://www.kaggle.com/datasets/uciml/human-activity-recognition-with-smartphones)  
+ 
