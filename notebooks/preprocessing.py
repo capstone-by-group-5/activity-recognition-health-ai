@@ -1,5 +1,3 @@
-
-
 import pandas as pd
 import numpy as np
 from scipy.stats import skew, kurtosis
@@ -17,7 +15,7 @@ os.makedirs(output_dir, exist_ok=True)
 train_df = pd.read_csv(train_path)
 test_df = pd.read_csv(test_path)
 
-def extract_features(df):
+def extract_features(df, fft_value=None):
     """Extracts statistical and FFT features from numerical columns."""
     feature_df = pd.DataFrame()
     for col in df.select_dtypes(include=[np.number]).columns:
@@ -32,7 +30,7 @@ def extract_features(df):
 
         # FFT-based feature
         fft_values = np.abs(fft(df[col].dropna()))  # Compute FFT and take the absolute values
-        feature_df[f'{col}_fft_energy'] = [np.sum(fft_values**2)]  # Energy of the signal
+        feature_df[f'{col}_fft_energy'] = [np.sum(fft_value s* *2)]  # Energy of the signal
 
     return feature_df
 
