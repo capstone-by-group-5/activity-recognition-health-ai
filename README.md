@@ -22,7 +22,7 @@ This project focuses on **Human Activity Recognition (HAR)** for **health monito
  ├── results/                # Model evaluation results </br>
  ├── config/                 # Configuration files (Optional) </br>
  ├── scripts/                # Utility scripts (Optional) </br>
- ├── logs/                   # Training and evaluation logs (Optional)  </br>
+ ├── logs/                   # Training and evaluation logs (Optional) </br>
  ├── README.md # Project documentation
 
 
