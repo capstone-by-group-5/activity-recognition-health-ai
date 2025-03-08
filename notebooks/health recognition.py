@@ -22,15 +22,6 @@ from tensorflow import keras
 from tensorflow.keras import layers
 
 
-# In[ ]:
-
-
-
-
-
-# In[2]:
-
-
 train_data = pd.read_csv('/Users/apple/Documents/projects/activity-recognition-health-ai/data/raw/train.csv')
 test_data = pd.read_csv('/Users/apple/Documents/projects/activity-recognition-health-ai/data/raw/test.csv')
 
@@ -138,11 +129,19 @@ def remove_outliers_modified_zscore(df, y, threshold=3.5):
 
 
 
-def remove_outliers_iqr(df, y, columns):
+def remove_outliers_iqr(df, y, columns, max_outlier_fraction=0.1):
+    """Removes rows with excessive outliers based on the IQR method."""
     Q1 = df[columns].quantile(0.25)
     Q3 = df[columns].quantile(0.75)
     IQR = Q3 - Q1
-    mask = ~((df[columns] < (Q1 - 1.5 * IQR)) | (df[columns] > (Q3 + 1.5 * IQR))).any(axis=1)
+    outlier_mask = (df[columns] < (Q1 - 1.5 * IQR)) | (df[columns] > (Q3 + 1.5 * IQR))
+    
+    # Count number of outlier features per row
+    outlier_counts = outlier_mask.sum(axis=1)
+    
+    # Keep rows where fewer than 10% of features are outliers
+    mask = outlier_counts <= (max_outlier_fraction * len(columns))
+    
     return df[mask], y[mask]
 
 # X_train, y_train = remove_outliers_iqr(X_train, y_train, X_train.columns)
@@ -151,8 +150,7 @@ def remove_outliers_iqr(df, y, columns):
 
 # In[13]:
 
-
-X_train, y_train = remove_outliers_iqr(X_train, y_train, X_train.columns)
+X_train, y_train = remove_outliers_iqr(X_train, y_train, X_train.columns, max_outlier_fraction=0.1)
 
 
 # In[ ]:
