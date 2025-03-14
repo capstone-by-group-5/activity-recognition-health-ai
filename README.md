@@ -26,6 +26,35 @@ This project focuses on **Human Activity Recognition (HAR)** for **health monito
  ├── README.md # Project documentation
 
 
+📂 Project Structure
+├── data/
+│ ├── raw/
+│ │ ├── train.csv
+│ │ ├── test.csv
+│ ├── processed/
+│ │ ├── train_processed.csv
+│ │ ├── test_processed.csv
+├── notebooks/
+│ ├── eda.ipynb
+├── models/
+│ ├── har_model.pkl
+│ ├── scaler.pkl
+│ ├── pca.pkl
+│ ├── encoder.pkl
+├── src/
+│ ├── preprocessing.py
+│ ├── training.py
+│ ├── inference.py
+├── results/
+│ ├── accuracy.txt
+│ ├── classification_report.txt
+│ ├── confusion_matrix.png
+├── config/ (Optional)
+├── scripts/ (Optional)
+├── logs/ (Optional)
+├── README.md
+
+
 ## 📥 Dataset
 Dataset from Kaggle:  
 [Human Activity Recognition with Smartphones](https://www.kaggle.com/datasets/uciml/human-activity-recognition-with-smartphones)  
