@@ -58,4 +58,7 @@ This project focuses on **Human Activity Recognition (HAR)** for **health monito
 ## 📥 Dataset
 Dataset from Kaggle:  
 [Human Activity Recognition with Smartphones](https://www.kaggle.com/datasets/uciml/human-activity-recognition-with-smartphones)  
- 
+
+
+## To Run the application
+Command to Execute in terminal :  `python main.py`
