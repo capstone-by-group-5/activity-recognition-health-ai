@@ -1,18 +1,17 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[293]:
+# In[44]:
 
 
 # Import Libraries
 
 
-# In[424]:
+# In[45]:
 
 
 import os
 import logging
-import joblib
 import numpy as np
 import pandas as pd
 import seaborn as sns
@@ -34,12 +33,14 @@ from sklearn.feature_selection import RFE
 from sklearn.metrics import (
     accuracy_score, f1_score, precision_score, recall_score, classification_report, confusion_matrix
 )
+from sklearn.svm import SVC
+from sklearn.model_selection import GridSearchCV, cross_val_score
+import logging
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv1D, MaxPooling1D, LSTM, Dense
 from imblearn.over_sampling import SMOTE
 from scipy.stats import zscore
 from collections import Counter
-from joblib import Parallel, delayed
 from xgboost import XGBClassifier
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.model_selection import train_test_split
@@ -49,7 +50,7 @@ from tensorflow.keras.callbacks import EarlyStopping
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 
 
-# In[425]:
+# In[46]:
 
 
 # Dataset paths
@@ -58,13 +59,13 @@ train_path = "Dataset-HAR-Monitoring/train.csv"
 test_path = "Dataset-HAR-Monitoring/test.csv"
 
 
-# In[426]:
+# In[47]:
 
 
 # Load Data
 
 
-# In[427]:
+# In[48]:
 
 
 def load_data(train_path, test_path):
@@ -75,20 +76,20 @@ def load_data(train_path, test_path):
     return train, test
 
 
-# In[428]:
+# In[49]:
 
 
 # Define target_names
 target_names = ['STANDING', 'SITTING', 'LAYING', 'WALKING', 'WALKING_DOWNSTAIRS', 'WALKING_UPSTAIRS']
 
 
-# In[429]:
+# In[50]:
 
 
 # EDA Check
 
 
-# In[430]:
+# In[51]:
 
 
 def EDA_check(train, test):
@@ -102,13 +103,13 @@ def EDA_check(train, test):
     feature_distributions(train)
 
 
-# In[431]:
+# In[52]:
 
 
 # Sub Methods for EDA
 
 
-# In[432]:
+# In[53]:
 
 
 # Data Overview
@@ -126,7 +127,7 @@ def data_overview(train, test):
     print("Shape:", test.shape)
 
 
-# In[433]:
+# In[54]:
 
 
 # Basic stats
@@ -144,7 +145,7 @@ def basic_statistics(train):
     print("\nNumerical Columns:", num_cols)
 
 
-# In[434]:
+# In[55]:
 
 
 # Class Distribution
@@ -158,7 +159,7 @@ def class_distribution(train):
     plt.show()
 
 
-# In[435]:
+# In[56]:
 
 
 # Identify missing data 
@@ -174,7 +175,7 @@ def missing_data(train):
     print(f"Number of duplicate rows: {duplicates}")
 
 
-# In[436]:
+# In[57]:
 
 
 # Feature Correlation Matrix
@@ -189,7 +190,7 @@ def feature_relationships(train):
     plt.show()
 
 
-# In[437]:
+# In[58]:
 
 
 # Feature Distribution
@@ -224,13 +225,13 @@ def feature_distributions(train):
         plt.show()
 
 
-# In[438]:
+# In[59]:
 
 
 # Data Preprocessing
 
 
-# In[439]:
+# In[60]:
 
 
 from sklearn.preprocessing import OneHotEncoder
@@ -275,13 +276,13 @@ def data_preprocessing(train, test):
     return X_resampled, y_resampled, X_test_final, y_test, scaler, pca, activity_encoder, subject_encoder
 
 
-# In[440]:
+# In[61]:
 
 
 # Remove correletaed Features
 
 
-# In[441]:
+# In[62]:
 
 
 def remove_highly_correlated_features(train, test, threshold=0.97):
@@ -314,7 +315,7 @@ def remove_highly_correlated_features(train, test, threshold=0.97):
     return X_train, X_test
 
 
-# In[442]:
+# In[63]:
 
 
 # Remove High VIF Features
@@ -349,13 +350,13 @@ def svd_vif(X):
     return vif_values
 
 
-# In[443]:
+# In[64]:
 
 
 # Preprocessor Data , scaling, PCA, and feature selection
 
 
-# In[444]:
+# In[65]:
 
 
 def preprocess_data(X_train, X_test, variance_threshold=0.97):
@@ -382,13 +383,13 @@ def preprocess_data(X_train, X_test, variance_threshold=0.97):
     return X_train_pca, X_test_pca, scaler, pca
 
 
-# In[445]:
+# In[66]:
 
 
 # Check class imbalance
 
 
-# In[446]:
+# In[67]:
 
 
 def check_class_imbalance(y_train, encoder):
@@ -410,13 +411,13 @@ def check_class_imbalance(y_train, encoder):
     return label_counts
 
 
-# In[447]:
+# In[68]:
 
 
 # Handle class imbalance
 
 
-# In[448]:
+# In[69]:
 
 
 def handle_class_imbalance(X_train, y_train):
@@ -426,7 +427,7 @@ def handle_class_imbalance(X_train, y_train):
     return X_resampled, y_resampled
 
 
-# In[449]:
+# In[70]:
 
 
 def tune_hyperparameters(X_train, y_train):
@@ -449,7 +450,7 @@ def tune_hyperparameters(X_train, y_train):
     return grid_search.best_estimator_
 
 
-# In[467]:
+# In[86]:
 
 
 def randomforest_model_training_and_evaluation(algorithm_name, X_train, y_train, X_test, y_test):
@@ -489,12 +490,12 @@ def randomforest_model_training_and_evaluation(algorithm_name, X_train, y_train,
     print("Predictions made on the test set.")
 
     # Evaluate model performance
-    evaluate_model(algorithm_name, y_test, y_pred)
+    evaluate_model(algorithm_name, y_test, y_pred_random_forest)
     print("Model evaluated.")
     return model,y_pred_random_forest
 
 
-# In[468]:
+# In[87]:
 
 
 def plot_confusion_matrix(cm, y_test):
@@ -508,7 +509,7 @@ def plot_confusion_matrix(cm, y_test):
     plt.show()
 
 
-# In[469]:
+# In[88]:
 
 
 def evaluate_model(algorithm_name, y_test, y_pred):
@@ -534,25 +535,25 @@ def evaluate_model(algorithm_name, y_test, y_pred):
     return accuracy, report, cm
 
 
-# In[453]:
+# In[89]:
 
 
 # -----------------------------------------------------------------------------------------------------------------------------------
 
 
-# In[454]:
+# In[90]:
 
 
 # -----------------------------------------------------------------------------------------------------------------------------------
 
 
-# In[455]:
+# In[76]:
 
 
 # -----------------------------------------------------------------------------------------------------------------------------------
 
 
-# In[456]:
+# In[77]:
 
 
 # DATA LOADING
@@ -562,25 +563,25 @@ def evaluate_model(algorithm_name, y_test, y_pred):
 # Data Preprocessing
 
 
-# In[457]:
+# In[78]:
 
 
 # -----------------------------------------------------------------------------------------------------------------------------------
 
 
-# In[458]:
+# In[79]:
 
 
 # -----------------------------------------------------------------------------------------------------------------------------------
 
 
-# In[459]:
+# In[80]:
 
 
 # -----------------------------------------------------------------------------------------------------------------------------------
 
 
-# In[460]:
+# In[81]:
 
 
 # Load data
@@ -596,7 +597,7 @@ X_train, y_train, X_test, y_test, scaler, pca, activity_encoder, subject_encoder
 #X_train_final, y_train, X_test_final, y_test, scaler, pca, activity_encoder, subject_encoder = data_preprocessing(train, test)
 
 
-# In[461]:
+# In[91]:
 
 
 X_train_input = X_train
@@ -605,7 +606,7 @@ X_test_input = X_test
 y_test_input = y_test
 scaler_input = scaler
 pca_input=pca
-encoder_input=encoder
+encoder_input=subject_encoder
 print("X_train shape:", X_train.shape)
 print("y_train shape:", y_train.shape)
 print("X_test shape:", X_test.shape)
@@ -617,25 +618,31 @@ print("X_test_input shape:", X_test_input.shape)
 print("y_test_input shape:", y_test_input.shape)
 
 
-# In[462]:
+# In[92]:
 
 
 # Traing and evaluate RandomForest Model
 
 
-# In[463]:
+# In[93]:
 
 
 y_train_input
 
 
-# In[470]:
+# In[ ]:
+
+
+# Traing and evaluate RandomForest Model
+
+
+# In[94]:
 
 
 model_random_forest, y_pred_random_forest = randomforest_model_training_and_evaluation("RandomForest", X_train_input, y_train_input, X_test_input, y_test_input)
 
 
-# In[471]:
+# In[96]:
 
 
 # Ensure X_train and y_train have the correct shapes
@@ -647,7 +654,7 @@ if y_pred_random_forest.ndim > 1:
     y_pred_random_forest = y_pred_random_forest.argmax(axis=1)
 
 # Mapping predicted labels to target names
-predicted_target_names = [target_names[i] for i in y_pred]
+predicted_target_names = [target_names[i] for i in y_pred_random_forest]
 
 # Mapping original labels to target names
 original_target_names = [target_names[i] for i in y_test]
@@ -666,42 +673,32 @@ for i in range(num_offsets):
         print(f"Sample {j}: Predicted = {predicted_target_names[j]}, Original = {original_target_names[j]}")
 
 
-# In[472]:
-
-
-# Traing and evaluate RandomForest Model
-
-
-# In[473]:
+# In[98]:
 
 
 # -----------------------------------------------------------------------------------------------------------------------------------
 
 
-# In[474]:
+# In[99]:
 
 
 # -----------------------------------------------------------------------------------------------------------------------------------
 
 
-# In[475]:
+# In[100]:
 
 
 # -----------------------------------------------------------------------------------------------------------------------------------
 
 
-# In[476]:
+# In[101]:
 
 
 # -----------------------------------------------------------------------------------------------------------------------------------
 
 
-# In[487]:
+# In[102]:
 
-
-from sklearn.svm import SVC
-from sklearn.model_selection import GridSearchCV, cross_val_score
-import logging
 
 def svm_tune_hyperparameters(X_train, y_train):
     """Perform hyperparameter tuning using GridSearchCV."""
@@ -764,7 +761,7 @@ def svm_model_training_and_evaluation(X_train, y_train, X_test, y_test, algorith
     return model_svm, y_pred_svm
 
 
-# In[488]:
+# In[103]:
 
 
 # Ensure X_train and y_train have the correct shapes
@@ -772,19 +769,31 @@ print("X_train shape:", X_train.shape)
 print("y_train shape:", y_train.shape)
 
 
-# In[489]:
+# In[ ]:
+
+
+# -----------------------------------------------------------------------------------------------------------------------------------
+
+
+# In[ ]:
+
+
+# -----------------------------------------------------------------------------------------------------------------------------------
+
+
+# In[104]:
 
 
 # Train and evaluate the SVM model
 
 
-# In[490]:
+# In[105]:
 
 
 model_svm, y_pred_svm = svm_model_training_and_evaluation(X_train, y_train, X_test, y_test)
 
 
-# In[491]:
+# In[107]:
 
 
 # Ensure X_train and y_train have the correct shapes
@@ -796,7 +805,7 @@ if y_pred_svm.ndim > 1:
     y_pred_svm = y_pred_svm.argmax(axis=1)
 
 # Mapping predicted labels to target names
-predicted_target_names = [target_names[i] for i in y_pred]
+predicted_target_names = [target_names[i] for i in y_pred_svm]
 
 # Mapping original labels to target names
 original_target_names = [target_names[i] for i in y_test]
@@ -815,13 +824,13 @@ for i in range(num_offsets):
         print(f"Sample {j}: Predicted = {predicted_target_names[j]}, Original = {original_target_names[j]}")
 
 
-# In[492]:
+# In[108]:
 
 
 # LR Schedule
 
 
-# In[493]:
+# In[109]:
 
 
 def lr_schedule(epoch):
@@ -833,44 +842,44 @@ def lr_schedule(epoch):
     return lr
 
 
-# In[494]:
+# In[110]:
 
 
 # CNN Evalute Model
 
 
-# In[495]:
+# In[111]:
 
 
 # -----------------------------------------------------------------------------------------------------------------------------------
 
 
-# In[496]:
+# In[112]:
 
 
 # -----------------------------------------------------------------------------------------------------------------------------------
 
 
-# In[497]:
+# In[113]:
 
 
 # -----------------------------------------------------------------------------------------------------------------------------------
 
 
-# In[503]:
+# In[114]:
 
 
 unique_classes, class_counts = np.unique(y_train, return_counts=True)
 print("Class distribution in y_train:", dict(zip(unique_classes, class_counts)))
 
 
-# In[504]:
+# In[115]:
 
 
 subject_encoder
 
 
-# In[505]:
+# In[116]:
 
 
 # Reshape X_train and X_test to 3D (samples, timesteps, features)
@@ -895,7 +904,7 @@ print("Input shape:", input_shape)
 print("Number of classes:", num_classes)
 
 
-# In[506]:
+# In[117]:
 
 
 # Build an improved CNN-LSTM model
@@ -929,7 +938,7 @@ def build_improved_hybrid_model(input_shape, num_classes):
     return model
 
 
-# In[507]:
+# In[119]:
 
 
 # Build the model
@@ -956,13 +965,13 @@ y_pred_hybrid_lstm = model_hybrid_lstm.predict(X_test_reshaped).argmax(axis=1)
 
 # Classification report and confusion matrix
 print("Classification Report:")
-print(classification_report(y_test, y_pred))
+print(classification_report(y_test, y_pred_hybrid_lstm))
 
 print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred))
+print(confusion_matrix(y_test, y_pred_hybrid_lstm))
 
 
-# In[508]:
+# In[121]:
 
 
 # Ensure X_train and y_train have the correct shapes
@@ -974,7 +983,7 @@ if y_pred_hybrid_lstm.ndim > 1:
     y_pred_hybrid_lstm = y_pred_hybrid_lstm.argmax(axis=1)
 
 # Mapping predicted labels to target names
-predicted_target_names = [target_names[i] for i in y_pred]
+predicted_target_names = [target_names[i] for i in y_pred_hybrid_lstm]
 
 # Mapping original labels to target names
 original_target_names = [target_names[i] for i in y_test]
@@ -993,13 +1002,13 @@ for i in range(num_offsets):
         print(f"Sample {j}: Predicted = {predicted_target_names[j]}, Original = {original_target_names[j]}")
 
 
-# In[510]:
+# In[122]:
 
 
 # Build CNN Model
 
 
-# In[512]:
+# In[124]:
 
 
 def cnn_model_training_and_evaluation(X_train, y_train, X_test, y_test):
@@ -1086,10 +1095,10 @@ def cnn_model_training_and_evaluation(X_train, y_train, X_test, y_test):
     print("Confusion Matrix:")
     print(confusion_matrix(y_test, y_pred_cnn))
 
-    return model
+    return model, y_pred_cnn
 
 
-# In[513]:
+# In[125]:
 
 
 # Ensure X_train and y_train have the correct shapes
@@ -1097,10 +1106,10 @@ print("X_train shape:", X_train.shape)
 print("y_train shape:", y_train.shape)
 
 # Train and evaluate the SVM model
-cnn_model = cnn_model_training_and_evaluation(X_train, y_train, X_test, y_test)
+cnn_model, y_pred_cnn = cnn_model_training_and_evaluation(X_train, y_train, X_test, y_test)
 
 
-# In[514]:
+# In[127]:
 
 
 # Ensure X_train and y_train have the correct shapes
@@ -1112,7 +1121,7 @@ if y_pred_cnn.ndim > 1:
     y_pred_cnn = y_pred_cnn.argmax(axis=1)
 
 # Mapping predicted labels to target names
-predicted_target_names = [target_names[i] for i in y_pred]
+predicted_target_names = [target_names[i] for i in y_pred_cnn]
 
 # Mapping original labels to target names
 original_target_names = [target_names[i] for i in y_test]
