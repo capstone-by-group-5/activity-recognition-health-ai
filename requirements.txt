@@ -1,5 +1,8 @@
-streamlit
-numpy
-pandas
+seaborn
+matplotlib
+tensorflow
 scikit-learn
 imbalanced-learn
+pandas
+numpy
+streamlit
