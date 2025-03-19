@@ -581,6 +581,9 @@ def main():
     if st.checkbox("Train and Evaluate SVM Model"):
         model_svm, y_pred_svm = svm_model_training_and_evaluation(X_train, y_train, X_test, y_test)
 
+    if st.checkbox("Train and Evaluate CNN  Model"):
+        cnn_model = cnn_model_training_and_evaluation(X_train, y_train, X_test, y_test)
+
     if st.checkbox("Train and Evaluate CNN-LSTM Hybrid Model"):
         hybrid_model = hybrid_cnn_lstm_model_training_and_evaluation(X_train, y_train, X_test, y_test)
 
