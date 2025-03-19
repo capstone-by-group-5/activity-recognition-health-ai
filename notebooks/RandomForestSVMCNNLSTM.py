@@ -55,8 +55,8 @@ from sklearn.metrics import classification_report, confusion_matrix, accuracy_sc
 
 # Dataset paths
 
-train_path = "Dataset-HAR-Monitoring/train.csv"
-test_path = "Dataset-HAR-Monitoring/test.csv"
+train_path = "data/raw/train.csv"
+test_path = "data/raw/test.csv"
 
 
 # In[47]:
