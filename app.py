@@ -46,7 +46,7 @@ def EDA_check(train, test):
     class_distribution(train)
     missing_data(train)
     feature_relationships(train)
-    feature_distributions(train)
+   # feature_distributions(train)
 
 # Sub Methods for EDA
 def data_overview(train, test):
