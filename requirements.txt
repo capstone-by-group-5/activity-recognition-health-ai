@@ -1,7 +1,7 @@
 seaborn
 matplotlib
 tensorflow
-#tensorflow-cpu==2.19.0
+#tensorflow-cpu
 scikit-learn
 imbalanced-learn
 pandas
