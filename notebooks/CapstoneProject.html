@@ -7551,6 +7551,7 @@ a.anchor-link {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="s2">"/train.csv"</span><span class="p">)</span>
+<span class="n">df_test</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="s2">"/test.csv"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7747,12 +7748,203 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=196fefbc">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=8e4d7f04">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">df_test</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>tBodyAcc-mean()-X</th>
+<th>tBodyAcc-mean()-Y</th>
+<th>tBodyAcc-mean()-Z</th>
+<th>tBodyAcc-std()-X</th>
+<th>tBodyAcc-std()-Y</th>
+<th>tBodyAcc-std()-Z</th>
+<th>tBodyAcc-mad()-X</th>
+<th>tBodyAcc-mad()-Y</th>
+<th>tBodyAcc-mad()-Z</th>
+<th>tBodyAcc-max()-X</th>
+<th>...</th>
+<th>fBodyBodyGyroJerkMag-kurtosis()</th>
+<th>angle(tBodyAccMean,gravity)</th>
+<th>angle(tBodyAccJerkMean),gravityMean)</th>
+<th>angle(tBodyGyroMean,gravityMean)</th>
+<th>angle(tBodyGyroJerkMean,gravityMean)</th>
+<th>angle(X,gravityMean)</th>
+<th>angle(Y,gravityMean)</th>
+<th>angle(Z,gravityMean)</th>
+<th>subject</th>
+<th>Activity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>0.257178</td>
+<td>-0.023285</td>
+<td>-0.014654</td>
+<td>-0.938404</td>
+<td>-0.920091</td>
+<td>-0.667683</td>
+<td>-0.952501</td>
+<td>-0.925249</td>
+<td>-0.674302</td>
+<td>-0.894088</td>
+<td>...</td>
+<td>-0.705974</td>
+<td>0.006462</td>
+<td>0.162920</td>
+<td>-0.825886</td>
+<td>0.271151</td>
+<td>-0.720009</td>
+<td>0.276801</td>
+<td>-0.057978</td>
+<td>2</td>
+<td>STANDING</td>
+</tr>
+<tr>
+<th>1</th>
+<td>0.286027</td>
+<td>-0.013163</td>
+<td>-0.119083</td>
+<td>-0.975415</td>
+<td>-0.967458</td>
+<td>-0.944958</td>
+<td>-0.986799</td>
+<td>-0.968401</td>
+<td>-0.945823</td>
+<td>-0.894088</td>
+<td>...</td>
+<td>-0.594944</td>
+<td>-0.083495</td>
+<td>0.017500</td>
+<td>-0.434375</td>
+<td>0.920593</td>
+<td>-0.698091</td>
+<td>0.281343</td>
+<td>-0.083898</td>
+<td>2</td>
+<td>STANDING</td>
+</tr>
+<tr>
+<th>2</th>
+<td>0.275485</td>
+<td>-0.026050</td>
+<td>-0.118152</td>
+<td>-0.993819</td>
+<td>-0.969926</td>
+<td>-0.962748</td>
+<td>-0.994403</td>
+<td>-0.970735</td>
+<td>-0.963483</td>
+<td>-0.939260</td>
+<td>...</td>
+<td>-0.640736</td>
+<td>-0.034956</td>
+<td>0.202302</td>
+<td>0.064103</td>
+<td>0.145068</td>
+<td>-0.702771</td>
+<td>0.280083</td>
+<td>-0.079346</td>
+<td>2</td>
+<td>STANDING</td>
+</tr>
+<tr>
+<th>3</th>
+<td>0.270298</td>
+<td>-0.032614</td>
+<td>-0.117520</td>
+<td>-0.994743</td>
+<td>-0.973268</td>
+<td>-0.967091</td>
+<td>-0.995274</td>
+<td>-0.974471</td>
+<td>-0.968897</td>
+<td>-0.938610</td>
+<td>...</td>
+<td>-0.736124</td>
+<td>-0.017067</td>
+<td>0.154438</td>
+<td>0.340134</td>
+<td>0.296407</td>
+<td>-0.698954</td>
+<td>0.284114</td>
+<td>-0.077108</td>
+<td>2</td>
+<td>STANDING</td>
+</tr>
+<tr>
+<th>4</th>
+<td>0.274833</td>
+<td>-0.027848</td>
+<td>-0.129527</td>
+<td>-0.993852</td>
+<td>-0.967445</td>
+<td>-0.978295</td>
+<td>-0.994111</td>
+<td>-0.965953</td>
+<td>-0.977346</td>
+<td>-0.938610</td>
+<td>...</td>
+<td>-0.846595</td>
+<td>-0.002223</td>
+<td>-0.040046</td>
+<td>0.736715</td>
+<td>-0.118545</td>
+<td>-0.692245</td>
+<td>0.290722</td>
+<td>-0.073857</td>
+<td>2</td>
+<td>STANDING</td>
+</tr>
+</tbody>
+</table>
+<p>5 rows × 563 columns</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=196fefbc">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">shape</span>
@@ -7766,9 +7958,35 @@ a.anchor-link {
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>(7352, 563)</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=38bf9d82">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">df_test</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>(2947, 563)</pre>
 </div>
 </div>
 </div>
@@ -7778,7 +7996,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
@@ -7804,49 +8022,12 @@ memory usage: 31.6+ MB
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=7532ac48">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>tBodyAcc-mean()-X       7347
-tBodyAcc-mean()-Y       7352
-tBodyAcc-mean()-Z       7349
-tBodyAcc-std()-X        7349
-tBodyAcc-std()-Y        7351
-                        ... 
-angle(X,gravityMean)    7352
-angle(Y,gravityMean)    7352
-angle(Z,gravityMean)    7352
-subject                   21
-Activity                   6
-Length: 563, dtype: int64</pre>
-</div>
-</div>
-</div>
-</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=27e02133">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">missing_cols</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span>
@@ -7876,7 +8057,7 @@ Length: 563, dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">missing_cols</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span>
@@ -7906,7 +8087,7 @@ Length: 563, dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
@@ -7920,7 +8101,7 @@ Length: 563, dtype: int64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -8169,7 +8350,7 @@ Length: 563, dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()])</span>
@@ -8183,7 +8364,7 @@ Length: 563, dtype: int64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[13]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>0</pre>
 </div>
@@ -8195,7 +8376,7 @@ Length: 563, dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'Activity'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
@@ -8223,7 +8404,7 @@ Length: 563, dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1">#Check the Target Class Imbalance</span>
@@ -8254,7 +8435,7 @@ Length: 563, dtype: int64</pre>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=fa70eb9a">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=46dec3f1">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8295,7 +8476,7 @@ Length: 563, dtype: int64</pre>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=d0c8e35d">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f52e1f93">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8305,7 +8486,20 @@ Length: 563, dtype: int64</pre>
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">X_initial</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">y_initial</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="c1"># Compute correlation matrix of the columns to remove the redundant columns present</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=d0c8e35d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Compute correlation matrix of the columns to remove the redundant columns present</span>
 <span class="n">corr_matrix</span> <span class="o">=</span> <span class="n">X_initial</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
 
 
@@ -8317,8 +8511,8 @@ Length: 563, dtype: int64</pre>
 <span class="c1"># Create an upper triangular mask to avoid duplicate comparisons</span>
 <span class="n">upper</span> <span class="o">=</span> <span class="n">corr_matrix_abs</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">corr_matrix_abs</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">bool</span><span class="p">))</span>
 
-<span class="c1"># Find columns with correlation &gt; 0.95</span>
-<span class="n">to_drop</span> <span class="o">=</span> <span class="p">[</span><span class="n">column</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">upper</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">upper</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.95</span><span class="p">)]</span>
+<span class="c1"># Find columns with correlation &gt; 0.97</span>
+<span class="n">to_drop</span> <span class="o">=</span> <span class="p">[</span><span class="n">column</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">upper</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">upper</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.97</span><span class="p">)]</span>
 
 <span class="c1"># Drop highly correlated columns</span>
 <span class="n">df_cleaned</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">to_drop</span><span class="p">)</span>
@@ -8345,26 +8539,558 @@ Length: 563, dtype: int64</pre>
 Correlation Matrix:
  (562, 562)
 
-Columns dropped: ['tBodyAcc-mad()-X', 'tBodyAcc-mad()-Y', 'tBodyAcc-mad()-Z', 'tBodyAcc-max()-X', 'tBodyAcc-max()-Y', 'tBodyAcc-min()-X', 'tBodyAcc-min()-Y', 'tBodyAcc-sma()', 'tBodyAcc-energy()-X', 'tBodyAcc-iqr()-X', 'tBodyAcc-iqr()-Y', 'tBodyAcc-iqr()-Z', 'tGravityAcc-mad()-X', 'tGravityAcc-mad()-Y', 'tGravityAcc-mad()-Z', 'tGravityAcc-max()-X', 'tGravityAcc-max()-Y', 'tGravityAcc-max()-Z', 'tGravityAcc-min()-X', 'tGravityAcc-min()-Y', 'tGravityAcc-min()-Z', 'tGravityAcc-energy()-X', 'tGravityAcc-iqr()-X', 'tGravityAcc-iqr()-Y', 'tGravityAcc-iqr()-Z', 'tGravityAcc-arCoeff()-X,2', 'tGravityAcc-arCoeff()-X,3', 'tGravityAcc-arCoeff()-X,4', 'tGravityAcc-arCoeff()-Y,2', 'tGravityAcc-arCoeff()-Y,3', 'tGravityAcc-arCoeff()-Y,4', 'tGravityAcc-arCoeff()-Z,2', 'tGravityAcc-arCoeff()-Z,3', 'tGravityAcc-arCoeff()-Z,4', 'tBodyAccJerk-std()-X', 'tBodyAccJerk-std()-Y', 'tBodyAccJerk-mad()-X', 'tBodyAccJerk-mad()-Y', 'tBodyAccJerk-mad()-Z', 'tBodyAccJerk-max()-X', 'tBodyAccJerk-max()-Y', 'tBodyAccJerk-max()-Z', 'tBodyAccJerk-min()-X', 'tBodyAccJerk-min()-Y', 'tBodyAccJerk-min()-Z', 'tBodyAccJerk-sma()', 'tBodyAccJerk-energy()-Y', 'tBodyAccJerk-iqr()-X', 'tBodyAccJerk-iqr()-Y', 'tBodyAccJerk-iqr()-Z', 'tBodyAccJerk-entropy()-Y', 'tBodyAccJerk-entropy()-Z', 'tBodyAccJerk-arCoeff()-X,1', 'tBodyAccJerk-arCoeff()-Y,1', 'tBodyAccJerk-arCoeff()-Z,1', 'tBodyGyro-mad()-X', 'tBodyGyro-mad()-Y', 'tBodyGyro-mad()-Z', 'tBodyGyro-max()-Y', 'tBodyGyro-min()-Z', 'tBodyGyro-sma()', 'tBodyGyro-iqr()-X', 'tBodyGyro-iqr()-Y', 'tBodyGyro-iqr()-Z', 'tBodyGyroJerk-std()-X', 'tBodyGyroJerk-std()-Z', 'tBodyGyroJerk-mad()-X', 'tBodyGyroJerk-mad()-Y', 'tBodyGyroJerk-mad()-Z', 'tBodyGyroJerk-max()-X', 'tBodyGyroJerk-max()-Y', 'tBodyGyroJerk-max()-Z', 'tBodyGyroJerk-min()-X', 'tBodyGyroJerk-min()-Y', 'tBodyGyroJerk-min()-Z', 'tBodyGyroJerk-sma()', 'tBodyGyroJerk-iqr()-X', 'tBodyGyroJerk-iqr()-Y', 'tBodyGyroJerk-iqr()-Z', 'tBodyGyroJerk-entropy()-X', 'tBodyGyroJerk-entropy()-Y', 'tBodyGyroJerk-entropy()-Z', 'tBodyGyroJerk-arCoeff()-X,1', 'tBodyGyroJerk-arCoeff()-Y,1', 'tBodyGyroJerk-arCoeff()-Z,1', 'tBodyAccMag-mean()', 'tBodyAccMag-std()', 'tBodyAccMag-mad()', 'tBodyAccMag-max()', 'tBodyAccMag-sma()', 'tBodyAccMag-energy()', 'tBodyAccMag-iqr()', 'tBodyAccMag-entropy()', 'tBodyAccMag-arCoeff()2', 'tGravityAccMag-mean()', 'tGravityAccMag-std()', 'tGravityAccMag-mad()', 'tGravityAccMag-max()', 'tGravityAccMag-min()', 'tGravityAccMag-sma()', 'tGravityAccMag-energy()', 'tGravityAccMag-iqr()', 'tGravityAccMag-entropy()', 'tGravityAccMag-arCoeff()1', 'tGravityAccMag-arCoeff()2', 'tGravityAccMag-arCoeff()3', 'tGravityAccMag-arCoeff()4', 'tBodyAccJerkMag-mean()', 'tBodyAccJerkMag-std()', 'tBodyAccJerkMag-mad()', 'tBodyAccJerkMag-max()', 'tBodyAccJerkMag-sma()', 'tBodyAccJerkMag-energy()', 'tBodyAccJerkMag-iqr()', 'tBodyAccJerkMag-entropy()', 'tBodyGyroMag-mean()', 'tBodyGyroMag-std()', 'tBodyGyroMag-mad()', 'tBodyGyroMag-max()', 'tBodyGyroMag-sma()', 'tBodyGyroMag-iqr()', 'tBodyGyroJerkMag-mean()', 'tBodyGyroJerkMag-std()', 'tBodyGyroJerkMag-mad()', 'tBodyGyroJerkMag-max()', 'tBodyGyroJerkMag-sma()', 'tBodyGyroJerkMag-energy()', 'tBodyGyroJerkMag-iqr()', 'tBodyGyroJerkMag-entropy()', 'fBodyAcc-mean()-X', 'fBodyAcc-mean()-Y', 'fBodyAcc-mean()-Z', 'fBodyAcc-std()-X', 'fBodyAcc-std()-Y', 'fBodyAcc-std()-Z', 'fBodyAcc-mad()-X', 'fBodyAcc-mad()-Y', 'fBodyAcc-mad()-Z', 'fBodyAcc-max()-X', 'fBodyAcc-max()-Y', 'fBodyAcc-max()-Z', 'fBodyAcc-sma()', 'fBodyAcc-energy()-X', 'fBodyAcc-energy()-Y', 'fBodyAcc-energy()-Z', 'fBodyAcc-iqr()-X', 'fBodyAcc-iqr()-Y', 'fBodyAcc-iqr()-Z', 'fBodyAcc-entropy()-X', 'fBodyAcc-entropy()-Y', 'fBodyAcc-entropy()-Z', 'fBodyAcc-kurtosis()-X', 'fBodyAcc-kurtosis()-Y', 'fBodyAcc-kurtosis()-Z', 'fBodyAcc-bandsEnergy()-1,8', 'fBodyAcc-bandsEnergy()-1,16', 'fBodyAcc-bandsEnergy()-17,32', 'fBodyAcc-bandsEnergy()-33,48', 'fBodyAcc-bandsEnergy()-49,64', 'fBodyAcc-bandsEnergy()-1,24', 'fBodyAcc-bandsEnergy()-25,48', 'fBodyAcc-bandsEnergy()-1,16.1', 'fBodyAcc-bandsEnergy()-17,32.1', 'fBodyAcc-bandsEnergy()-33,48.1', 'fBodyAcc-bandsEnergy()-49,64.1', 'fBodyAcc-bandsEnergy()-1,24.1', 'fBodyAcc-bandsEnergy()-25,48.1', 'fBodyAcc-bandsEnergy()-1,16.2', 'fBodyAcc-bandsEnergy()-17,32.2', 'fBodyAcc-bandsEnergy()-33,48.2', 'fBodyAcc-bandsEnergy()-49,64.2', 'fBodyAcc-bandsEnergy()-1,24.2', 'fBodyAcc-bandsEnergy()-25,48.2', 'fBodyAccJerk-mean()-X', 'fBodyAccJerk-mean()-Y', 'fBodyAccJerk-mean()-Z', 'fBodyAccJerk-std()-X', 'fBodyAccJerk-std()-Y', 'fBodyAccJerk-std()-Z', 'fBodyAccJerk-mad()-X', 'fBodyAccJerk-mad()-Y', 'fBodyAccJerk-mad()-Z', 'fBodyAccJerk-max()-X', 'fBodyAccJerk-max()-Y', 'fBodyAccJerk-max()-Z', 'fBodyAccJerk-sma()', 'fBodyAccJerk-energy()-X', 'fBodyAccJerk-energy()-Y', 'fBodyAccJerk-energy()-Z', 'fBodyAccJerk-iqr()-X', 'fBodyAccJerk-iqr()-Y', 'fBodyAccJerk-iqr()-Z', 'fBodyAccJerk-entropy()-X', 'fBodyAccJerk-entropy()-Y', 'fBodyAccJerk-entropy()-Z', 'fBodyAccJerk-bandsEnergy()-1,8', 'fBodyAccJerk-bandsEnergy()-9,16', 'fBodyAccJerk-bandsEnergy()-17,24', 'fBodyAccJerk-bandsEnergy()-25,32', 'fBodyAccJerk-bandsEnergy()-1,16', 'fBodyAccJerk-bandsEnergy()-17,32', 'fBodyAccJerk-bandsEnergy()-33,48', 'fBodyAccJerk-bandsEnergy()-49,64', 'fBodyAccJerk-bandsEnergy()-1,24', 'fBodyAccJerk-bandsEnergy()-25,48', 'fBodyAccJerk-bandsEnergy()-9,16.1', 'fBodyAccJerk-bandsEnergy()-17,24.1', 'fBodyAccJerk-bandsEnergy()-25,32.1', 'fBodyAccJerk-bandsEnergy()-33,40.1', 'fBodyAccJerk-bandsEnergy()-1,16.1', 'fBodyAccJerk-bandsEnergy()-17,32.1', 'fBodyAccJerk-bandsEnergy()-33,48.1', 'fBodyAccJerk-bandsEnergy()-49,64.1', 'fBodyAccJerk-bandsEnergy()-1,24.1', 'fBodyAccJerk-bandsEnergy()-25,48.1', 'fBodyAccJerk-bandsEnergy()-9,16.2', 'fBodyAccJerk-bandsEnergy()-17,24.2', 'fBodyAccJerk-bandsEnergy()-25,32.2', 'fBodyAccJerk-bandsEnergy()-33,40.2', 'fBodyAccJerk-bandsEnergy()-41,48.2', 'fBodyAccJerk-bandsEnergy()-1,16.2', 'fBodyAccJerk-bandsEnergy()-17,32.2', 'fBodyAccJerk-bandsEnergy()-33,48.2', 'fBodyAccJerk-bandsEnergy()-49,64.2', 'fBodyAccJerk-bandsEnergy()-1,24.2', 'fBodyAccJerk-bandsEnergy()-25,48.2', 'fBodyGyro-mean()-X', 'fBodyGyro-mean()-Y', 'fBodyGyro-mean()-Z', 'fBodyGyro-std()-X', 'fBodyGyro-std()-Y', 'fBodyGyro-std()-Z', 'fBodyGyro-mad()-X', 'fBodyGyro-mad()-Y', 'fBodyGyro-mad()-Z', 'fBodyGyro-max()-X', 'fBodyGyro-max()-Y', 'fBodyGyro-max()-Z', 'fBodyGyro-sma()', 'fBodyGyro-energy()-Y', 'fBodyGyro-energy()-Z', 'fBodyGyro-iqr()-X', 'fBodyGyro-iqr()-Y', 'fBodyGyro-iqr()-Z', 'fBodyGyro-entropy()-X', 'fBodyGyro-entropy()-Y', 'fBodyGyro-entropy()-Z', 'fBodyGyro-kurtosis()-X', 'fBodyGyro-kurtosis()-Y', 'fBodyGyro-kurtosis()-Z', 'fBodyGyro-bandsEnergy()-1,8', 'fBodyGyro-bandsEnergy()-1,16', 'fBodyGyro-bandsEnergy()-17,32', 'fBodyGyro-bandsEnergy()-33,48', 'fBodyGyro-bandsEnergy()-49,64', 'fBodyGyro-bandsEnergy()-1,24', 'fBodyGyro-bandsEnergy()-25,48', 'fBodyGyro-bandsEnergy()-1,16.1', 'fBodyGyro-bandsEnergy()-17,32.1', 'fBodyGyro-bandsEnergy()-33,48.1', 'fBodyGyro-bandsEnergy()-49,64.1', 'fBodyGyro-bandsEnergy()-1,24.1', 'fBodyGyro-bandsEnergy()-25,48.1', 'fBodyGyro-bandsEnergy()-1,8.2', 'fBodyGyro-bandsEnergy()-1,16.2', 'fBodyGyro-bandsEnergy()-17,32.2', 'fBodyGyro-bandsEnergy()-33,48.2', 'fBodyGyro-bandsEnergy()-49,64.2', 'fBodyGyro-bandsEnergy()-1,24.2', 'fBodyGyro-bandsEnergy()-25,48.2', 'fBodyAccMag-mean()', 'fBodyAccMag-std()', 'fBodyAccMag-mad()', 'fBodyAccMag-max()', 'fBodyAccMag-sma()', 'fBodyAccMag-energy()', 'fBodyAccMag-iqr()', 'fBodyAccMag-entropy()', 'fBodyAccMag-kurtosis()', 'fBodyBodyAccJerkMag-mean()', 'fBodyBodyAccJerkMag-std()', 'fBodyBodyAccJerkMag-mad()', 'fBodyBodyAccJerkMag-max()', 'fBodyBodyAccJerkMag-sma()', 'fBodyBodyAccJerkMag-energy()', 'fBodyBodyAccJerkMag-iqr()', 'fBodyBodyAccJerkMag-entropy()', 'fBodyBodyAccJerkMag-kurtosis()', 'fBodyBodyGyroMag-mean()', 'fBodyBodyGyroMag-std()', 'fBodyBodyGyroMag-mad()', 'fBodyBodyGyroMag-max()', 'fBodyBodyGyroMag-sma()', 'fBodyBodyGyroMag-iqr()', 'fBodyBodyGyroMag-entropy()', 'fBodyBodyGyroMag-kurtosis()', 'fBodyBodyGyroJerkMag-mean()', 'fBodyBodyGyroJerkMag-std()', 'fBodyBodyGyroJerkMag-mad()', 'fBodyBodyGyroJerkMag-max()', 'fBodyBodyGyroJerkMag-sma()', 'fBodyBodyGyroJerkMag-energy()', 'fBodyBodyGyroJerkMag-iqr()', 'fBodyBodyGyroJerkMag-entropy()', 'fBodyBodyGyroJerkMag-kurtosis()', 'angle(X,gravityMean)', 'angle(Y,gravityMean)', 'angle(Z,gravityMean)']
+Columns dropped: ['tBodyAcc-mad()-X', 'tBodyAcc-mad()-Y', 'tBodyAcc-mad()-Z', 'tBodyAcc-max()-X', 'tBodyAcc-sma()', 'tBodyAcc-iqr()-X', 'tBodyAcc-iqr()-Y', 'tBodyAcc-iqr()-Z', 'tGravityAcc-mad()-X', 'tGravityAcc-mad()-Y', 'tGravityAcc-mad()-Z', 'tGravityAcc-max()-X', 'tGravityAcc-max()-Y', 'tGravityAcc-max()-Z', 'tGravityAcc-min()-X', 'tGravityAcc-min()-Y', 'tGravityAcc-min()-Z', 'tGravityAcc-energy()-X', 'tGravityAcc-iqr()-X', 'tGravityAcc-iqr()-Y', 'tGravityAcc-iqr()-Z', 'tGravityAcc-arCoeff()-X,2', 'tGravityAcc-arCoeff()-X,3', 'tGravityAcc-arCoeff()-X,4', 'tGravityAcc-arCoeff()-Y,2', 'tGravityAcc-arCoeff()-Y,3', 'tGravityAcc-arCoeff()-Y,4', 'tGravityAcc-arCoeff()-Z,2', 'tGravityAcc-arCoeff()-Z,3', 'tGravityAcc-arCoeff()-Z,4', 'tBodyAccJerk-std()-X', 'tBodyAccJerk-mad()-X', 'tBodyAccJerk-mad()-Y', 'tBodyAccJerk-mad()-Z', 'tBodyAccJerk-sma()', 'tBodyAccJerk-iqr()-X', 'tBodyAccJerk-iqr()-Y', 'tBodyAccJerk-iqr()-Z', 'tBodyAccJerk-entropy()-Y', 'tBodyAccJerk-entropy()-Z', 'tBodyGyro-mad()-X', 'tBodyGyro-mad()-Y', 'tBodyGyro-mad()-Z', 'tBodyGyro-iqr()-X', 'tBodyGyro-iqr()-Y', 'tBodyGyro-iqr()-Z', 'tBodyGyroJerk-mad()-X', 'tBodyGyroJerk-mad()-Y', 'tBodyGyroJerk-mad()-Z', 'tBodyGyroJerk-max()-X', 'tBodyGyroJerk-max()-Z', 'tBodyGyroJerk-sma()', 'tBodyGyroJerk-iqr()-X', 'tBodyGyroJerk-iqr()-Y', 'tBodyGyroJerk-iqr()-Z', 'tBodyGyroJerk-entropy()-Z', 'tBodyGyroJerk-arCoeff()-Z,1', 'tBodyAccMag-mean()', 'tBodyAccMag-mad()', 'tBodyAccMag-max()', 'tBodyAccMag-sma()', 'tBodyAccMag-iqr()', 'tGravityAccMag-mean()', 'tGravityAccMag-std()', 'tGravityAccMag-mad()', 'tGravityAccMag-max()', 'tGravityAccMag-min()', 'tGravityAccMag-sma()', 'tGravityAccMag-energy()', 'tGravityAccMag-iqr()', 'tGravityAccMag-entropy()', 'tGravityAccMag-arCoeff()1', 'tGravityAccMag-arCoeff()2', 'tGravityAccMag-arCoeff()3', 'tGravityAccMag-arCoeff()4', 'tBodyAccJerkMag-mean()', 'tBodyAccJerkMag-std()', 'tBodyAccJerkMag-mad()', 'tBodyAccJerkMag-max()', 'tBodyAccJerkMag-sma()', 'tBodyAccJerkMag-energy()', 'tBodyAccJerkMag-iqr()', 'tBodyAccJerkMag-entropy()', 'tBodyGyroMag-mean()', 'tBodyGyroMag-mad()', 'tBodyGyroMag-max()', 'tBodyGyroMag-sma()', 'tBodyGyroMag-iqr()', 'tBodyGyroJerkMag-mean()', 'tBodyGyroJerkMag-std()', 'tBodyGyroJerkMag-mad()', 'tBodyGyroJerkMag-max()', 'tBodyGyroJerkMag-sma()', 'tBodyGyroJerkMag-iqr()', 'tBodyGyroJerkMag-entropy()', 'fBodyAcc-mean()-X', 'fBodyAcc-mean()-Y', 'fBodyAcc-mean()-Z', 'fBodyAcc-std()-X', 'fBodyAcc-std()-Y', 'fBodyAcc-std()-Z', 'fBodyAcc-mad()-X', 'fBodyAcc-mad()-Y', 'fBodyAcc-mad()-Z', 'fBodyAcc-max()-X', 'fBodyAcc-max()-Y', 'fBodyAcc-max()-Z', 'fBodyAcc-sma()', 'fBodyAcc-energy()-X', 'fBodyAcc-energy()-Z', 'fBodyAcc-iqr()-Z', 'fBodyAcc-entropy()-X', 'fBodyAcc-entropy()-Y', 'fBodyAcc-entropy()-Z', 'fBodyAcc-kurtosis()-X', 'fBodyAcc-kurtosis()-Y', 'fBodyAcc-kurtosis()-Z', 'fBodyAcc-bandsEnergy()-1,8', 'fBodyAcc-bandsEnergy()-1,16', 'fBodyAcc-bandsEnergy()-17,32', 'fBodyAcc-bandsEnergy()-33,48', 'fBodyAcc-bandsEnergy()-49,64', 'fBodyAcc-bandsEnergy()-1,24', 'fBodyAcc-bandsEnergy()-25,48', 'fBodyAcc-bandsEnergy()-1,16.1', 'fBodyAcc-bandsEnergy()-17,32.1', 'fBodyAcc-bandsEnergy()-33,48.1', 'fBodyAcc-bandsEnergy()-49,64.1', 'fBodyAcc-bandsEnergy()-1,24.1', 'fBodyAcc-bandsEnergy()-25,48.1', 'fBodyAcc-bandsEnergy()-1,16.2', 'fBodyAcc-bandsEnergy()-17,32.2', 'fBodyAcc-bandsEnergy()-33,48.2', 'fBodyAcc-bandsEnergy()-49,64.2', 'fBodyAcc-bandsEnergy()-1,24.2', 'fBodyAcc-bandsEnergy()-25,48.2', 'fBodyAccJerk-mean()-X', 'fBodyAccJerk-mean()-Y', 'fBodyAccJerk-mean()-Z', 'fBodyAccJerk-std()-X', 'fBodyAccJerk-std()-Y', 'fBodyAccJerk-std()-Z', 'fBodyAccJerk-mad()-X', 'fBodyAccJerk-mad()-Y', 'fBodyAccJerk-mad()-Z', 'fBodyAccJerk-max()-X', 'fBodyAccJerk-max()-Y', 'fBodyAccJerk-max()-Z', 'fBodyAccJerk-sma()', 'fBodyAccJerk-energy()-X', 'fBodyAccJerk-energy()-Y', 'fBodyAccJerk-energy()-Z', 'fBodyAccJerk-iqr()-X', 'fBodyAccJerk-iqr()-Y', 'fBodyAccJerk-iqr()-Z', 'fBodyAccJerk-entropy()-X', 'fBodyAccJerk-entropy()-Y', 'fBodyAccJerk-entropy()-Z', 'fBodyAccJerk-bandsEnergy()-1,8', 'fBodyAccJerk-bandsEnergy()-9,16', 'fBodyAccJerk-bandsEnergy()-17,24', 'fBodyAccJerk-bandsEnergy()-25,32', 'fBodyAccJerk-bandsEnergy()-17,32', 'fBodyAccJerk-bandsEnergy()-49,64', 'fBodyAccJerk-bandsEnergy()-1,24', 'fBodyAccJerk-bandsEnergy()-9,16.1', 'fBodyAccJerk-bandsEnergy()-17,24.1', 'fBodyAccJerk-bandsEnergy()-25,32.1', 'fBodyAccJerk-bandsEnergy()-1,16.1', 'fBodyAccJerk-bandsEnergy()-17,32.1', 'fBodyAccJerk-bandsEnergy()-49,64.1', 'fBodyAccJerk-bandsEnergy()-1,24.1', 'fBodyAccJerk-bandsEnergy()-25,48.1', 'fBodyAccJerk-bandsEnergy()-9,16.2', 'fBodyAccJerk-bandsEnergy()-17,24.2', 'fBodyAccJerk-bandsEnergy()-25,32.2', 'fBodyAccJerk-bandsEnergy()-33,40.2', 'fBodyAccJerk-bandsEnergy()-1,16.2', 'fBodyAccJerk-bandsEnergy()-17,32.2', 'fBodyAccJerk-bandsEnergy()-33,48.2', 'fBodyAccJerk-bandsEnergy()-49,64.2', 'fBodyAccJerk-bandsEnergy()-1,24.2', 'fBodyAccJerk-bandsEnergy()-25,48.2', 'fBodyGyro-mean()-X', 'fBodyGyro-mean()-Y', 'fBodyGyro-mean()-Z', 'fBodyGyro-std()-X', 'fBodyGyro-std()-Y', 'fBodyGyro-std()-Z', 'fBodyGyro-mad()-X', 'fBodyGyro-mad()-Y', 'fBodyGyro-mad()-Z', 'fBodyGyro-max()-X', 'fBodyGyro-max()-Z', 'fBodyGyro-sma()', 'fBodyGyro-energy()-Y', 'fBodyGyro-energy()-Z', 'fBodyGyro-entropy()-X', 'fBodyGyro-entropy()-Y', 'fBodyGyro-entropy()-Z', 'fBodyGyro-kurtosis()-X', 'fBodyGyro-kurtosis()-Y', 'fBodyGyro-kurtosis()-Z', 'fBodyGyro-bandsEnergy()-1,8', 'fBodyGyro-bandsEnergy()-1,16', 'fBodyGyro-bandsEnergy()-17,32', 'fBodyGyro-bandsEnergy()-33,48', 'fBodyGyro-bandsEnergy()-49,64', 'fBodyGyro-bandsEnergy()-1,24', 'fBodyGyro-bandsEnergy()-25,48', 'fBodyGyro-bandsEnergy()-17,32.1', 'fBodyGyro-bandsEnergy()-33,48.1', 'fBodyGyro-bandsEnergy()-49,64.1', 'fBodyGyro-bandsEnergy()-1,24.1', 'fBodyGyro-bandsEnergy()-25,48.1', 'fBodyGyro-bandsEnergy()-1,16.2', 'fBodyGyro-bandsEnergy()-17,32.2', 'fBodyGyro-bandsEnergy()-33,48.2', 'fBodyGyro-bandsEnergy()-49,64.2', 'fBodyGyro-bandsEnergy()-1,24.2', 'fBodyGyro-bandsEnergy()-25,48.2', 'fBodyAccMag-mean()', 'fBodyAccMag-std()', 'fBodyAccMag-mad()', 'fBodyAccMag-max()', 'fBodyAccMag-sma()', 'fBodyAccMag-iqr()', 'fBodyAccMag-entropy()', 'fBodyAccMag-kurtosis()', 'fBodyBodyAccJerkMag-mean()', 'fBodyBodyAccJerkMag-std()', 'fBodyBodyAccJerkMag-mad()', 'fBodyBodyAccJerkMag-max()', 'fBodyBodyAccJerkMag-sma()', 'fBodyBodyAccJerkMag-energy()', 'fBodyBodyAccJerkMag-iqr()', 'fBodyBodyAccJerkMag-entropy()', 'fBodyBodyAccJerkMag-kurtosis()', 'fBodyBodyGyroMag-mean()', 'fBodyBodyGyroMag-std()', 'fBodyBodyGyroMag-mad()', 'fBodyBodyGyroMag-max()', 'fBodyBodyGyroMag-sma()', 'fBodyBodyGyroMag-entropy()', 'fBodyBodyGyroMag-kurtosis()', 'fBodyBodyGyroJerkMag-mean()', 'fBodyBodyGyroJerkMag-std()', 'fBodyBodyGyroJerkMag-mad()', 'fBodyBodyGyroJerkMag-max()', 'fBodyBodyGyroJerkMag-sma()', 'fBodyBodyGyroJerkMag-energy()', 'fBodyBodyGyroJerkMag-iqr()', 'fBodyBodyGyroJerkMag-entropy()', 'angle(X,gravityMean)', 'angle(Y,gravityMean)', 'angle(Z,gravityMean)']
 
 Cleaned DataFrame:
- (7352, 255)
+ (7352, 307)
 </pre>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=497a6487">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d18f0e41">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [23]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">df_cleaned</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">y</span> <span class="o">=</span><span class="n">df_cleaned</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">#dropping column found to be highly corelated to avoid redudancy</span>
+<span class="n">df_test_cleaned</span><span class="o">=</span><span class="n">df_test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'tBodyAcc-mad()-X'</span><span class="p">,</span> <span class="s1">'tBodyAcc-mad()-Y'</span><span class="p">,</span> <span class="s1">'tBodyAcc-mad()-Z'</span><span class="p">,</span> <span class="s1">'tBodyAcc-max()-X'</span><span class="p">,</span> <span class="s1">'tBodyAcc-sma()'</span><span class="p">,</span> <span class="s1">'tBodyAcc-iqr()-X'</span><span class="p">,</span> <span class="s1">'tBodyAcc-iqr()-Y'</span><span class="p">,</span> <span class="s1">'tBodyAcc-iqr()-Z'</span><span class="p">,</span> <span class="s1">'tGravityAcc-mad()-X'</span><span class="p">,</span> <span class="s1">'tGravityAcc-mad()-Y'</span><span class="p">,</span> <span class="s1">'tGravityAcc-mad()-Z'</span><span class="p">,</span> <span class="s1">'tGravityAcc-max()-X'</span><span class="p">,</span> <span class="s1">'tGravityAcc-max()-Y'</span><span class="p">,</span> <span class="s1">'tGravityAcc-max()-Z'</span><span class="p">,</span> <span class="s1">'tGravityAcc-min()-X'</span><span class="p">,</span> <span class="s1">'tGravityAcc-min()-Y'</span><span class="p">,</span> <span class="s1">'tGravityAcc-min()-Z'</span><span class="p">,</span> <span class="s1">'tGravityAcc-energy()-X'</span><span class="p">,</span> <span class="s1">'tGravityAcc-iqr()-X'</span><span class="p">,</span> <span class="s1">'tGravityAcc-iqr()-Y'</span><span class="p">,</span> <span class="s1">'tGravityAcc-iqr()-Z'</span><span class="p">,</span> <span class="s1">'tGravityAcc-arCoeff()-X,2'</span><span class="p">,</span> <span class="s1">'tGravityAcc-arCoeff()-X,3'</span><span class="p">,</span> <span class="s1">'tGravityAcc-arCoeff()-X,4'</span><span class="p">,</span> <span class="s1">'tGravityAcc-arCoeff()-Y,2'</span><span class="p">,</span> <span class="s1">'tGravityAcc-arCoeff()-Y,3'</span><span class="p">,</span> <span class="s1">'tGravityAcc-arCoeff()-Y,4'</span><span class="p">,</span> <span class="s1">'tGravityAcc-arCoeff()-Z,2'</span><span class="p">,</span> <span class="s1">'tGravityAcc-arCoeff()-Z,3'</span><span class="p">,</span> <span class="s1">'tGravityAcc-arCoeff()-Z,4'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-std()-X'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-mad()-X'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-mad()-Y'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-mad()-Z'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-sma()'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-iqr()-X'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-iqr()-Y'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-iqr()-Z'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-entropy()-Y'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-entropy()-Z'</span><span class="p">,</span> <span class="s1">'tBodyGyro-mad()-X'</span><span class="p">,</span> <span class="s1">'tBodyGyro-mad()-Y'</span><span class="p">,</span> <span class="s1">'tBodyGyro-mad()-Z'</span><span class="p">,</span> <span class="s1">'tBodyGyro-iqr()-X'</span><span class="p">,</span> <span class="s1">'tBodyGyro-iqr()-Y'</span><span class="p">,</span> <span class="s1">'tBodyGyro-iqr()-Z'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-mad()-X'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-mad()-Y'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-mad()-Z'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-max()-X'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-max()-Z'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-sma()'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-iqr()-X'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-iqr()-Y'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-iqr()-Z'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-entropy()-Z'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-arCoeff()-Z,1'</span><span class="p">,</span> <span class="s1">'tBodyAccMag-mean()'</span><span class="p">,</span> <span class="s1">'tBodyAccMag-mad()'</span><span class="p">,</span> <span class="s1">'tBodyAccMag-max()'</span><span class="p">,</span> <span class="s1">'tBodyAccMag-sma()'</span><span class="p">,</span> <span class="s1">'tBodyAccMag-iqr()'</span><span class="p">,</span> <span class="s1">'tGravityAccMag-mean()'</span><span class="p">,</span> <span class="s1">'tGravityAccMag-std()'</span><span class="p">,</span> <span class="s1">'tGravityAccMag-mad()'</span><span class="p">,</span> <span class="s1">'tGravityAccMag-max()'</span><span class="p">,</span> <span class="s1">'tGravityAccMag-min()'</span><span class="p">,</span> <span class="s1">'tGravityAccMag-sma()'</span><span class="p">,</span> <span class="s1">'tGravityAccMag-energy()'</span><span class="p">,</span> <span class="s1">'tGravityAccMag-iqr()'</span><span class="p">,</span> <span class="s1">'tGravityAccMag-entropy()'</span><span class="p">,</span> <span class="s1">'tGravityAccMag-arCoeff()1'</span><span class="p">,</span> <span class="s1">'tGravityAccMag-arCoeff()2'</span><span class="p">,</span> <span class="s1">'tGravityAccMag-arCoeff()3'</span><span class="p">,</span> <span class="s1">'tGravityAccMag-arCoeff()4'</span><span class="p">,</span> <span class="s1">'tBodyAccJerkMag-mean()'</span><span class="p">,</span> <span class="s1">'tBodyAccJerkMag-std()'</span><span class="p">,</span> <span class="s1">'tBodyAccJerkMag-mad()'</span><span class="p">,</span> <span class="s1">'tBodyAccJerkMag-max()'</span><span class="p">,</span> <span class="s1">'tBodyAccJerkMag-sma()'</span><span class="p">,</span> <span class="s1">'tBodyAccJerkMag-energy()'</span><span class="p">,</span> <span class="s1">'tBodyAccJerkMag-iqr()'</span><span class="p">,</span> <span class="s1">'tBodyAccJerkMag-entropy()'</span><span class="p">,</span> <span class="s1">'tBodyGyroMag-mean()'</span><span class="p">,</span> <span class="s1">'tBodyGyroMag-mad()'</span><span class="p">,</span> <span class="s1">'tBodyGyroMag-max()'</span><span class="p">,</span> <span class="s1">'tBodyGyroMag-sma()'</span><span class="p">,</span> <span class="s1">'tBodyGyroMag-iqr()'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerkMag-mean()'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerkMag-std()'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerkMag-mad()'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerkMag-max()'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerkMag-sma()'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerkMag-iqr()'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerkMag-entropy()'</span><span class="p">,</span> <span class="s1">'fBodyAcc-mean()-X'</span><span class="p">,</span> <span class="s1">'fBodyAcc-mean()-Y'</span><span class="p">,</span> <span class="s1">'fBodyAcc-mean()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAcc-std()-X'</span><span class="p">,</span> <span class="s1">'fBodyAcc-std()-Y'</span><span class="p">,</span> <span class="s1">'fBodyAcc-std()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAcc-mad()-X'</span><span class="p">,</span> <span class="s1">'fBodyAcc-mad()-Y'</span><span class="p">,</span> <span class="s1">'fBodyAcc-mad()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAcc-max()-X'</span><span class="p">,</span> <span class="s1">'fBodyAcc-max()-Y'</span><span class="p">,</span> <span class="s1">'fBodyAcc-max()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAcc-sma()'</span><span class="p">,</span> <span class="s1">'fBodyAcc-energy()-X'</span><span class="p">,</span> <span class="s1">'fBodyAcc-energy()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAcc-iqr()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAcc-entropy()-X'</span><span class="p">,</span> <span class="s1">'fBodyAcc-entropy()-Y'</span><span class="p">,</span> <span class="s1">'fBodyAcc-entropy()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAcc-kurtosis()-X'</span><span class="p">,</span> <span class="s1">'fBodyAcc-kurtosis()-Y'</span><span class="p">,</span> <span class="s1">'fBodyAcc-kurtosis()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-1,8'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-1,16'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-17,32'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-33,48'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-49,64'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-1,24'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-25,48'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-1,16.1'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-17,32.1'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-33,48.1'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-49,64.1'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-1,24.1'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-25,48.1'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-1,16.2'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-17,32.2'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-33,48.2'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-49,64.2'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-1,24.2'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-25,48.2'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-mean()-X'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-mean()-Y'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-mean()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-std()-X'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-std()-Y'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-std()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-mad()-X'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-mad()-Y'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-mad()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-max()-X'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-max()-Y'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-max()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-sma()'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-energy()-X'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-energy()-Y'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-energy()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-iqr()-X'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-iqr()-Y'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-iqr()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-entropy()-X'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-entropy()-Y'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-entropy()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-1,8'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-9,16'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-17,24'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-25,32'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-17,32'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-49,64'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-1,24'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-9,16.1'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-17,24.1'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-25,32.1'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-1,16.1'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-17,32.1'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-49,64.1'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-1,24.1'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-25,48.1'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-9,16.2'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-17,24.2'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-25,32.2'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-33,40.2'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-1,16.2'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-17,32.2'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-33,48.2'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-49,64.2'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-1,24.2'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-25,48.2'</span><span class="p">,</span> <span class="s1">'fBodyGyro-mean()-X'</span><span class="p">,</span> <span class="s1">'fBodyGyro-mean()-Y'</span><span class="p">,</span> <span class="s1">'fBodyGyro-mean()-Z'</span><span class="p">,</span> <span class="s1">'fBodyGyro-std()-X'</span><span class="p">,</span> <span class="s1">'fBodyGyro-std()-Y'</span><span class="p">,</span> <span class="s1">'fBodyGyro-std()-Z'</span><span class="p">,</span> <span class="s1">'fBodyGyro-mad()-X'</span><span class="p">,</span> <span class="s1">'fBodyGyro-mad()-Y'</span><span class="p">,</span> <span class="s1">'fBodyGyro-mad()-Z'</span><span class="p">,</span> <span class="s1">'fBodyGyro-max()-X'</span><span class="p">,</span> <span class="s1">'fBodyGyro-max()-Z'</span><span class="p">,</span> <span class="s1">'fBodyGyro-sma()'</span><span class="p">,</span> <span class="s1">'fBodyGyro-energy()-Y'</span><span class="p">,</span> <span class="s1">'fBodyGyro-energy()-Z'</span><span class="p">,</span> <span class="s1">'fBodyGyro-entropy()-X'</span><span class="p">,</span> <span class="s1">'fBodyGyro-entropy()-Y'</span><span class="p">,</span> <span class="s1">'fBodyGyro-entropy()-Z'</span><span class="p">,</span> <span class="s1">'fBodyGyro-kurtosis()-X'</span><span class="p">,</span> <span class="s1">'fBodyGyro-kurtosis()-Y'</span><span class="p">,</span> <span class="s1">'fBodyGyro-kurtosis()-Z'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-1,8'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-1,16'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-17,32'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-33,48'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-49,64'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-1,24'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-25,48'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-17,32.1'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-33,48.1'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-49,64.1'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-1,24.1'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-25,48.1'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-1,16.2'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-17,32.2'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-33,48.2'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-49,64.2'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-1,24.2'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-25,48.2'</span><span class="p">,</span> <span class="s1">'fBodyAccMag-mean()'</span><span class="p">,</span> <span class="s1">'fBodyAccMag-std()'</span><span class="p">,</span> <span class="s1">'fBodyAccMag-mad()'</span><span class="p">,</span> <span class="s1">'fBodyAccMag-max()'</span><span class="p">,</span> <span class="s1">'fBodyAccMag-sma()'</span><span class="p">,</span> <span class="s1">'fBodyAccMag-iqr()'</span><span class="p">,</span> <span class="s1">'fBodyAccMag-entropy()'</span><span class="p">,</span> <span class="s1">'fBodyAccMag-kurtosis()'</span><span class="p">,</span> <span class="s1">'fBodyBodyAccJerkMag-mean()'</span><span class="p">,</span> <span class="s1">'fBodyBodyAccJerkMag-std()'</span><span class="p">,</span> <span class="s1">'fBodyBodyAccJerkMag-mad()'</span><span class="p">,</span> <span class="s1">'fBodyBodyAccJerkMag-max()'</span><span class="p">,</span> <span class="s1">'fBodyBodyAccJerkMag-sma()'</span><span class="p">,</span> <span class="s1">'fBodyBodyAccJerkMag-energy()'</span><span class="p">,</span> <span class="s1">'fBodyBodyAccJerkMag-iqr()'</span><span class="p">,</span> <span class="s1">'fBodyBodyAccJerkMag-entropy()'</span><span class="p">,</span> <span class="s1">'fBodyBodyAccJerkMag-kurtosis()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroMag-mean()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroMag-std()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroMag-mad()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroMag-max()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroMag-sma()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroMag-entropy()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroMag-kurtosis()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroJerkMag-mean()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroJerkMag-std()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroJerkMag-mad()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroJerkMag-max()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroJerkMag-sma()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroJerkMag-energy()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroJerkMag-iqr()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroJerkMag-entropy()'</span><span class="p">,</span> <span class="s1">'angle(X,gravityMean)'</span><span class="p">,</span> <span class="s1">'angle(Y,gravityMean)'</span><span class="p">,</span> <span class="s1">'angle(Z,gravityMean)'</span><span class="p">])</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=4d56a512">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [24]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">df_test_cleaned</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[24]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>(2947, 307)</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=1d745958">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [25]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">df_test_cleaned</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[25]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>tBodyAcc-mean()-X</th>
+<th>tBodyAcc-mean()-Y</th>
+<th>tBodyAcc-mean()-Z</th>
+<th>tBodyAcc-std()-X</th>
+<th>tBodyAcc-std()-Y</th>
+<th>tBodyAcc-std()-Z</th>
+<th>tBodyAcc-max()-Y</th>
+<th>tBodyAcc-max()-Z</th>
+<th>tBodyAcc-min()-X</th>
+<th>tBodyAcc-min()-Y</th>
+<th>...</th>
+<th>fBodyBodyGyroJerkMag-min()</th>
+<th>fBodyBodyGyroJerkMag-maxInds</th>
+<th>fBodyBodyGyroJerkMag-meanFreq()</th>
+<th>fBodyBodyGyroJerkMag-skewness()</th>
+<th>fBodyBodyGyroJerkMag-kurtosis()</th>
+<th>angle(tBodyAccMean,gravity)</th>
+<th>angle(tBodyAccJerkMean),gravityMean)</th>
+<th>angle(tBodyGyroMean,gravityMean)</th>
+<th>angle(tBodyGyroJerkMean,gravityMean)</th>
+<th>subject</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>count</th>
+<td>2947.000000</td>
+<td>2947.000000</td>
+<td>2947.000000</td>
+<td>2947.000000</td>
+<td>2947.000000</td>
+<td>2947.000000</td>
+<td>2947.000000</td>
+<td>2947.000000</td>
+<td>2947.000000</td>
+<td>2947.000000</td>
+<td>...</td>
+<td>2947.000000</td>
+<td>2947.000000</td>
+<td>2947.000000</td>
+<td>2947.000000</td>
+<td>2947.000000</td>
+<td>2947.000000</td>
+<td>2947.000000</td>
+<td>2947.000000</td>
+<td>2947.000000</td>
+<td>2947.000000</td>
+</tr>
+<tr>
+<th>mean</th>
+<td>0.273996</td>
+<td>-0.017863</td>
+<td>-0.108386</td>
+<td>-0.613635</td>
+<td>-0.508330</td>
+<td>-0.633797</td>
+<td>-0.303028</td>
+<td>-0.574975</td>
+<td>0.529679</td>
+<td>0.394903</td>
+<td>...</td>
+<td>-0.869391</td>
+<td>-0.902963</td>
+<td>0.130236</td>
+<td>-0.277593</td>
+<td>-0.598756</td>
+<td>0.005264</td>
+<td>0.003799</td>
+<td>0.040029</td>
+<td>-0.017298</td>
+<td>12.986427</td>
+</tr>
+<tr>
+<th>std</th>
+<td>0.060570</td>
+<td>0.025745</td>
+<td>0.042747</td>
+<td>0.412597</td>
+<td>0.494269</td>
+<td>0.362699</td>
+<td>0.274075</td>
+<td>0.253431</td>
+<td>0.338503</td>
+<td>0.326645</td>
+<td>...</td>
+<td>0.180039</td>
+<td>0.130682</td>
+<td>0.231018</td>
+<td>0.317245</td>
+<td>0.311042</td>
+<td>0.336147</td>
+<td>0.445077</td>
+<td>0.634989</td>
+<td>0.501311</td>
+<td>6.950984</td>
+</tr>
+<tr>
+<th>min</th>
+<td>-0.592004</td>
+<td>-0.362884</td>
+<td>-0.576184</td>
+<td>-0.999606</td>
+<td>-1.000000</td>
+<td>-0.998955</td>
+<td>-0.583487</td>
+<td>-0.846114</td>
+<td>-0.506816</td>
+<td>-0.880782</td>
+<td>...</td>
+<td>-0.999978</td>
+<td>-1.000000</td>
+<td>-0.785543</td>
+<td>-1.000000</td>
+<td>-1.000000</td>
+<td>-1.000000</td>
+<td>-0.993402</td>
+<td>-0.998898</td>
+<td>-0.991096</td>
+<td>2.000000</td>
+</tr>
+<tr>
+<th>25%</th>
+<td>0.262075</td>
+<td>-0.024961</td>
+<td>-0.121162</td>
+<td>-0.990914</td>
+<td>-0.973664</td>
+<td>-0.976122</td>
+<td>-0.559938</td>
+<td>-0.810242</td>
+<td>0.240895</td>
+<td>0.147252</td>
+<td>...</td>
+<td>-0.992428</td>
+<td>-0.968254</td>
+<td>-0.008433</td>
+<td>-0.517494</td>
+<td>-0.829593</td>
+<td>-0.130541</td>
+<td>-0.282600</td>
+<td>-0.518924</td>
+<td>-0.428375</td>
+<td>9.000000</td>
+</tr>
+<tr>
+<th>50%</th>
+<td>0.277113</td>
+<td>-0.016967</td>
+<td>-0.108458</td>
+<td>-0.931214</td>
+<td>-0.790972</td>
+<td>-0.827534</td>
+<td>-0.436526</td>
+<td>-0.684548</td>
+<td>0.755450</td>
+<td>0.594357</td>
+<td>...</td>
+<td>-0.963172</td>
+<td>-0.904762</td>
+<td>0.142676</td>
+<td>-0.311023</td>
+<td>-0.683672</td>
+<td>0.005188</td>
+<td>0.006767</td>
+<td>0.047113</td>
+<td>-0.026726</td>
+<td>12.000000</td>
+</tr>
+<tr>
+<th>75%</th>
+<td>0.288097</td>
+<td>-0.010143</td>
+<td>-0.097123</td>
+<td>-0.267395</td>
+<td>-0.105919</td>
+<td>-0.311432</td>
+<td>-0.075040</td>
+<td>-0.375213</td>
+<td>0.841741</td>
+<td>0.683272</td>
+<td>...</td>
+<td>-0.798295</td>
+<td>-0.873016</td>
+<td>0.288320</td>
+<td>-0.083559</td>
+<td>-0.458332</td>
+<td>0.146200</td>
+<td>0.288113</td>
+<td>0.622151</td>
+<td>0.394387</td>
+<td>18.000000</td>
+</tr>
+<tr>
+<th>max</th>
+<td>0.671887</td>
+<td>0.246106</td>
+<td>0.494114</td>
+<td>0.465299</td>
+<td>1.000000</td>
+<td>0.489703</td>
+<td>0.674711</td>
+<td>0.384516</td>
+<td>0.854911</td>
+<td>0.707630</td>
+<td>...</td>
+<td>0.557422</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>0.998898</td>
+<td>0.986347</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>24.000000</td>
+</tr>
+</tbody>
+</table>
+<p>8 rows × 306 columns</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d806fdcd">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [26]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">X_train</span> <span class="o">=</span> <span class="n">df_cleaned</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">y_train</span> <span class="o">=</span><span class="n">df_cleaned</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">X_test</span><span class="o">=</span><span class="n">df_test_cleaned</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">y_test</span><span class="o">=</span><span class="n">df_test_cleaned</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=83fd572b">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [27]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="c1"># Standardize the data</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+
+<span class="c1"># Fit and transform on X_train</span>
+<span class="c1">#NOT USING SCALING on TRAIN DATA AS DATA IS ALREADY SCALED</span>
+<span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+
+<span class="c1"># Transform X_test using the same scaler</span>
+<span class="n">X_test_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=3d92f7ec">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [28]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+<span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mf">0.95</span><span class="p">)</span> 
+<span class="n">X_train_pca</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">)</span>
+<span class="n">X_test_pca</span>  <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
+
+<span class="c1"># Check the explained variance ratio</span>
+<span class="n">explained_variance</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Explained variance ratio: </span><span class="si">{</span><span class="n">explained_variance</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Number of components to retain 95% variance: </span><span class="si">{</span><span class="n">pca</span><span class="o">.</span><span class="n">n_components_</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Explained variance ratio: [0.35958865 0.07680818 0.02807185 0.02216172 0.01996806 0.01933721
+ 0.0166658  0.01582354 0.0119831  0.01176496 0.01109518 0.01060941
+ 0.01015926 0.00967816 0.00959636 0.00916228 0.00907278 0.00852482
+ 0.0075571  0.00726546 0.0070674  0.00690247 0.00659345 0.00651073
+ 0.00635701 0.00595472 0.00587902 0.0056837  0.00548823 0.00539685
+ 0.00513119 0.00509636 0.0050132  0.00487875 0.00465869 0.00460143
+ 0.00448572 0.00444402 0.00443022 0.00413671 0.00404143 0.00393715
+ 0.0038864  0.00380904 0.00372992 0.00362464 0.00360794 0.00347173
+ 0.00339674 0.0033157  0.00329795 0.00327986 0.00317734 0.00311695
+ 0.003095   0.00304669 0.00301959 0.00299679 0.00290725 0.0028765
+ 0.0028224  0.00277089 0.00272218 0.0027041  0.00263386 0.00257762
+ 0.00252458 0.00251414 0.00244729 0.00242441 0.00237791 0.00229136
+ 0.00225752 0.00225355 0.00215782 0.00212306 0.00210092 0.00204484
+ 0.00203119 0.00199423 0.00193537 0.00192764 0.00188408 0.00179543
+ 0.00176642 0.00175124 0.00167961 0.00163623 0.00162196 0.00161036
+ 0.00158755 0.0015696  0.00153095 0.00146275 0.00145222 0.00143209
+ 0.00139575 0.00137948 0.00135326 0.00132844 0.0013158  0.00127974
+ 0.00127889 0.00124191 0.00123895 0.00120646 0.00118166 0.00117402
+ 0.0011424  0.00112776 0.00109977 0.00109421 0.00107152 0.00105365
+ 0.00103716 0.00102759 0.00101573]
+Number of components to retain 95% variance: 117
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=497a6487">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [29]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">X_train_pca</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[29]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>(7352, 117)</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=cd4dfde5">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [30]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">X_test_pca</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[30]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>(2947, 117)</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=cfb3b208">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [31]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">#Outliers removal based on z score</span>
+
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="c1"># Calculate Z-scores for each feature</span>
+<span class="n">z_scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">zscore</span><span class="p">(</span><span class="n">X_train_pca</span><span class="p">))</span>
+
+<span class="c1"># Set a threshold (e.g., 3 standard deviations)</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">outliers_z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">z_scores</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">)</span>
+
+<span class="c1"># Count and print the number of outliers</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Number of outliers detected by Z-Score: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">outliers_z</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Optional: Remove outliers</span>
+<span class="n">X_no_outliers_z</span> <span class="o">=</span> <span class="n">X_train_pca</span><span class="p">[(</span><span class="n">z_scores</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+<span class="n">y_no_outliers_z</span> <span class="o">=</span> <span class="n">y_train</span><span class="p">[(</span><span class="n">z_scores</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Number of outliers detected by Z-Score: 2151
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=583a0e24">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [32]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">X_no_outliers_z</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[32]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>(5201, 117)</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=55606a0b">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [33]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">y_no_outliers_z</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[33]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>(5201,)</pre>
 </div>
 </div>
 </div>
@@ -8374,14 +9100,97 @@ Cleaned DataFrame:
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [34]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># assigning proper columns to train dataset </span>
+<span class="c1">#X_train = X_no_outliers_z</span>
+<span class="c1">#y_train= y_no_outliers_z</span>
 
-<span class="c1"># Split into training (80%) and testing (20%)</span>
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">X_no_outliers_z</span>
+<span class="n">y_train</span><span class="o">=</span> <span class="n">y_no_outliers_z</span>
+
+<span class="n">X_test</span><span class="o">=</span><span class="n">X_test_pca</span>
+<span class="n">y_test</span><span class="o">=</span><span class="n">y_test</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=eee082a8">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [35]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[35]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>(5201, 117)</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=82b278fc">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [36]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">y_train</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[36]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>(5201,)</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=d9d02b26">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [37]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[37]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>(2947, 117)</pre>
 </div>
 </div>
 </div>
@@ -8391,7 +9200,7 @@ Cleaned DataFrame:
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [38]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
@@ -8404,12 +9213,93 @@ Cleaned DataFrame:
 </div>
 </div>
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=1188fa2b">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [39]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="c1"># Create and train the Logistic Regression model</span>
+<span class="n">logisticregressionmodel</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">logisticregressionmodel</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Logistic Regression Model Trained Successfully!"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Logistic Regression Model Trained Successfully!
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=7be86994">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [40]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Make predictions</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">logisticregressionmodel</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># Evaluate model</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Logistic Regression Model Accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2"> Logistic Regression Model Classification Report:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Logistic Regression Model Accuracy: 0.92
+
+ Logistic Regression Model Classification Report:
+                    precision    recall  f1-score   support
+
+            LAYING       1.00      1.00      1.00       537
+           SITTING       0.93      0.86      0.89       491
+          STANDING       0.88      0.94      0.91       532
+           WALKING       0.90      0.96      0.93       496
+WALKING_DOWNSTAIRS       0.92      0.87      0.89       420
+  WALKING_UPSTAIRS       0.90      0.90      0.90       471
+
+          accuracy                           0.92      2947
+         macro avg       0.92      0.92      0.92      2947
+      weighted avg       0.92      0.92      0.92      2947
+
+</pre>
+</div>
+</div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=de4f42cc">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [41]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">svc_linear</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">'linear'</span><span class="p">)</span>
@@ -8419,7 +9309,6 @@ Cleaned DataFrame:
 <span class="c1"># compute and print accuracy score</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">'SVC Linear: Model accuracy score with default hyperparameters: </span><span class="si">{0:0.4f}</span><span class="s1">'</span><span class="o">.</span> <span class="nb">format</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Classification Report:</span><span class="se">\n\n</span><span class="s2">"</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-
 
 <span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
 
@@ -8436,33 +9325,33 @@ Cleaned DataFrame:
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>SVC Linear: Model accuracy score with default hyperparameters: 0.9762
+<pre>SVC Linear: Model accuracy score with default hyperparameters: 0.9182
 
 Classification Report:
 
                      precision    recall  f1-score   support
 
-            LAYING       1.00      1.00      1.00       280
-           SITTING       0.93      0.95      0.94       262
-          STANDING       0.96      0.93      0.94       276
-           WALKING       1.00      0.99      1.00       247
-WALKING_DOWNSTAIRS       0.99      1.00      1.00       206
-  WALKING_UPSTAIRS       0.99      0.99      0.99       200
+            LAYING       1.00      1.00      1.00       537
+           SITTING       0.92      0.86      0.89       491
+          STANDING       0.89      0.93      0.91       532
+           WALKING       0.88      0.98      0.93       496
+WALKING_DOWNSTAIRS       0.93      0.83      0.88       420
+  WALKING_UPSTAIRS       0.89      0.88      0.88       471
 
-          accuracy                           0.98      1471
-         macro avg       0.98      0.98      0.98      1471
-      weighted avg       0.98      0.98      0.98      1471
+          accuracy                           0.92      2947
+         macro avg       0.92      0.91      0.92      2947
+      weighted avg       0.92      0.92      0.92      2947
 
 
 
 Confusion matrix
 
- [[280   0   0   0   0   0]
- [  0 250  12   0   0   0]
- [  0  19 257   0   0   0]
- [  0   0   0 245   0   2]
- [  0   0   0   0 206   0]
- [  0   0   0   0   2 198]]
+ [[537   0   0   0   0   0]
+ [  1 424  63   0   0   3]
+ [  0  35 497   0   0   0]
+ [  0   0   0 487   8   1]
+ [  0   0   0  24 348  48]
+ [  0   0   0  40  18 413]]
 </pre>
 </div>
 </div>
@@ -8473,7 +9362,7 @@ Confusion matrix
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [22]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [42]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">svc_poly</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">'poly'</span><span class="p">)</span>
@@ -8499,33 +9388,33 @@ Confusion matrix
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>SVC poly: Model accuracy score with default hyperparameters: 0.8375
+<pre>SVC poly: Model accuracy score with default hyperparameters: 0.9186
 
 Classification Report:
 
                      precision    recall  f1-score   support
 
-            LAYING       1.00      0.99      0.99       280
-           SITTING       0.92      0.69      0.79       262
-          STANDING       0.76      0.94      0.84       276
-           WALKING       0.64      0.98      0.78       247
-WALKING_DOWNSTAIRS       1.00      0.65      0.78       206
-  WALKING_UPSTAIRS       0.95      0.69      0.80       200
+            LAYING       1.00      0.98      0.99       537
+           SITTING       0.93      0.88      0.90       491
+          STANDING       0.89      0.94      0.92       532
+           WALKING       0.85      0.98      0.91       496
+WALKING_DOWNSTAIRS       0.98      0.79      0.87       420
+  WALKING_UPSTAIRS       0.89      0.92      0.90       471
 
-          accuracy                           0.84      1471
-         macro avg       0.88      0.82      0.83      1471
-      weighted avg       0.87      0.84      0.84      1471
+          accuracy                           0.92      2947
+         macro avg       0.92      0.91      0.92      2947
+      weighted avg       0.92      0.92      0.92      2947
 
 
 
 Confusion matrix
 
- [[278   0   0   1   0   1]
- [  1 180  80   1   0   0]
- [  0  16 260   0   0   0]
- [  0   0   0 243   0   4]
- [  0   0   0  70 133   3]
- [  0   0   0  62   0 138]]
+ [[527   6   3   0   0   1]
+ [  0 431  57   0   0   3]
+ [  0  28 500   4   0   0]
+ [  0   0   0 488   5   3]
+ [  0   0   0  46 330  44]
+ [  0   0   0  39   1 431]]
 </pre>
 </div>
 </div>
@@ -8536,7 +9425,7 @@ Confusion matrix
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [23]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [43]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">svc_rbf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">'rbf'</span><span class="p">)</span>
@@ -8563,266 +9452,84 @@ Confusion matrix
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>SVC RBF: Model accuracy score with default hyperparameters: 0.9361
+<pre>SVC RBF: Model accuracy score with default hyperparameters: 0.9348
 
 Classification Report:
 
                      precision    recall  f1-score   support
 
-            LAYING       1.00      1.00      1.00       280
-           SITTING       0.89      0.83      0.86       262
-          STANDING       0.85      0.90      0.87       276
-           WALKING       0.97      0.98      0.97       247
-WALKING_DOWNSTAIRS       0.99      0.95      0.97       206
-  WALKING_UPSTAIRS       0.95      0.98      0.96       200
+            LAYING       0.99      1.00      1.00       537
+           SITTING       0.93      0.88      0.90       491
+          STANDING       0.90      0.94      0.92       532
+           WALKING       0.91      0.99      0.95       496
+WALKING_DOWNSTAIRS       0.99      0.84      0.90       420
+  WALKING_UPSTAIRS       0.90      0.95      0.93       471
 
-          accuracy                           0.94      1471
-         macro avg       0.94      0.94      0.94      1471
-      weighted avg       0.94      0.94      0.94      1471
+          accuracy                           0.93      2947
+         macro avg       0.94      0.93      0.93      2947
+      weighted avg       0.94      0.93      0.93      2947
 
 
 
 Confusion matrix
 
- [[280   0   0   0   0   0]
- [  0 217  45   0   0   0]
- [  0  28 248   0   0   0]
- [  0   0   0 241   0   6]
- [  0   0   0   6 195   5]
- [  0   0   0   2   2 196]]
+ [[535   0   0   1   0   1]
+ [  3 430  54   0   0   4]
+ [  0  33 499   0   0   0]
+ [  0   0   0 492   3   1]
+ [  0   0   0  26 351  43]
+ [  0   0   0  21   2 448]]
 </pre>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=2657f88a">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f2b44d67">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [24]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [44]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">df_test</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="s2">"/test.csv"</span><span class="p">)</span>
-<span class="n">df_test</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span>
+<span class="c1"># Encode target labels (Convert categorical to numeric)</span>
+<span class="n">encoder</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[24]:</div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>tBodyAcc-mean()-X</th>
-<th>tBodyAcc-mean()-Y</th>
-<th>tBodyAcc-mean()-Z</th>
-<th>tBodyAcc-std()-X</th>
-<th>tBodyAcc-std()-Y</th>
-<th>tBodyAcc-std()-Z</th>
-<th>tBodyAcc-mad()-X</th>
-<th>tBodyAcc-mad()-Y</th>
-<th>tBodyAcc-mad()-Z</th>
-<th>tBodyAcc-max()-X</th>
-<th>...</th>
-<th>fBodyBodyGyroJerkMag-kurtosis()</th>
-<th>angle(tBodyAccMean,gravity)</th>
-<th>angle(tBodyAccJerkMean),gravityMean)</th>
-<th>angle(tBodyGyroMean,gravityMean)</th>
-<th>angle(tBodyGyroJerkMean,gravityMean)</th>
-<th>angle(X,gravityMean)</th>
-<th>angle(Y,gravityMean)</th>
-<th>angle(Z,gravityMean)</th>
-<th>subject</th>
-<th>Activity</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>0</th>
-<td>0.257178</td>
-<td>-0.023285</td>
-<td>-0.014654</td>
-<td>-0.938404</td>
-<td>-0.920091</td>
-<td>-0.667683</td>
-<td>-0.952501</td>
-<td>-0.925249</td>
-<td>-0.674302</td>
-<td>-0.894088</td>
-<td>...</td>
-<td>-0.705974</td>
-<td>0.006462</td>
-<td>0.162920</td>
-<td>-0.825886</td>
-<td>0.271151</td>
-<td>-0.720009</td>
-<td>0.276801</td>
-<td>-0.057978</td>
-<td>2</td>
-<td>STANDING</td>
-</tr>
-<tr>
-<th>1</th>
-<td>0.286027</td>
-<td>-0.013163</td>
-<td>-0.119083</td>
-<td>-0.975415</td>
-<td>-0.967458</td>
-<td>-0.944958</td>
-<td>-0.986799</td>
-<td>-0.968401</td>
-<td>-0.945823</td>
-<td>-0.894088</td>
-<td>...</td>
-<td>-0.594944</td>
-<td>-0.083495</td>
-<td>0.017500</td>
-<td>-0.434375</td>
-<td>0.920593</td>
-<td>-0.698091</td>
-<td>0.281343</td>
-<td>-0.083898</td>
-<td>2</td>
-<td>STANDING</td>
-</tr>
-<tr>
-<th>2</th>
-<td>0.275485</td>
-<td>-0.026050</td>
-<td>-0.118152</td>
-<td>-0.993819</td>
-<td>-0.969926</td>
-<td>-0.962748</td>
-<td>-0.994403</td>
-<td>-0.970735</td>
-<td>-0.963483</td>
-<td>-0.939260</td>
-<td>...</td>
-<td>-0.640736</td>
-<td>-0.034956</td>
-<td>0.202302</td>
-<td>0.064103</td>
-<td>0.145068</td>
-<td>-0.702771</td>
-<td>0.280083</td>
-<td>-0.079346</td>
-<td>2</td>
-<td>STANDING</td>
-</tr>
-<tr>
-<th>3</th>
-<td>0.270298</td>
-<td>-0.032614</td>
-<td>-0.117520</td>
-<td>-0.994743</td>
-<td>-0.973268</td>
-<td>-0.967091</td>
-<td>-0.995274</td>
-<td>-0.974471</td>
-<td>-0.968897</td>
-<td>-0.938610</td>
-<td>...</td>
-<td>-0.736124</td>
-<td>-0.017067</td>
-<td>0.154438</td>
-<td>0.340134</td>
-<td>0.296407</td>
-<td>-0.698954</td>
-<td>0.284114</td>
-<td>-0.077108</td>
-<td>2</td>
-<td>STANDING</td>
-</tr>
-<tr>
-<th>4</th>
-<td>0.274833</td>
-<td>-0.027848</td>
-<td>-0.129527</td>
-<td>-0.993852</td>
-<td>-0.967445</td>
-<td>-0.978295</td>
-<td>-0.994111</td>
-<td>-0.965953</td>
-<td>-0.977346</td>
-<td>-0.938610</td>
-<td>...</td>
-<td>-0.846595</td>
-<td>-0.002223</td>
-<td>-0.040046</td>
-<td>0.736715</td>
-<td>-0.118545</td>
-<td>-0.692245</td>
-<td>0.290722</td>
-<td>-0.073857</td>
-<td>2</td>
-<td>STANDING</td>
-</tr>
-</tbody>
-</table>
-<p>5 rows × 563 columns</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=660effa4">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=d07f0047">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [25]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [45]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1">#dropping column found to be highly corelated to avoid redudancy</span>
-<span class="n">df_test</span><span class="o">=</span><span class="n">df_test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'tBodyAcc-mad()-X'</span><span class="p">,</span> <span class="s1">'tBodyAcc-mad()-Y'</span><span class="p">,</span> <span class="s1">'tBodyAcc-mad()-Z'</span><span class="p">,</span> <span class="s1">'tBodyAcc-max()-X'</span><span class="p">,</span> <span class="s1">'tBodyAcc-max()-Y'</span><span class="p">,</span> <span class="s1">'tBodyAcc-min()-X'</span><span class="p">,</span> <span class="s1">'tBodyAcc-min()-Y'</span><span class="p">,</span> <span class="s1">'tBodyAcc-sma()'</span><span class="p">,</span> <span class="s1">'tBodyAcc-energy()-X'</span><span class="p">,</span> <span class="s1">'tBodyAcc-iqr()-X'</span><span class="p">,</span> <span class="s1">'tBodyAcc-iqr()-Y'</span><span class="p">,</span> <span class="s1">'tBodyAcc-iqr()-Z'</span><span class="p">,</span> <span class="s1">'tGravityAcc-mad()-X'</span><span class="p">,</span> <span class="s1">'tGravityAcc-mad()-Y'</span><span class="p">,</span> <span class="s1">'tGravityAcc-mad()-Z'</span><span class="p">,</span> <span class="s1">'tGravityAcc-max()-X'</span><span class="p">,</span> <span class="s1">'tGravityAcc-max()-Y'</span><span class="p">,</span> <span class="s1">'tGravityAcc-max()-Z'</span><span class="p">,</span> <span class="s1">'tGravityAcc-min()-X'</span><span class="p">,</span> <span class="s1">'tGravityAcc-min()-Y'</span><span class="p">,</span> <span class="s1">'tGravityAcc-min()-Z'</span><span class="p">,</span> <span class="s1">'tGravityAcc-energy()-X'</span><span class="p">,</span> <span class="s1">'tGravityAcc-iqr()-X'</span><span class="p">,</span> <span class="s1">'tGravityAcc-iqr()-Y'</span><span class="p">,</span> <span class="s1">'tGravityAcc-iqr()-Z'</span><span class="p">,</span> <span class="s1">'tGravityAcc-arCoeff()-X,2'</span><span class="p">,</span> <span class="s1">'tGravityAcc-arCoeff()-X,3'</span><span class="p">,</span> <span class="s1">'tGravityAcc-arCoeff()-X,4'</span><span class="p">,</span> <span class="s1">'tGravityAcc-arCoeff()-Y,2'</span><span class="p">,</span> <span class="s1">'tGravityAcc-arCoeff()-Y,3'</span><span class="p">,</span> <span class="s1">'tGravityAcc-arCoeff()-Y,4'</span><span class="p">,</span> <span class="s1">'tGravityAcc-arCoeff()-Z,2'</span><span class="p">,</span> <span class="s1">'tGravityAcc-arCoeff()-Z,3'</span><span class="p">,</span> <span class="s1">'tGravityAcc-arCoeff()-Z,4'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-std()-X'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-std()-Y'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-mad()-X'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-mad()-Y'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-mad()-Z'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-max()-X'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-max()-Y'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-max()-Z'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-min()-X'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-min()-Y'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-min()-Z'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-sma()'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-energy()-Y'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-iqr()-X'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-iqr()-Y'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-iqr()-Z'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-entropy()-Y'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-entropy()-Z'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-arCoeff()-X,1'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-arCoeff()-Y,1'</span><span class="p">,</span> <span class="s1">'tBodyAccJerk-arCoeff()-Z,1'</span><span class="p">,</span> <span class="s1">'tBodyGyro-mad()-X'</span><span class="p">,</span> <span class="s1">'tBodyGyro-mad()-Y'</span><span class="p">,</span> <span class="s1">'tBodyGyro-mad()-Z'</span><span class="p">,</span> <span class="s1">'tBodyGyro-max()-Y'</span><span class="p">,</span> <span class="s1">'tBodyGyro-min()-Z'</span><span class="p">,</span> <span class="s1">'tBodyGyro-sma()'</span><span class="p">,</span> <span class="s1">'tBodyGyro-iqr()-X'</span><span class="p">,</span> <span class="s1">'tBodyGyro-iqr()-Y'</span><span class="p">,</span> <span class="s1">'tBodyGyro-iqr()-Z'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-std()-X'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-std()-Z'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-mad()-X'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-mad()-Y'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-mad()-Z'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-max()-X'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-max()-Y'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-max()-Z'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-min()-X'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-min()-Y'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-min()-Z'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-sma()'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-iqr()-X'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-iqr()-Y'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-iqr()-Z'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-entropy()-X'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-entropy()-Y'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-entropy()-Z'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-arCoeff()-X,1'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-arCoeff()-Y,1'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerk-arCoeff()-Z,1'</span><span class="p">,</span> <span class="s1">'tBodyAccMag-mean()'</span><span class="p">,</span> <span class="s1">'tBodyAccMag-std()'</span><span class="p">,</span> <span class="s1">'tBodyAccMag-mad()'</span><span class="p">,</span> <span class="s1">'tBodyAccMag-max()'</span><span class="p">,</span> <span class="s1">'tBodyAccMag-sma()'</span><span class="p">,</span> <span class="s1">'tBodyAccMag-energy()'</span><span class="p">,</span> <span class="s1">'tBodyAccMag-iqr()'</span><span class="p">,</span> <span class="s1">'tBodyAccMag-entropy()'</span><span class="p">,</span> <span class="s1">'tBodyAccMag-arCoeff()2'</span><span class="p">,</span> <span class="s1">'tGravityAccMag-mean()'</span><span class="p">,</span> <span class="s1">'tGravityAccMag-std()'</span><span class="p">,</span> <span class="s1">'tGravityAccMag-mad()'</span><span class="p">,</span> <span class="s1">'tGravityAccMag-max()'</span><span class="p">,</span> <span class="s1">'tGravityAccMag-min()'</span><span class="p">,</span> <span class="s1">'tGravityAccMag-sma()'</span><span class="p">,</span> <span class="s1">'tGravityAccMag-energy()'</span><span class="p">,</span> <span class="s1">'tGravityAccMag-iqr()'</span><span class="p">,</span> <span class="s1">'tGravityAccMag-entropy()'</span><span class="p">,</span> <span class="s1">'tGravityAccMag-arCoeff()1'</span><span class="p">,</span> <span class="s1">'tGravityAccMag-arCoeff()2'</span><span class="p">,</span> <span class="s1">'tGravityAccMag-arCoeff()3'</span><span class="p">,</span> <span class="s1">'tGravityAccMag-arCoeff()4'</span><span class="p">,</span> <span class="s1">'tBodyAccJerkMag-mean()'</span><span class="p">,</span> <span class="s1">'tBodyAccJerkMag-std()'</span><span class="p">,</span> <span class="s1">'tBodyAccJerkMag-mad()'</span><span class="p">,</span> <span class="s1">'tBodyAccJerkMag-max()'</span><span class="p">,</span> <span class="s1">'tBodyAccJerkMag-sma()'</span><span class="p">,</span> <span class="s1">'tBodyAccJerkMag-energy()'</span><span class="p">,</span> <span class="s1">'tBodyAccJerkMag-iqr()'</span><span class="p">,</span> <span class="s1">'tBodyAccJerkMag-entropy()'</span><span class="p">,</span> <span class="s1">'tBodyGyroMag-mean()'</span><span class="p">,</span> <span class="s1">'tBodyGyroMag-std()'</span><span class="p">,</span> <span class="s1">'tBodyGyroMag-mad()'</span><span class="p">,</span> <span class="s1">'tBodyGyroMag-max()'</span><span class="p">,</span> <span class="s1">'tBodyGyroMag-sma()'</span><span class="p">,</span> <span class="s1">'tBodyGyroMag-iqr()'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerkMag-mean()'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerkMag-std()'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerkMag-mad()'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerkMag-max()'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerkMag-sma()'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerkMag-energy()'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerkMag-iqr()'</span><span class="p">,</span> <span class="s1">'tBodyGyroJerkMag-entropy()'</span><span class="p">,</span> <span class="s1">'fBodyAcc-mean()-X'</span><span class="p">,</span> <span class="s1">'fBodyAcc-mean()-Y'</span><span class="p">,</span> <span class="s1">'fBodyAcc-mean()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAcc-std()-X'</span><span class="p">,</span> <span class="s1">'fBodyAcc-std()-Y'</span><span class="p">,</span> <span class="s1">'fBodyAcc-std()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAcc-mad()-X'</span><span class="p">,</span> <span class="s1">'fBodyAcc-mad()-Y'</span><span class="p">,</span> <span class="s1">'fBodyAcc-mad()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAcc-max()-X'</span><span class="p">,</span> <span class="s1">'fBodyAcc-max()-Y'</span><span class="p">,</span> <span class="s1">'fBodyAcc-max()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAcc-sma()'</span><span class="p">,</span> <span class="s1">'fBodyAcc-energy()-X'</span><span class="p">,</span> <span class="s1">'fBodyAcc-energy()-Y'</span><span class="p">,</span> <span class="s1">'fBodyAcc-energy()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAcc-iqr()-X'</span><span class="p">,</span> <span class="s1">'fBodyAcc-iqr()-Y'</span><span class="p">,</span> <span class="s1">'fBodyAcc-iqr()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAcc-entropy()-X'</span><span class="p">,</span> <span class="s1">'fBodyAcc-entropy()-Y'</span><span class="p">,</span> <span class="s1">'fBodyAcc-entropy()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAcc-kurtosis()-X'</span><span class="p">,</span> <span class="s1">'fBodyAcc-kurtosis()-Y'</span><span class="p">,</span> <span class="s1">'fBodyAcc-kurtosis()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-1,8'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-1,16'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-17,32'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-33,48'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-49,64'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-1,24'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-25,48'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-1,16.1'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-17,32.1'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-33,48.1'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-49,64.1'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-1,24.1'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-25,48.1'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-1,16.2'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-17,32.2'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-33,48.2'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-49,64.2'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-1,24.2'</span><span class="p">,</span> <span class="s1">'fBodyAcc-bandsEnergy()-25,48.2'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-mean()-X'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-mean()-Y'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-mean()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-std()-X'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-std()-Y'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-std()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-mad()-X'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-mad()-Y'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-mad()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-max()-X'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-max()-Y'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-max()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-sma()'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-energy()-X'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-energy()-Y'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-energy()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-iqr()-X'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-iqr()-Y'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-iqr()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-entropy()-X'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-entropy()-Y'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-entropy()-Z'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-1,8'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-9,16'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-17,24'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-25,32'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-1,16'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-17,32'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-33,48'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-49,64'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-1,24'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-25,48'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-9,16.1'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-17,24.1'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-25,32.1'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-33,40.1'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-1,16.1'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-17,32.1'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-33,48.1'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-49,64.1'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-1,24.1'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-25,48.1'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-9,16.2'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-17,24.2'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-25,32.2'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-33,40.2'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-41,48.2'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-1,16.2'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-17,32.2'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-33,48.2'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-49,64.2'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-1,24.2'</span><span class="p">,</span> <span class="s1">'fBodyAccJerk-bandsEnergy()-25,48.2'</span><span class="p">,</span> <span class="s1">'fBodyGyro-mean()-X'</span><span class="p">,</span> <span class="s1">'fBodyGyro-mean()-Y'</span><span class="p">,</span> <span class="s1">'fBodyGyro-mean()-Z'</span><span class="p">,</span> <span class="s1">'fBodyGyro-std()-X'</span><span class="p">,</span> <span class="s1">'fBodyGyro-std()-Y'</span><span class="p">,</span> <span class="s1">'fBodyGyro-std()-Z'</span><span class="p">,</span> <span class="s1">'fBodyGyro-mad()-X'</span><span class="p">,</span> <span class="s1">'fBodyGyro-mad()-Y'</span><span class="p">,</span> <span class="s1">'fBodyGyro-mad()-Z'</span><span class="p">,</span> <span class="s1">'fBodyGyro-max()-X'</span><span class="p">,</span> <span class="s1">'fBodyGyro-max()-Y'</span><span class="p">,</span> <span class="s1">'fBodyGyro-max()-Z'</span><span class="p">,</span> <span class="s1">'fBodyGyro-sma()'</span><span class="p">,</span> <span class="s1">'fBodyGyro-energy()-Y'</span><span class="p">,</span> <span class="s1">'fBodyGyro-energy()-Z'</span><span class="p">,</span> <span class="s1">'fBodyGyro-iqr()-X'</span><span class="p">,</span> <span class="s1">'fBodyGyro-iqr()-Y'</span><span class="p">,</span> <span class="s1">'fBodyGyro-iqr()-Z'</span><span class="p">,</span> <span class="s1">'fBodyGyro-entropy()-X'</span><span class="p">,</span> <span class="s1">'fBodyGyro-entropy()-Y'</span><span class="p">,</span> <span class="s1">'fBodyGyro-entropy()-Z'</span><span class="p">,</span> <span class="s1">'fBodyGyro-kurtosis()-X'</span><span class="p">,</span> <span class="s1">'fBodyGyro-kurtosis()-Y'</span><span class="p">,</span> <span class="s1">'fBodyGyro-kurtosis()-Z'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-1,8'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-1,16'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-17,32'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-33,48'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-49,64'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-1,24'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-25,48'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-1,16.1'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-17,32.1'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-33,48.1'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-49,64.1'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-1,24.1'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-25,48.1'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-1,8.2'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-1,16.2'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-17,32.2'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-33,48.2'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-49,64.2'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-1,24.2'</span><span class="p">,</span> <span class="s1">'fBodyGyro-bandsEnergy()-25,48.2'</span><span class="p">,</span> <span class="s1">'fBodyAccMag-mean()'</span><span class="p">,</span> <span class="s1">'fBodyAccMag-std()'</span><span class="p">,</span> <span class="s1">'fBodyAccMag-mad()'</span><span class="p">,</span> <span class="s1">'fBodyAccMag-max()'</span><span class="p">,</span> <span class="s1">'fBodyAccMag-sma()'</span><span class="p">,</span> <span class="s1">'fBodyAccMag-energy()'</span><span class="p">,</span> <span class="s1">'fBodyAccMag-iqr()'</span><span class="p">,</span> <span class="s1">'fBodyAccMag-entropy()'</span><span class="p">,</span> <span class="s1">'fBodyAccMag-kurtosis()'</span><span class="p">,</span> <span class="s1">'fBodyBodyAccJerkMag-mean()'</span><span class="p">,</span> <span class="s1">'fBodyBodyAccJerkMag-std()'</span><span class="p">,</span> <span class="s1">'fBodyBodyAccJerkMag-mad()'</span><span class="p">,</span> <span class="s1">'fBodyBodyAccJerkMag-max()'</span><span class="p">,</span> <span class="s1">'fBodyBodyAccJerkMag-sma()'</span><span class="p">,</span> <span class="s1">'fBodyBodyAccJerkMag-energy()'</span><span class="p">,</span> <span class="s1">'fBodyBodyAccJerkMag-iqr()'</span><span class="p">,</span> <span class="s1">'fBodyBodyAccJerkMag-entropy()'</span><span class="p">,</span> <span class="s1">'fBodyBodyAccJerkMag-kurtosis()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroMag-mean()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroMag-std()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroMag-mad()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroMag-max()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroMag-sma()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroMag-iqr()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroMag-entropy()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroMag-kurtosis()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroJerkMag-mean()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroJerkMag-std()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroJerkMag-mad()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroJerkMag-max()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroJerkMag-sma()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroJerkMag-energy()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroJerkMag-iqr()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroJerkMag-entropy()'</span><span class="p">,</span> <span class="s1">'fBodyBodyGyroJerkMag-kurtosis()'</span><span class="p">,</span> <span class="s1">'angle(X,gravityMean)'</span><span class="p">,</span> <span class="s1">'angle(Y,gravityMean)'</span><span class="p">,</span> <span class="s1">'angle(Z,gravityMean)'</span><span class="p">])</span>    
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=ded203f1">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [26]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">Xtest</span> <span class="o">=</span> <span class="n">df_test</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">ytest</span><span class="o">=</span><span class="n">df_test</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    
-<span class="n">ytest_pred</span><span class="o">=</span> <span class="n">svc_rbf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">Xtest</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
 
-<span class="c1"># compute and print accuracy score</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'SVC Linear: Model accuracy score with default hyperparameters: </span><span class="si">{0:0.4f}</span><span class="s1">'</span><span class="o">.</span> <span class="nb">format</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">ytest</span><span class="p">,</span> <span class="n">ytest_pred</span><span class="p">)))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Classification Report:</span><span class="se">\n\n</span><span class="s2">"</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">ytest</span><span class="p">,</span> <span class="n">ytest_pred</span><span class="p">))</span>
+<span class="c1"># Create DMatrix for XGBoost (efficient training format)</span>
+<span class="n">dtrain</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">y_train</span><span class="p">)</span>
+<span class="n">dtest</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">y_test</span><span class="p">)</span>
 
+<span class="c1"># Set XGBoost parameters</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'objective'</span><span class="p">:</span> <span class="s1">'multi:softmax'</span><span class="p">,</span>  <span class="c1"># Multiclass classification</span>
+    <span class="s1">'num_class'</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">y_train</span><span class="p">)),</span>  <span class="c1"># Number of classes</span>
+    <span class="s1">'eval_metric'</span><span class="p">:</span> <span class="s1">'mlogloss'</span><span class="p">,</span>  <span class="c1"># Log loss for multiclass classification</span>
+    <span class="s1">'max_depth'</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>  <span class="c1"># Maximum depth of a tree</span>
+    <span class="s1">'eta'</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>  <span class="c1"># Learning rate</span>
+    <span class="s1">'gamma'</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>  <span class="c1"># Minimum loss reduction required for split</span>
+<span class="p">}</span>
 
-<span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">ytest</span><span class="p">,</span> <span class="n">ytest_pred</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n\n</span><span class="s1">Confusion matrix</span><span class="se">\n\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">cm</span><span class="p">)</span>
+<span class="c1"># Train the XGBoost model</span>
+<span class="n">num_rounds</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># Number of boosting rounds</span>
+<span class="n">xgbmodel</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">dtrain</span><span class="p">,</span> <span class="n">num_boost_round</span><span class="o">=</span><span class="n">num_rounds</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"XGBoost Model Trained Successfully!"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8835,33 +9542,136 @@ Confusion matrix
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>SVC Linear: Model accuracy score with default hyperparameters: 0.9114
+<pre>XGBoost Model Trained Successfully!
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=7855dc63">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [46]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Make predictions</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">xgbmodel</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dtest</span><span class="p">)</span>
+
+<span class="c1"># Evaluate model </span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"XGBoost Model Accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Classification Report:</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>XGBoost Model Accuracy: 0.8748
 
 Classification Report:
+               precision    recall  f1-score   support
 
-                     precision    recall  f1-score   support
+           0       0.99      0.94      0.96       537
+           1       0.86      0.80      0.83       491
+           2       0.84      0.91      0.87       532
+           3       0.80      0.98      0.88       496
+           4       0.93      0.71      0.81       420
+           5       0.87      0.87      0.87       471
 
-            LAYING       1.00      1.00      1.00       537
-           SITTING       0.86      0.81      0.83       491
-          STANDING       0.84      0.88      0.86       532
-           WALKING       0.88      1.00      0.93       496
-WALKING_DOWNSTAIRS       0.97      0.84      0.90       420
-  WALKING_UPSTAIRS       0.94      0.93      0.93       471
+    accuracy                           0.87      2947
+   macro avg       0.88      0.87      0.87      2947
+weighted avg       0.88      0.87      0.87      2947
 
-          accuracy                           0.91      2947
-         macro avg       0.92      0.91      0.91      2947
-      weighted avg       0.91      0.91      0.91      2947
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=8023f5a3">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [47]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="c1"># Create and train the Random Forest model</span>
+<span class="n">randomforestmodel</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">randomforestmodel</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Random Forest Model Trained Successfully!"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Random Forest Model Trained Successfully!
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=d6819d36">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [48]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Make predictions</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">randomforestmodel</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 
+<span class="c1"># Evaluate model</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">" Random Forest Model Accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2"> Random Forest Model Classification Report:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre> Random Forest Model Accuracy: 0.85
 
-Confusion matrix
+ Random Forest Model Classification Report:
+              precision    recall  f1-score   support
 
- [[537   0   0   0   0   0]
- [  0 399  89   0   0   3]
- [  0  66 466   0   0   0]
- [  0   0   0 495   1   0]
- [  0   0   0  44 351  25]
- [  0   0   0  25   8 438]]
+           0       0.98      0.93      0.96       537
+           1       0.84      0.74      0.79       491
+           2       0.80      0.91      0.85       532
+           3       0.74      0.96      0.84       496
+           4       0.90      0.59      0.71       420
+           5       0.88      0.89      0.88       471
+
+    accuracy                           0.85      2947
+   macro avg       0.86      0.84      0.84      2947
+weighted avg       0.86      0.85      0.84      2947
+
 </pre>
 </div>
 </div>
@@ -8872,7 +9682,7 @@ Confusion matrix
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [27]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [49]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
@@ -8886,31 +9696,12 @@ Confusion matrix
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=68c72b34">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [28]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Encode target labels (Convert categorical to numeric)</span>
-<span class="n">encoder</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-
-<span class="c1"># Split dataset (80% training, 20% testing)</span>
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b8bf9154">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [29]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [51]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1">#Now lets apply the deep learning Model </span>
@@ -8921,7 +9712,7 @@ Confusion matrix
     <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span>
     <span class="n">Dense</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">'relu'</span><span class="p">),</span>
     <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span>
-    <span class="n">Dense</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y</span><span class="p">)),</span> <span class="n">activation</span><span class="o">=</span><span class="s1">'softmax'</span><span class="p">)</span>  <span class="c1"># Softmax for multi-class classification</span>
+    <span class="n">Dense</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_train</span><span class="p">)),</span> <span class="n">activation</span><span class="o">=</span><span class="s1">'softmax'</span><span class="p">)</span>  <span class="c1"># Softmax for multi-class classification</span>
 <span class="p">])</span>
 
 <span class="c1"># Compile model</span>
@@ -8940,19 +9731,6 @@ Confusion matrix
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>/opt/anaconda3/lib/python3.11/site-packages/keras/src/layers/core/dense.py:87: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
-  super().__init__(activity_regularizer=activity_regularizer, **kwargs)
-2025-03-21 18:51:33.593594: I metal_plugin/src/device/metal_device.cc:1154] Metal device set to: Apple M3 Pro
-2025-03-21 18:51:33.593645: I metal_plugin/src/device/metal_device.cc:296] systemMemory: 18.00 GB
-2025-03-21 18:51:33.593653: I metal_plugin/src/device/metal_device.cc:313] maxCacheSize: 6.00 GB
-2025-03-21 18:51:33.593854: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:305] Could not identify NUMA node of platform GPU ID 0, defaulting to 0. Your kernel may not have been built with NUMA support.
-2025-03-21 18:51:33.593875: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:271] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 0 MB memory) -&gt; physical PluggableDevice (device: 0, name: METAL, pci bus id: &lt;undefined&gt;)
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">Model: "sequential"</span>
 </pre>
@@ -8964,15 +9742,15 @@ Confusion matrix
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
 ┃<span style="font-weight: bold"> Layer (type)                    </span>┃<span style="font-weight: bold"> Output Shape           </span>┃<span style="font-weight: bold">       Param # </span>┃
 ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
-│ dense (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                   │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">32</span>)             │         <span style="color: #00af00; text-decoration-color: #00af00">8,160</span> │
+│ dense_2 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                 │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">32</span>)             │         <span style="color: #00af00; text-decoration-color: #00af00">3,776</span> │
 ├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ dropout (<span style="color: #0087ff; text-decoration-color: #0087ff">Dropout</span>)               │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">32</span>)             │             <span style="color: #00af00; text-decoration-color: #00af00">0</span> │
+│ dropout_2 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dropout</span>)             │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">32</span>)             │             <span style="color: #00af00; text-decoration-color: #00af00">0</span> │
 ├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ dense_1 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                 │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">16</span>)             │           <span style="color: #00af00; text-decoration-color: #00af00">528</span> │
+│ dense_3 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                 │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">16</span>)             │           <span style="color: #00af00; text-decoration-color: #00af00">528</span> │
 ├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ dropout_1 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dropout</span>)             │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">16</span>)             │             <span style="color: #00af00; text-decoration-color: #00af00">0</span> │
+│ dropout_3 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dropout</span>)             │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">16</span>)             │             <span style="color: #00af00; text-decoration-color: #00af00">0</span> │
 ├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ dense_2 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                 │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">6</span>)              │           <span style="color: #00af00; text-decoration-color: #00af00">102</span> │
+│ dense_4 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                 │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">6</span>)              │           <span style="color: #00af00; text-decoration-color: #00af00">102</span> │
 └─────────────────────────────────┴────────────────────────┴───────────────┘
 </pre>
 </div>
@@ -8980,14 +9758,14 @@ Confusion matrix
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold"> Total params: </span><span style="color: #00af00; text-decoration-color: #00af00">8,790</span> (34.34 KB)
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold"> Total params: </span><span style="color: #00af00; text-decoration-color: #00af00">4,406</span> (17.21 KB)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold"> Trainable params: </span><span style="color: #00af00; text-decoration-color: #00af00">8,790</span> (34.34 KB)
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold"> Trainable params: </span><span style="color: #00af00; text-decoration-color: #00af00">4,406</span> (17.21 KB)
 </pre>
 </div>
 </div>
@@ -9005,7 +9783,7 @@ Confusion matrix
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [30]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [52]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Train the model</span>
@@ -9029,112 +9807,112 @@ Confusion matrix
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>2025-03-21 18:51:34.046857: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:117] Plugin optimizer for device_type GPU is enabled.
+<pre>2025-03-22 01:58:17.453024: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:117] Plugin optimizer for device_type GPU is enabled.
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre><span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">7s</span> 8ms/step - accuracy: 0.3224 - loss: 2.3038 - val_accuracy: 0.7315 - val_loss: 0.6084
+<pre><span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">6s</span> 8ms/step - accuracy: 0.4875 - loss: 1.5282 - val_accuracy: 0.8748 - val_loss: 0.3497
 Epoch 2/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.6303 - loss: 0.8923 - val_accuracy: 0.8518 - val_loss: 0.3817
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.8296 - loss: 0.4015 - val_accuracy: 0.9080 - val_loss: 0.2412
 Epoch 3/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.7814 - loss: 0.5059 - val_accuracy: 0.9381 - val_loss: 0.2172
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9045 - loss: 0.2461 - val_accuracy: 0.9250 - val_loss: 0.2045
 Epoch 4/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.8317 - loss: 0.3814 - val_accuracy: 0.9150 - val_loss: 0.2223
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9282 - loss: 0.1794 - val_accuracy: 0.9260 - val_loss: 0.2015
 Epoch 5/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.8916 - loss: 0.2698 - val_accuracy: 0.8851 - val_loss: 0.2535
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9362 - loss: 0.1674 - val_accuracy: 0.9355 - val_loss: 0.1759
 Epoch 6/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9066 - loss: 0.2380 - val_accuracy: 0.9524 - val_loss: 0.1307
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9435 - loss: 0.1435 - val_accuracy: 0.9216 - val_loss: 0.2313
 Epoch 7/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9064 - loss: 0.2131 - val_accuracy: 0.9456 - val_loss: 0.1490
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9328 - loss: 0.1611 - val_accuracy: 0.9270 - val_loss: 0.2105
 Epoch 8/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9260 - loss: 0.1851 - val_accuracy: 0.9429 - val_loss: 0.1305
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9495 - loss: 0.1275 - val_accuracy: 0.9179 - val_loss: 0.2342
 Epoch 9/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9317 - loss: 0.1813 - val_accuracy: 0.9483 - val_loss: 0.1390
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9530 - loss: 0.1286 - val_accuracy: 0.9250 - val_loss: 0.2310
 Epoch 10/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9329 - loss: 0.1650 - val_accuracy: 0.9354 - val_loss: 0.1579
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9487 - loss: 0.1378 - val_accuracy: 0.9247 - val_loss: 0.2322
 Epoch 11/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9371 - loss: 0.1642 - val_accuracy: 0.9599 - val_loss: 0.1184
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9498 - loss: 0.1235 - val_accuracy: 0.9148 - val_loss: 0.2874
 Epoch 12/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9425 - loss: 0.1389 - val_accuracy: 0.9626 - val_loss: 0.1038
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9538 - loss: 0.1173 - val_accuracy: 0.9199 - val_loss: 0.2652
 Epoch 13/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9471 - loss: 0.1450 - val_accuracy: 0.9619 - val_loss: 0.1009
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9539 - loss: 0.1163 - val_accuracy: 0.9145 - val_loss: 0.2850
 Epoch 14/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9497 - loss: 0.1350 - val_accuracy: 0.9551 - val_loss: 0.1038
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9475 - loss: 0.1308 - val_accuracy: 0.9152 - val_loss: 0.2996
 Epoch 15/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9501 - loss: 0.1336 - val_accuracy: 0.9613 - val_loss: 0.0942
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9572 - loss: 0.1205 - val_accuracy: 0.9220 - val_loss: 0.2536
 Epoch 16/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9527 - loss: 0.1201 - val_accuracy: 0.9613 - val_loss: 0.1096
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9559 - loss: 0.1208 - val_accuracy: 0.9111 - val_loss: 0.2921
 Epoch 17/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9476 - loss: 0.1417 - val_accuracy: 0.9381 - val_loss: 0.1517
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9540 - loss: 0.1237 - val_accuracy: 0.9148 - val_loss: 0.2883
 Epoch 18/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9532 - loss: 0.1273 - val_accuracy: 0.9613 - val_loss: 0.1009
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9529 - loss: 0.1273 - val_accuracy: 0.9152 - val_loss: 0.2875
 Epoch 19/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9505 - loss: 0.1224 - val_accuracy: 0.9511 - val_loss: 0.1276
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 8ms/step - accuracy: 0.9529 - loss: 0.1194 - val_accuracy: 0.9175 - val_loss: 0.3021
 Epoch 20/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9508 - loss: 0.1281 - val_accuracy: 0.9674 - val_loss: 0.0859
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9561 - loss: 0.1177 - val_accuracy: 0.9131 - val_loss: 0.3375
 Epoch 21/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9514 - loss: 0.1292 - val_accuracy: 0.9572 - val_loss: 0.1113
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9544 - loss: 0.1206 - val_accuracy: 0.9165 - val_loss: 0.3196
 Epoch 22/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9502 - loss: 0.1252 - val_accuracy: 0.9680 - val_loss: 0.0862
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9554 - loss: 0.1149 - val_accuracy: 0.9070 - val_loss: 0.3401
 Epoch 23/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9557 - loss: 0.1068 - val_accuracy: 0.9674 - val_loss: 0.0946
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9495 - loss: 0.1424 - val_accuracy: 0.9053 - val_loss: 0.3679
 Epoch 24/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9603 - loss: 0.1055 - val_accuracy: 0.9579 - val_loss: 0.1215
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9556 - loss: 0.1166 - val_accuracy: 0.9162 - val_loss: 0.3676
 Epoch 25/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9539 - loss: 0.1154 - val_accuracy: 0.9646 - val_loss: 0.1126
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9551 - loss: 0.1305 - val_accuracy: 0.9182 - val_loss: 0.3597
 Epoch 26/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9493 - loss: 0.1236 - val_accuracy: 0.9606 - val_loss: 0.1014
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9560 - loss: 0.1249 - val_accuracy: 0.9172 - val_loss: 0.3696
 Epoch 27/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9589 - loss: 0.1069 - val_accuracy: 0.9674 - val_loss: 0.0881
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9535 - loss: 0.1264 - val_accuracy: 0.9108 - val_loss: 0.3509
 Epoch 28/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9561 - loss: 0.1158 - val_accuracy: 0.9619 - val_loss: 0.0994
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9508 - loss: 0.1595 - val_accuracy: 0.9138 - val_loss: 0.3558
 Epoch 29/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9594 - loss: 0.1053 - val_accuracy: 0.9613 - val_loss: 0.0933
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9464 - loss: 0.1537 - val_accuracy: 0.9169 - val_loss: 0.3453
 Epoch 30/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9551 - loss: 0.1199 - val_accuracy: 0.9674 - val_loss: 0.0942
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9547 - loss: 0.1261 - val_accuracy: 0.9169 - val_loss: 0.3283
 Epoch 31/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9623 - loss: 0.1015 - val_accuracy: 0.9680 - val_loss: 0.0883
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9498 - loss: 0.1333 - val_accuracy: 0.9179 - val_loss: 0.3990
 Epoch 32/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9581 - loss: 0.1031 - val_accuracy: 0.9701 - val_loss: 0.0832
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9422 - loss: 0.1454 - val_accuracy: 0.9131 - val_loss: 0.3808
 Epoch 33/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">6s</span> 8ms/step - accuracy: 0.9642 - loss: 0.0985 - val_accuracy: 0.9633 - val_loss: 0.1056
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9492 - loss: 0.1402 - val_accuracy: 0.9189 - val_loss: 0.3565
 Epoch 34/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">7s</span> 9ms/step - accuracy: 0.9558 - loss: 0.1060 - val_accuracy: 0.9619 - val_loss: 0.0968
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9516 - loss: 0.1279 - val_accuracy: 0.9101 - val_loss: 0.3676
 Epoch 35/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9588 - loss: 0.1019 - val_accuracy: 0.9626 - val_loss: 0.1023
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9452 - loss: 0.1489 - val_accuracy: 0.9101 - val_loss: 0.3369
 Epoch 36/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9608 - loss: 0.1108 - val_accuracy: 0.9606 - val_loss: 0.1021
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9495 - loss: 0.1302 - val_accuracy: 0.9145 - val_loss: 0.3364
 Epoch 37/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9561 - loss: 0.1176 - val_accuracy: 0.9708 - val_loss: 0.0801
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9494 - loss: 0.1437 - val_accuracy: 0.9108 - val_loss: 0.3675
 Epoch 38/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9623 - loss: 0.0979 - val_accuracy: 0.9660 - val_loss: 0.1066
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9526 - loss: 0.1370 - val_accuracy: 0.9179 - val_loss: 0.3289
 Epoch 39/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9541 - loss: 0.1340 - val_accuracy: 0.9674 - val_loss: 0.0918
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9531 - loss: 0.1299 - val_accuracy: 0.9104 - val_loss: 0.3871
 Epoch 40/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9570 - loss: 0.1085 - val_accuracy: 0.9653 - val_loss: 0.1064
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9534 - loss: 0.1249 - val_accuracy: 0.9158 - val_loss: 0.3671
 Epoch 41/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 6ms/step - accuracy: 0.9579 - loss: 0.1217 - val_accuracy: 0.9701 - val_loss: 0.0921
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9597 - loss: 0.1188 - val_accuracy: 0.9223 - val_loss: 0.3487
 Epoch 42/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9652 - loss: 0.1018 - val_accuracy: 0.9640 - val_loss: 0.1029
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9546 - loss: 0.1338 - val_accuracy: 0.9220 - val_loss: 0.3580
 Epoch 43/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9613 - loss: 0.1049 - val_accuracy: 0.9728 - val_loss: 0.0739
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9528 - loss: 0.1365 - val_accuracy: 0.9121 - val_loss: 0.3679
 Epoch 44/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9570 - loss: 0.1029 - val_accuracy: 0.9735 - val_loss: 0.0814
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9545 - loss: 0.1317 - val_accuracy: 0.9125 - val_loss: 0.3893
 Epoch 45/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9657 - loss: 0.0868 - val_accuracy: 0.9694 - val_loss: 0.0981
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9493 - loss: 0.1338 - val_accuracy: 0.9230 - val_loss: 0.3166
 Epoch 46/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9586 - loss: 0.1006 - val_accuracy: 0.9680 - val_loss: 0.0894
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9468 - loss: 0.1462 - val_accuracy: 0.9237 - val_loss: 0.3426
 Epoch 47/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9609 - loss: 0.1151 - val_accuracy: 0.9714 - val_loss: 0.0880
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9485 - loss: 0.1429 - val_accuracy: 0.9128 - val_loss: 0.3686
 Epoch 48/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 6ms/step - accuracy: 0.9563 - loss: 0.1001 - val_accuracy: 0.9667 - val_loss: 0.0872
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9464 - loss: 0.1576 - val_accuracy: 0.9162 - val_loss: 0.3656
 Epoch 49/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9619 - loss: 0.0986 - val_accuracy: 0.9517 - val_loss: 0.1260
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9537 - loss: 0.1362 - val_accuracy: 0.9240 - val_loss: 0.3213
 Epoch 50/50
-<span class="ansi-bold">736/736</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 6ms/step - accuracy: 0.9606 - loss: 0.1078 - val_accuracy: 0.9735 - val_loss: 0.0813
+<span class="ansi-bold">651/651</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">5s</span> 7ms/step - accuracy: 0.9527 - loss: 0.1472 - val_accuracy: 0.9060 - val_loss: 0.3628
 </pre>
 </div>
 </div>
@@ -9145,7 +9923,7 @@ Epoch 50/50
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [31]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [53]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Evaluate on test data</span>
@@ -9163,8 +9941,8 @@ Epoch 50/50
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre><span class="ansi-bold">46/46</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 3ms/step - accuracy: 0.9845 - loss: 0.0507 
-Test Accuracy: 0.9735
+<pre><span class="ansi-bold">93/93</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 2ms/step - accuracy: 0.9076 - loss: 0.3338
+Test Accuracy: 0.9060
 </pre>
 </div>
 </div>
@@ -9175,7 +9953,7 @@ Test Accuracy: 0.9735
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [32]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [54]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Predict class labels</span>
@@ -9196,61 +9974,11 @@ Test Accuracy: 0.9735
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre><span class="ansi-bold">46/46</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 1ms/step
-Predicted Classes: ['WALKING_DOWNSTAIRS' 'WALKING_DOWNSTAIRS' 'WALKING' 'SITTING'
- 'WALKING_DOWNSTAIRS' 'WALKING' 'WALKING_UPSTAIRS' 'WALKING'
- 'WALKING_DOWNSTAIRS' 'STANDING']
-Actual Classes: ['WALKING_DOWNSTAIRS' 'WALKING_DOWNSTAIRS' 'WALKING' 'SITTING'
- 'WALKING_DOWNSTAIRS' 'WALKING' 'WALKING_UPSTAIRS' 'WALKING'
- 'WALKING_DOWNSTAIRS' 'STANDING']
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=c9ba33d3">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [33]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Predict class probabilities for test data </span>
-<span class="n">predictionsOnTestData</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">Xtest</span><span class="p">)</span>
-
-<span class="c1"># Convert probabilities to class labels</span>
-<span class="n">predicted_classes_on_testData</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">predictionsOnTestData</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="c1"># Convert numeric labels back to original class names</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Predicted Classes:"</span><span class="p">,</span> <span class="n">encoder</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">predicted_classes_on_testData</span><span class="p">[:</span><span class="mi">10</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Actual Classes:"</span><span class="p">,</span> <span class="n">ytest</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre><span class="ansi-bold">93/93</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 4ms/step
+<pre><span class="ansi-bold">93/93</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 1ms/step  
 Predicted Classes: ['STANDING' 'STANDING' 'STANDING' 'STANDING' 'STANDING' 'STANDING'
  'STANDING' 'STANDING' 'STANDING' 'STANDING']
-Actual Classes: 0    STANDING
-1    STANDING
-2    STANDING
-3    STANDING
-4    STANDING
-5    STANDING
-6    STANDING
-7    STANDING
-8    STANDING
-9    STANDING
-Name: Activity, dtype: object
+Actual Classes: ['STANDING' 'STANDING' 'STANDING' 'STANDING' 'STANDING' 'STANDING'
+ 'STANDING' 'STANDING' 'STANDING' 'STANDING']
 </pre>
 </div>
 </div>
