@@ -13,23 +13,23 @@ from tensorflow.keras.layers import (
 from tensorflow.keras.callbacks import EarlyStopping
 from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.preprocessing import MinMaxScaler, LabelEncoder, OneHotEncoder
+from sklearn.preprocessing import MinMaxScaler, LabelEncoder, OneHotEncoder, StandardScaler
 from sklearn.decomposition import PCA
 from sklearn.model_selection import GridSearchCV, StratifiedKFold, cross_val_score
 from sklearn.metrics import (
-    accuracy_score, f1_score, precision_score, recall_score, classification_report, confusion_matrix
+    accuracy_score, f1_score, precision_score, recall_score, classification_report, confusion_matrix, roc_auc_score
 )
 from imblearn.over_sampling import SMOTE
 import streamlit as st
+import shap  # For model interpretability
+from sklearn.feature_selection import SelectFromModel  # For feature importance
 
 # Dataset paths
-
 train_path = "data/raw/train.csv"
 test_path = "data/raw/test.csv"
 
 # Define target_names
 target_names = ['STANDING', 'SITTING', 'LAYING', 'WALKING', 'WALKING_DOWNSTAIRS', 'WALKING_UPSTAIRS']
-
 
 # Load Data
 def load_data(train_path, test_path):
@@ -38,6 +38,19 @@ def load_data(train_path, test_path):
     test = pd.read_csv(test_path)
     return train, test
 
+# Feature Engineering
+def create_additional_features(df):
+    """Create additional features like magnitude and rolling statistics."""
+    # Magnitude of acceleration
+    df['tBodyAcc_mag'] = np.sqrt(df['tBodyAcc-mean()-X']**2 +
+                                 df['tBodyAcc-mean()-Y']**2 +
+                                 df['tBodyAcc-mean()-Z']**2)
+
+    # Rolling statistics
+    df['tBodyAcc-mean()-X_rolling_mean'] = df['tBodyAcc-mean()-X'].rolling(window=5).mean()
+    df['tBodyAcc-mean()-X_rolling_std'] = df['tBodyAcc-mean()-X'].rolling(window=5).std()
+
+    return df
 
 # EDA Check
 def EDA_check(train, test):
@@ -49,7 +62,6 @@ def EDA_check(train, test):
     missing_data(train)
     feature_relationships(train)
     feature_distributions(train)
-
 
 # Sub Methods for EDA
 def data_overview(train, test):
@@ -64,7 +76,6 @@ def data_overview(train, test):
     st.write(test.head())
     st.write("Shape:", test.shape)
 
-
 def basic_statistics(train):
     """Display basic statistics and column information."""
     st.write("\n--- BASIC STATISTICS ---")
@@ -77,7 +88,6 @@ def basic_statistics(train):
     st.write("\nCategorical Columns:", cat_cols)
     st.write("\nNumerical Columns:", num_cols)
 
-
 def class_distribution(train):
     """Plot the distribution of target classes."""
     plt.figure(figsize=(8, 6))
@@ -85,7 +95,6 @@ def class_distribution(train):
     plt.title('Class Distribution')
     plt.xticks(rotation=45)
     st.pyplot(plt)
-
 
 def missing_data(train):
     """Check for missing values and duplicates."""
@@ -97,10 +106,9 @@ def missing_data(train):
     duplicates = train.duplicated().sum()
     st.write(f"Number of duplicate rows: {duplicates}")
 
-
 def feature_relationships(train):
     """Plot feature correlation matrix."""
-    st.write("Feature  relationships method started...")
+    st.write("Feature relationships method started...")
     try:
         numeric_train = train.select_dtypes(include=['float64', 'int64'])
         correlation_matrix = numeric_train.corr()
@@ -108,18 +116,13 @@ def feature_relationships(train):
         sns.heatmap(correlation_matrix, cmap='coolwarm', annot=True, linewidths=0.1)
         plt.title('Feature Correlation Matrix')
         st.pyplot(plt)
-        st.write("Feature  relationships method ended successfully!")
+        st.write("Feature relationships method ended successfully!")
     except Exception as e:
         st.write(f"Error: {e}")
 
-# Add more debug statements to track progress
-
-    # Your app code here
-
-
 def feature_distributions(train):
     """Plot feature distributions."""
-    st.write("feature distributions method started...")
+    st.write("Feature distributions method started...")
     try:
         num_features = train.shape[1]
         features_per_plot = 100  # Number of features per subplot
@@ -147,10 +150,9 @@ def feature_distributions(train):
             plt.title(f'Boxplot of Features {start_col+1} to {end_col}')
             plt.xticks(rotation=90)
             st.pyplot(plt)
-        st.write("feature distributions method ended successfully!")
+        st.write("Feature distributions method ended successfully!")
     except Exception as e:
         st.write(f"Error: {e}")
-
 
 # Data Preprocessing
 def data_preprocessing(train, test):
@@ -158,6 +160,10 @@ def data_preprocessing(train, test):
     st.write("\n--- Preprocessing Data ---")
     st.write("Preprocessing Data method started...")
     try:
+        # Feature Engineering
+        train = create_additional_features(train)
+        test = create_additional_features(test)
+
         X_train, X_test = remove_highly_correlated_features(train, test)
         X_train, X_test, vif_data = remove_high_vif_features(X_train, X_test)
 
@@ -196,11 +202,10 @@ def data_preprocessing(train, test):
     except Exception as e:
         st.write(f"Error: {e}")
 
-
 # Remove correlated Features
 def remove_highly_correlated_features(train, test, threshold=0.97):
     """Remove features with correlation above the threshold."""
-    st.write("remove highly correlated features Data method started...")
+    st.write("Remove highly correlated features method started...")
     try:
         activity_train = train['Activity'] if 'Activity' in train.columns else None
         subject_train = train['subject'] if 'subject' in train.columns else None
@@ -226,16 +231,15 @@ def remove_highly_correlated_features(train, test, threshold=0.97):
             X_test['Activity'] = activity_test
         if subject_test is not None:
             X_test['subject'] = subject_test
-        st.write("remove highly correlated method ended successfully!")
+        st.write("Remove highly correlated method ended successfully!")
         return X_train, X_test
     except Exception as e:
         st.write(f"Error: {e}")
 
-
 # Remove High VIF Features
 def remove_high_vif_features(train, test, threshold=10):
     """Remove features with high VIF."""
-    st.write("remove high vif features method started...")
+    st.write("Remove high VIF features method started...")
     try:
         activity_train = train['Activity'] if 'Activity' in train.columns else None
         subject_train = train['subject'] if 'subject' in train.columns else None
@@ -254,30 +258,28 @@ def remove_high_vif_features(train, test, threshold=10):
 
         train_reduced = train.drop(columns=high_vif_features, errors='ignore')
         test_reduced = test.drop(columns=high_vif_features, errors='ignore')
-        st.write("remove high vif features method ended successfully!")
+        st.write("Remove high VIF features method ended successfully!")
         return train_reduced, test_reduced, vif_data
     except Exception as e:
         st.write(f"Error: {e}")
 
-
 def svd_vif(X):
     """Compute VIF using Singular Value Decomposition."""
-    st.write("svd vif method started...")
+    st.write("SVD VIF method started...")
     try:
         U, s, Vt = np.linalg.svd(X, full_matrices=False)
         vif_values = 1 / (s ** 2)
-        st.write("svd vif method ended successfully!")
+        st.write("SVD VIF method ended successfully!")
         return vif_values
     except Exception as e:
         st.write(f"Error: {e}")
 
-
-# Preprocessor Data , scaling, PCA, and feature selection
+# Preprocessor Data, scaling, PCA, and feature selection
 def preprocess_data(X_train, X_test, variance_threshold=0.97):
-    # Normalize features
-    st.write("preprocess_data method started...")
+    """Normalize features and apply PCA."""
+    st.write("Preprocess data method started...")
     try:
-        scaler = MinMaxScaler()
+        scaler = StandardScaler()  # Use StandardScaler instead of MinMaxScaler
         X_train_scaled = pd.DataFrame(scaler.fit_transform(X_train), columns=X_train.columns)
         X_test_scaled = pd.DataFrame(scaler.transform(X_test), columns=X_test.columns)
 
@@ -295,16 +297,15 @@ def preprocess_data(X_train, X_test, variance_threshold=0.97):
         # Assign human-readable column names
         X_train_pca = pd.DataFrame(X_train_pca, columns=feature_names)
         X_test_pca = pd.DataFrame(X_test_pca, columns=feature_names)
-        st.write("preprocess_data method ended successfully!")
+        st.write("Preprocess data method ended successfully!")
         return X_train_pca, X_test_pca, scaler, pca
     except Exception as e:
         st.write(f"Error: {e}")
 
-
 # Check class imbalance
 def check_class_imbalance(y_train, encoder):
     """Checks and visualizes class imbalance with actual activity names."""
-    st.write("check_class_imbalance method started...")
+    st.write("Check class imbalance method started...")
     try:
         label_counts = pd.Series(y_train).value_counts()
 
@@ -319,29 +320,27 @@ def check_class_imbalance(y_train, encoder):
         plt.pie(label_counts, labels=activity_labels, autopct='%1.1f%%', startangle=140, colors=colors)
         plt.title("Distribution of Activity Classes")
         st.pyplot(plt)
-        st.write("check_class_imbalance method ended successfully!")
+        st.write("Check class imbalance method ended successfully!")
         return label_counts
     except Exception as e:
         st.write(f"Error: {e}")
 
-
 # Handle class imbalance
 def handle_class_imbalance(X_train, y_train):
     """Apply SMOTE to handle class imbalance."""
-    st.write("handle_class_imbalance method started...")
+    st.write("Handle class imbalance method started...")
     try:
         smote = SMOTE(random_state=42)
         X_resampled, y_resampled = smote.fit_resample(X_train, y_train)
-        st.write("handle_class_imbalance method ended successfully!")
+        st.write("Handle class imbalance method ended successfully!")
         return X_resampled, y_resampled
     except Exception as e:
         st.write(f"Error: {e}")
 
-
 # Tune hyperparameters
 def tune_hyperparameters(X_train, y_train):
     """Perform hyperparameter tuning using GridSearchCV."""
-    st.write("tune_hyperparameters method started...")
+    st.write("Tune hyperparameters method started...")
     try:
         param_grid = {
             'n_estimators': [100, 200, 300],
@@ -357,7 +356,7 @@ def tune_hyperparameters(X_train, y_train):
         )
         grid_search.fit(X_train, y_train)
         st.write(f"Best hyperparameters: {grid_search.best_params_}")
-        st.write("tune_hyperparameters method ended successfully!")
+        st.write("Tune hyperparameters method ended successfully!")
         return grid_search.best_estimator_
     except Exception as e:
         st.write(f"Error: {e}")
@@ -366,7 +365,7 @@ def tune_hyperparameters(X_train, y_train):
 def randomforest_model_training_and_evaluation(algorithm_name, X_train, y_train, X_test, y_test):
     """Train and evaluate a Random Forest model."""
     st.write(f"\n--- Training and Evaluating {algorithm_name} Model ---")
-    st.write("randomforest_model_training_and_evaluation method started...")
+    st.write("RandomForest model training and evaluation method started...")
     try:
         # Hyperparameter tuning
         best_model = tune_hyperparameters(X_train, y_train)
@@ -386,9 +385,6 @@ def randomforest_model_training_and_evaluation(algorithm_name, X_train, y_train,
         st.write(f"Cross-validation accuracy scores: {cv_scores}")
         st.write(f"Mean cross-validation accuracy: {cv_scores.mean():.4f}")
 
-        # Initialize the model
-        st.write(f"{algorithm_name} model trained on the full training set.")
-
         # Train the model
         model.fit(X_train, y_train)
         st.write("Model trained.")
@@ -400,16 +396,15 @@ def randomforest_model_training_and_evaluation(algorithm_name, X_train, y_train,
         # Evaluate model performance
         evaluate_model(algorithm_name, y_test, y_pred_random_forest)
         st.write("Model evaluated.")
-        st.write("randomforest_model_training_and_evaluation method ended successfully!")
+        st.write("RandomForest model training and evaluation method ended successfully!")
         return model, y_pred_random_forest
     except Exception as e:
         st.write(f"Error: {e}")
 
-
 # Plot confusion matrix
 def plot_confusion_matrix(cm, y_test):
     """Plot and save the confusion matrix."""
-    st.write("plot_confusion_matrix method started...")
+    st.write("Plot confusion matrix method started...")
     try:
         plt.figure(figsize=(8, 6))
         sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=np.unique(y_test), yticklabels=np.unique(y_test))
@@ -417,15 +412,14 @@ def plot_confusion_matrix(cm, y_test):
         plt.ylabel("Actual")
         plt.title("Confusion Matrix")
         st.pyplot(plt)
-        st.write("plot_confusion_matrix method ended successfully!")
+        st.write("Plot confusion matrix method ended successfully!")
     except Exception as e:
         st.write(f"Error: {e}")
-
 
 # Evaluate model
 def evaluate_model(algorithm_name, y_test, y_pred):
     """Evaluate the model's performance on the test set."""
-    st.write("evaluate_model method started...")
+    st.write("Evaluate model method started...")
     try:
         accuracy = accuracy_score(y_test, y_pred)
         f1 = f1_score(y_test, y_pred, average='weighted')
@@ -443,51 +437,15 @@ def evaluate_model(algorithm_name, y_test, y_pred):
 
         # Plot confusion matrix
         plot_confusion_matrix(cm, y_test)
-        st.write("evaluate_model method ended successfully!")
+        st.write("Evaluate model method ended successfully!")
         return accuracy, report, cm
     except Exception as e:
         st.write(f"Error: {e}")
 
-
-def svm_tune_hyperparameters(X_train, y_train):
-    """Perform hyperparameter tuning using GridSearchCV."""
-    try:
-        st.write(f"svm_tune_hyperparameters method started...")
-        param_grid = {
-            'C': [0.1, 1, 10],
-            'kernel': ['linear', 'rbf']
-        }
-        grid_search = GridSearchCV(
-            SVC(random_state=42),
-            param_grid,
-            cv=5,
-            scoring='accuracy',
-            n_jobs=-1
-        )
-        grid_search.fit(X_train, y_train)
-        print(f"Best hyperparameters: {grid_search.best_params_}")
-        st.write("svm_tune_hyperparameters method ended successfully!")
-        return grid_search.best_estimator_
-    except Exception as e:
-        st.write(f"Error: {e}")
-
-
-def cross_validate(model, X_train, y_train):
-    """Perform cross-validation on the training data."""
-    try:
-        st.write(f"cross_validate method started...")
-        cv_scores = cross_val_score(model, X_train, y_train, cv=5, scoring='accuracy')
-        st.write("cross_validate method ended successfully!")
-        return cv_scores
-    except Exception as e:
-        st.write(f"Error: {e}")
-
-
-
 # SVM Model Training and Evaluation
 def svm_model_training_and_evaluation(X_train, y_train, X_test, y_test, algorithm_name="SVM"):
     """Train, evaluate, and save an SVM model."""
-    st.write("svm_model_training_and_evaluation method started...")
+    st.write("SVM model training and evaluation method started...")
     try:
         st.write(f"Training {algorithm_name} model...")
 
@@ -522,16 +480,15 @@ def svm_model_training_and_evaluation(X_train, y_train, X_test, y_test, algorith
         # Evaluate the model
         evaluate_model(algorithm_name, y_test, y_pred_svm)
         st.write("Model evaluated.")
-        st.write("svm_model_training_and_evaluation method ended successfully!")
+        st.write("SVM model training and evaluation method ended successfully!")
         return model_svm, y_pred_svm
     except Exception as e:
         st.write(f"Error: {e}")
 
-
 # CNN Model Training and Evaluation
 def cnn_model_training_and_evaluation(X_train, y_train, X_test, y_test):
     """Train and evaluate a CNN model."""
-    st.write("cnn_model_training_and_evaluation method started...")
+    st.write("CNN model training and evaluation method started...")
     try:
         # Reshape data for CNN input
         X_train_reshaped = np.expand_dims(X_train, axis=-1)  # Shape: (samples, timesteps, 1)
@@ -603,19 +560,18 @@ def cnn_model_training_and_evaluation(X_train, y_train, X_test, y_test):
 
         st.write("Confusion Matrix:")
         st.write(confusion_matrix(y_test, y_pred_cnn))
-        st.write("cnn_model_training_and_evaluation method ended successfully!")
+        st.write("CNN model training and evaluation method ended successfully!")
         return model
 
     except Exception as e:
         st.write(f"Error: {e}")
 
-
 # CNN-LSTM Hybrid Model Training and Evaluation
 def hybrid_cnn_lstm_model_training_and_evaluation(X_train, y_train, X_test, y_test):
     """Train and evaluate a CNN-LSTM hybrid model."""
-    # Reshape data for CNN input
-    st.write("hybrid_cnn_lstm_model_training_and_evaluation method started...")
+    st.write("CNN-LSTM hybrid model training and evaluation method started...")
     try:
+        # Reshape data for CNN input
         X_train_reshaped = np.expand_dims(X_train, axis=-1)  # Shape: (samples, timesteps, 1)
         X_test_reshaped = np.expand_dims(X_test, axis=-1)    # Shape: (samples, timesteps, 1)
 
@@ -684,16 +640,15 @@ def hybrid_cnn_lstm_model_training_and_evaluation(X_train, y_train, X_test, y_te
 
         st.write("Confusion Matrix:")
         st.write(confusion_matrix(y_test, y_pred_hybrid))
-        st.write("hybrid_cnn_lstm_model_training_and_evaluation method ended successfully!")
+        st.write("CNN-LSTM hybrid model training and evaluation method ended successfully!")
         return model
     except Exception as e:
         st.write(f"Error: {e}")
 
-
 # Function to display predictions
 def display_predictions(X_test, y_pred, y_test, model_name):
     """Display predictions in a user-friendly way."""
-    st.write("display_predictions method started...")
+    st.write("Display predictions method started...")
     try:
         st.subheader(f"{model_name} Predictions")
 
@@ -726,7 +681,7 @@ def display_predictions(X_test, y_pred, y_test, model_name):
             })
 
         # Display results in a table
-        st.write("display_predictions method ended successfully!")
+        st.write("Display predictions method ended successfully!")
         st.table(results)
     except Exception as e:
         st.write(f"Error: {e}")
