@@ -38,9 +38,39 @@ from sklearn.pipeline import Pipeline
 from sklearn.feature_selection import RFE
 from sklearn.decomposition import PCA
 from statsmodels.stats.outliers_influence import variance_inflation_factor
-
-
 load_model = tf.keras.models.load_model
+
+import hashlib
+import glob
+from datetime import datetime
+
+# =========================
+# Caching Functions
+# =========================
+
+def get_data_hash(train, test, options):
+    """Generate unique hash for data and options"""
+    hash_obj = hashlib.md5()
+    hash_obj.update(pd.util.hash_pandas_object(train).values.tobytes())
+    hash_obj.update(pd.util.hash_pandas_object(test).values.tobytes())
+    hash_obj.update(str(options).encode())
+    return hash_obj.hexdigest()
+
+def save_to_cache(data, cache_dir, cache_name):
+    """Save data to cache directory"""
+    os.makedirs(cache_dir, exist_ok=True)
+    cache_path = os.path.join(cache_dir, f"{cache_name}.pkl")
+    joblib.dump(data, cache_path)
+    return cache_path
+
+def load_from_cache(cache_dir, cache_name):
+    """Load data from cache if exists"""
+    cache_path = os.path.join(cache_dir, f"{cache_name}.pkl")
+    if os.path.exists(cache_path):
+        return joblib.load(cache_path)
+    return None
+
+
 # Add these helper functions at the top of your code, right after the imports
 
 def show_class_distribution_comparison(y_train, class_weights, encoder):
@@ -345,11 +375,26 @@ def load_data(train_path, test_path):
     return train, test
 
 # EDA functions
+@st.cache_data
 def perform_eda(train, test):
+    cache_dir = "cache/eda"
+    cache_name = get_data_hash(train, test, "eda")
+    cached_eda = load_from_cache(cache_dir, cache_name)
+
+    if cached_eda:
+        st.success("Loaded EDA from cache!")
+        return cached_eda
+
     st.subheader("Exploratory Data Analysis")
+    eda_results = {}
 
     # Basic info
     with st.expander("Dataset Overview"):
+        eda_results['shape'] = {
+            'train': train.shape,
+            'test': test.shape,
+            'columns': train.columns.tolist()
+        }
         st.write("Train Data Shape:", train.shape)
         st.write("Test Data Shape:", test.shape)
         st.write("Train Columns:", train.columns.tolist())
@@ -358,10 +403,15 @@ def perform_eda(train, test):
     with st.expander("Class Distribution"):
         fig, ax = plt.subplots()
         train['Activity'].value_counts().plot(kind='bar', ax=ax)
+        eda_results['class_dist'] = fig
         st.pyplot(fig)
 
     # Missing values
     with st.expander("Missing Values"):
+        eda_results['missing'] = {
+            'train': train.isnull().sum().sum(),
+            'test': test.isnull().sum().sum()
+        }
         st.write("Train Missing Values:", train.isnull().sum().sum())
         st.write("Test Missing Values:", test.isnull().sum().sum())
 
@@ -371,7 +421,11 @@ def perform_eda(train, test):
         corr_matrix = train[numeric_cols].corr()
         fig, ax = plt.subplots(figsize=(12, 10))
         sns.heatmap(corr_matrix, ax=ax)
+        eda_results['correlation'] = fig
         st.pyplot(fig)
+
+    save_to_cache(eda_results, cache_dir, cache_name)
+    return eda_results
 
 # Preprocessing functions
 def preprocess_data(train, test, preprocess_options):
