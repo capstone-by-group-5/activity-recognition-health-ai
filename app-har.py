@@ -89,6 +89,42 @@ def show_prediction_samples(y_true, y_pred, encoder, num_samples=5, offsets=[0])
                 st.write(f"Sample {i}: Predicted = {y_pred_names[i]}, Original = {y_true_names[i]}")
         st.write("")
 
+
+
+
+def load_or_train_model(model_name, train_func, X_train, y_train, X_test, y_test, class_weights, model_params=None):
+    """
+    Check if model exists in models folder, if yes load it, otherwise train new one
+    """
+    models_dir = "models"
+    os.makedirs(models_dir, exist_ok=True)
+    model_path = os.path.join(models_dir, f"{model_name.replace(' ', '_').lower()}.pkl")
+
+    # Try to load existing model
+    if os.path.exists(model_path):
+        try:
+            model = joblib.load(model_path)
+            y_pred = model.predict(X_test)
+            st.success(f"Loaded pre-trained {model_name} from {model_path}")
+            return model, y_pred
+        except Exception as e:
+            st.warning(f"Failed to load model from {model_path}: {str(e)}. Training new model...")
+
+    # Train new model if loading failed or file doesn't exist
+    model, y_pred = train_func(X_train, y_train, X_test, y_test, class_weights, model_params)
+
+    # Save the trained model
+    try:
+        joblib.dump(model, model_path)
+        st.success(f"Saved trained {model_name} to {model_path}")
+    except Exception as e:
+        st.warning(f"Could not save model: {str(e)}")
+
+    return model, y_pred
+
+
+
+
 def train_xgboost(X_train, y_train, X_test, y_test, class_weights=None, model_params=None, random_state=42):
     """
     Updated version of your original XGBoost training function
@@ -921,7 +957,9 @@ def main():
                 with st.spinner(f"Training {model_option}..."):
                     try:
                         if model_option == "Logistic Regression":
-                            model, y_pred = train_logistic_regression(
+                            model, y_pred = load_or_train_model(
+                                "logistic_regression",
+                                train_logistic_regression,
                                 st.session_state.X_train,
                                 st.session_state.y_train,
                                 st.session_state.X_test,
@@ -929,7 +967,9 @@ def main():
                                 st.session_state.class_weights
                             )
                         elif model_option == "Random Forest":
-                            model, y_pred = train_random_forest(
+                            model, y_pred = load_or_train_model(
+                                "random_forest",
+                                train_random_forest,
                                 st.session_state.X_train,
                                 st.session_state.y_train,
                                 st.session_state.X_test,
@@ -938,7 +978,9 @@ def main():
                                 model_params
                             )
                         elif model_option == "SVM":
-                            model, y_pred = train_svm(
+                            model, y_pred = load_or_train_model(
+                                "svm",
+                                train_svm,
                                 st.session_state.X_train,
                                 st.session_state.y_train,
                                 st.session_state.X_test,
@@ -946,56 +988,122 @@ def main():
                                 st.session_state.class_weights
                             )
                         elif model_option == "XGBoost":
-                            model, y_pred = train_xgboost(
+                            model, y_pred = load_or_train_model(
+                                "xgboost",
+                                train_xgboost,
                                 st.session_state.X_train,
                                 st.session_state.y_train,
                                 st.session_state.X_test,
                                 st.session_state.y_test,
                                 st.session_state.class_weights
                             )
-                            # Calculate test accuracy if needed
-                          #  test_acc = accuracy_score(st.session_state.y_test, y_pred)
-
                         elif model_option == "CNN-LSTM Hybrid":
-                            model, y_pred = train_cnn_lstm(
-                                st.session_state.X_train,
-                                st.session_state.y_train,
-                                st.session_state.X_test,
-                                st.session_state.y_test,
-                                st.session_state.class_weights
-                            )
+                            model_path = "models/cnn_lstm.h5"
+                            if os.path.exists(model_path):
+                                try:
+                                    model = load_model(model_path)
+                                    X_test_reshaped = st.session_state.X_test.reshape(
+                                        st.session_state.X_test.shape[0],
+                                        st.session_state.X_test.shape[1],
+                                        1)
+                                    y_pred = model.predict(X_test_reshaped).argmax(axis=1)
+                                    st.success(f"Loaded pre-trained CNN-LSTM from {model_path}")
+                                except Exception as e:
+                                    st.warning(f"Failed to load model: {str(e)}. Training new model...")
+                                    model, y_pred = train_cnn_lstm(
+                                        st.session_state.X_train,
+                                        st.session_state.y_train,
+                                        st.session_state.X_test,
+                                        st.session_state.y_test,
+                                        st.session_state.class_weights
+                                    )
+                                    model.save(model_path)
+                            else:
+                                model, y_pred = train_cnn_lstm(
+                                    st.session_state.X_train,
+                                    st.session_state.y_train,
+                                    st.session_state.X_test,
+                                    st.session_state.y_test,
+                                    st.session_state.class_weights
+                                )
+                                model.save(model_path)
                         elif model_option == "Improved DNN":
-                            model, y_pred = train_improved_dnn(
-                                st.session_state.X_train,
-                                st.session_state.y_train,
-                                st.session_state.X_test,
-                                st.session_state.y_test,
-                                st.session_state.class_weights
-                            )
+                            model_path = "models/improved_dnn.h5"
+                            if os.path.exists(model_path):
+                                try:
+                                    model = load_model(model_path)
+                                    y_pred = np.argmax(model.predict(st.session_state.X_test), axis=1)
+                                    st.success(f"Loaded pre-trained Improved DNN from {model_path}")
+                                except:
+                                    model, y_pred = train_improved_dnn(
+                                        st.session_state.X_train,
+                                        st.session_state.y_train,
+                                        st.session_state.X_test,
+                                        st.session_state.y_test,
+                                        st.session_state.class_weights
+                                    )
+                                    model.save(model_path)
+                            else:
+                                model, y_pred = train_improved_dnn(
+                                    st.session_state.X_train,
+                                    st.session_state.y_train,
+                                    st.session_state.X_test,
+                                    st.session_state.y_test,
+                                    st.session_state.class_weights
+                                )
+                                model.save(model_path)
                         elif model_option == "CNN":
-                            model, y_pred = train_cnn(
-                                st.session_state.X_train,
-                                st.session_state.y_train,
-                                st.session_state.X_test,
-                                st.session_state.y_test,
-                                st.session_state.class_weights
-                            )
+                            model_path = "models/cnn.h5"
+                            if os.path.exists(model_path):
+                                try:
+                                    model = load_model(model_path)
+                                    X_test_reshaped = np.expand_dims(st.session_state.X_test, axis=-1)
+                                    y_pred = model.predict(X_test_reshaped).argmax(axis=1)
+                                    st.success(f"Loaded pre-trained CNN from {model_path}")
+                                except:
+                                    model, y_pred = train_cnn(
+                                        st.session_state.X_train,
+                                        st.session_state.y_train,
+                                        st.session_state.X_test,
+                                        st.session_state.y_test,
+                                        st.session_state.class_weights
+                                    )
+                                    model.save(model_path)
+                            else:
+                                model, y_pred = train_cnn(
+                                    st.session_state.X_train,
+                                    st.session_state.y_train,
+                                    st.session_state.X_test,
+                                    st.session_state.y_test,
+                                    st.session_state.class_weights
+                                )
+                                model.save(model_path)
                         elif model_option == "CNN-Dense Hybrid":
-                            model, y_pred = train_cnn_dense(
-                                st.session_state.X_train,
-                                st.session_state.y_train,
-                                st.session_state.X_test,
-                                st.session_state.y_test,
-                                st.session_state.class_weights
-                            )
-                        elif model_option == "Random Forest with SMOTE":
-                            model, y_pred = train_random_forest_with_smote(
-                                st.session_state.X_train,
-                                st.session_state.y_train,
-                                st.session_state.X_test,
-                                st.session_state.y_test,
-                                st.session_state.class_weights
-                            )
+                            model_path = "models/cnn_dense.h5"
+                            if os.path.exists(model_path):
+                                try:
+                                    model = load_model(model_path)
+                                    X_test_reshaped = np.expand_dims(st.session_state.X_test, axis=-1)
+                                    y_pred = np.argmax(model.predict(X_test_reshaped), axis=1)
+                                    st.success(f"Loaded pre-trained CNN-Dense from {model_path}")
+                                except:
+                                    model, y_pred = train_cnn_dense(
+                                        st.session_state.X_train,
+                                        st.session_state.y_train,
+                                        st.session_state.X_test,
+                                        st.session_state.y_test,
+                                        st.session_state.class_weights
+                                    )
+                                    model.save(model_path)
+                            else:
+                                model, y_pred = train_cnn_dense(
+                                    st.session_state.X_train,
+                                    st.session_state.y_train,
+                                    st.session_state.X_test,
+                                    st.session_state.y_test,
+                                    st.session_state.class_weights
+                                )
+                                model.save(model_path)
 
                         # Store results
                         st.session_state.model = model
@@ -1019,6 +1127,12 @@ def main():
 
                     except Exception as e:
                         st.error(f"Error during model training: {str(e)}")
+
+
+
+
+
+
 
             # Show feature importance if available
             if 'model' in st.session_state and st.session_state.current_model == model_option:
