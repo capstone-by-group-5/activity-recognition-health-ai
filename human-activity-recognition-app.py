@@ -1013,7 +1013,7 @@ def main():
             st.session_state['test'] = test
             st.session_state['data_loaded'] = True
         else:
-            st.warning("Please upload at least training data")
+            st.warning("Please upload data Set")
             return
 
     # Store data in session state
