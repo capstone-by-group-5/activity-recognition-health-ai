@@ -66,11 +66,6 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Paths
-train_path = "data/raw/train.csv"
-test_path = "data/raw/test.csv"
-
-
 
 # Sensor visualization
 with st.expander("📊 Live Sensor Feed Simulation", expanded=True):
@@ -936,8 +931,6 @@ def evaluate_model(y_true, y_pred, encoder, model_name):
 def main():
 
 
-
-
     # Sidebar controls
     st.sidebar.header("DATA UPLOAD")
     data_option = st.sidebar.radio("Data Source", ["Use sample data", "Upload your own"])
@@ -945,9 +938,15 @@ def main():
     # Main content tabs
     tab1, tab2, tab3 = st.tabs(["EDA", "Preprocessing", "Model Training"])
 
+    # Initialize variables first
+    train = None
+    test = None
+
     # Data loading section
     if data_option == "Use sample data":
         train, test = load_data(train_path, test_path)
+        st.session_state.train = train
+        st.session_state.test = test
     else:
         uploaded_train = st.sidebar.file_uploader("Upload Training Data (CSV)", type=["csv"])
         uploaded_test = st.sidebar.file_uploader("Upload Test Data (CSV) - Optional", type=["csv"])
@@ -992,8 +991,6 @@ def main():
 
     with tab2:
         st.header("Data Preprocessing")
-
-
 
         # Preprocessing options
         with st.expander("Standard Scaling", expanded=True):
