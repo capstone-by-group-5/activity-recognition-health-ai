@@ -268,32 +268,63 @@ def load_data(train_path, test_path):
 
 
 def perform_eda(train, test):
-    """Perform EDA with caching"""
+    """Perform EDA with proper caching and figure handling"""
     cache_dir = "cache/eda"
+    os.makedirs(cache_dir, exist_ok=True)
     cache_name = f"eda_{get_data_hash(train, test)}"
     cached_eda = load_from_cache(cache_dir, cache_name)
 
+    # Initialize expected keys
+    default_eda = {
+        'shape': {'train': None, 'test': None, 'columns': []},
+        'class_data': {},
+        'missing': {'train': 0, 'test': 0},
+        'corr_data': {}
+    }
+
     if cached_eda:
-        #st.success("Loaded EDA from stored file!")
-        # Display cached results
-        with st.expander("Dataset Overview (Cached)"):
-            st.write("Train Data Shape:", cached_eda['shape']['train'])
-            st.write("Test Data Shape:", cached_eda['shape']['test'])
-            st.write("Train Columns:", cached_eda['shape']['columns'])
+        # Merge cached data with defaults to ensure all keys exist
+        cached_eda = {**default_eda, **cached_eda}
 
-        with st.expander("Class Distribution (Cached)", expanded=False):
-            st.pyplot(cached_eda['class_dist'])
+        try:
+            # Dataset Overview
+            with st.expander("Dataset Overview (Cached)"):
+                st.write("Train Data Shape:", cached_eda['shape']['train'])
+                st.write("Test Data Shape:", cached_eda['shape']['test'])
+                st.write("Train Columns:", cached_eda['shape']['columns'])
 
-        with st.expander("Missing Values (Cached)", expanded=False):
-            st.write("Train Missing Values:", cached_eda['missing']['train'])
-            st.write("Test Missing Values:", cached_eda['missing']['test'])
+            # Class Distribution
+            with st.expander("Class Distribution (Cached)", expanded=False):
+                plt.close('all')
+                if cached_eda['class_data']:
+                    fig, ax = plt.subplots()
+                    pd.Series(cached_eda['class_data']).plot(kind='bar', ax=ax)
+                    st.pyplot(fig)
+                else:
+                    st.warning("No class distribution data available")
 
-        with st.expander("Feature Correlation (Cached)", expanded=False):
-            st.pyplot(cached_eda['correlation'])
-        return
+            # Missing Values
+            with st.expander("Missing Values (Cached)", expanded=False):
+                st.write("Train Missing Values:", cached_eda['missing']['train'])
+                st.write("Test Missing Values:", cached_eda['missing']['test'])
 
+            # Feature Correlation
+            with st.expander("Feature Correlation (Cached)", expanded=False):
+                plt.close('all')
+                if cached_eda['corr_data']:
+                    fig, ax = plt.subplots(figsize=(12, 10))
+                    sns.heatmap(pd.DataFrame(cached_eda['corr_data']), ax=ax)
+                    st.pyplot(fig)
+                else:
+                    st.warning("No correlation data available")
+            return
+        except Exception as e:
+            st.warning(f"Error loading cached EDA: {str(e)}")
+            # Fall through to fresh analysis
+
+    # Perform fresh EDA analysis
     st.subheader("Exploratory Data Analysis")
-    eda_results = {}
+    eda_results = default_eda.copy()
 
     # Basic info
     with st.expander("Dataset Overview"):
@@ -308,9 +339,11 @@ def perform_eda(train, test):
 
     # Class distribution
     with st.expander("Class Distribution"):
+        plt.close('all')
         fig, ax = plt.subplots()
-        train['Activity'].value_counts().plot(kind='bar', ax=ax)
-        eda_results['class_dist'] = fig
+        class_counts = train['Activity'].value_counts()
+        class_counts.plot(kind='bar', ax=ax)
+        eda_results['class_data'] = class_counts.to_dict()
         st.pyplot(fig)
 
     # Missing values
@@ -324,15 +357,20 @@ def perform_eda(train, test):
 
     # Correlation matrix
     with st.expander("Feature Correlation"):
+        plt.close('all')
         numeric_cols = train.select_dtypes(include=['float64', 'int64']).columns
         corr_matrix = train[numeric_cols].corr()
         fig, ax = plt.subplots(figsize=(12, 10))
         sns.heatmap(corr_matrix, ax=ax)
-        eda_results['correlation'] = fig
+        eda_results['corr_data'] = corr_matrix.to_dict()
         st.pyplot(fig)
 
-    save_to_cache(eda_results, cache_dir, cache_name)
-    cleanup_old_files(cache_dir)
+    # Save results to cache
+    try:
+        save_to_cache(eda_results, cache_dir, cache_name)
+        cleanup_old_files(cache_dir)
+    except Exception as e:
+        st.warning(f"Could not save EDA results to cache: {str(e)}")
 
 
 # ===========================================
