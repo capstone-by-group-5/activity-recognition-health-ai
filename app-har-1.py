@@ -1,95 +1,167 @@
-# import tensorflow as tf
-# from keras import Sequential
-# import tensorflow as tf
-# from keras.src.callbacks import ReduceLROnPlateau
-# from sklearn.utils import compute_class_weight
-# import tensorflow as tf
-from imblearn.over_sampling import SMOTE
 from keras import Sequential
 import tensorflow as tf
 from keras.src.callbacks import ReduceLROnPlateau
 from sklearn.utils import compute_class_weight
 from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
 
-# import streamlit as st
-# import pandas as pd
-# from tensorflow.keras import Sequential
-from tensorflow.keras.regularizers import l2
-
-# from imblearn.pipeline import Pipeline
-# from imblearn.over_sampling import SMOTE
-# from sklearn.model_selection import train_test_split
-# from sklearn.ensemble import RandomForestClassifier
-# from sklearn.model_selection import GridSearchCV, StratifiedKFold
-# from sklearn.metrics import balanced_accuracy_score, make_scorer
-# import numpy as np
-# import numpy as np
-# import matplotlib.pyplot as plt
-# import seaborn as sns
-# import joblib
-# import os
-# import xgboost as xgb
-# from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, precision_score, recall_score, \
-#     f1_score
-# from sklearn.preprocessing import StandardScaler, LabelEncoder
-# from sklearn.linear_model import LogisticRegression
-# from sklearn.ensemble import RandomForestClassifier
-# from sklearn.svm import SVC
-# from xgboost import XGBClassifier
-# from tensorflow.keras.layers import Dense, Conv1D, LSTM, Dropout, BatchNormalization, Flatten, Input, MaxPooling1D
-# from tensorflow.keras.optimizers import Adam
-# from tensorflow.keras.losses import SparseCategoricalCrossentropy
-# from sklearn.model_selection import train_test_split, GridSearchCV
-# from imblearn.over_sampling import SMOTE
-# from imblearn.pipeline import Pipeline as ImbPipeline
-# from sklearn.pipeline import Pipeline
-# from sklearn.feature_selection import RFE
-# from sklearn.decomposition import PCA
-# from statsmodels.stats.outliers_influence import variance_inflation_factor
-
-load_model = tf.keras.models.load_model
-
-# import hashlib
-# import glob
-# from datetime import datetime
-
 import streamlit as st
 import pandas as pd
 from tensorflow.keras import Sequential
 from tensorflow.keras.regularizers import l2
 from imblearn.pipeline import Pipeline
-# from imblearn.over_sampling import SMOTE
-# from sklearn.model_selection import train_test_split
-# from sklearn.ensemble import RandomForestClassifier
-# from sklearn.model_selection import GridSearchCV, StratifiedKFold
-# from sklearn.metrics import balanced_accuracy_score, make_scorer
-import numpy as np
+
 import matplotlib.pyplot as plt
 import seaborn as sns
 import joblib
 import os
 import xgboost as xgb
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, precision_score, recall_score, \
-    f1_score, make_scorer, balanced_accuracy_score
+    f1_score
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
-# from xgboost import XGBClassifier
 from tensorflow.keras.layers import Dense, Conv1D, LSTM, Dropout, BatchNormalization, Flatten, Input, MaxPooling1D
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.losses import SparseCategoricalCrossentropy
 from sklearn.model_selection import train_test_split, GridSearchCV, StratifiedKFold
-# from imblearn.over_sampling import SMOTE
-# from imblearn.pipeline import Pipeline as ImbPipeline
 from sklearn.pipeline import Pipeline
-# from sklearn.feature_selection import RFE
-# from sklearn.decomposition import PCA
-from imblearn.pipeline import Pipeline as ImbPipeline
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 import hashlib
 import glob
 
+from imblearn.pipeline import Pipeline as ImbPipeline
+from sklearn.ensemble import RandomForestClassifier
+from imblearn.over_sampling import SMOTE
+from sklearn.metrics import make_scorer, balanced_accuracy_score
+import numpy as np
+
+
+
+load_model = tf.keras.models.load_model
+
+# Paths
+train_path = "data/raw/train.csv"
+test_path = "data/raw/test.csv"
+
+
+MODEL_OPTIONS = {
+    "Logistic Regression Model": "Logistic Regression Model",
+    "Random Forest Model": "Random Forest Model",
+    "SVM Model (Support Vector Machine)": "SVM Model",
+    "XGBoost Model (eXtreme Gradient Boosting)": "XGBoost Model",
+    "DNN Model (Deep Neural Network)": "DNN Model",
+    "CNN Model (Convolutional Neural Networks)": "CNN Model",
+    "CNN-Dense Hybrid Model": "CNN-Dense Hybrid Model"
+}
+
+# Initialize session state
+if 'force_redo' not in st.session_state:
+    st.session_state.force_redo = False
+
+# Set page config
+st.set_page_config(
+    page_title="Human Activity Recognition",
+    page_icon="🏃‍♂️",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+# Paths
+train_path = "data/raw/train.csv"
+test_path = "data/raw/test.csv"
+
+
+
+# Sensor visualization
+with st.expander("📊 Live Sensor Feed Simulation", expanded=True):
+    st.markdown("**Human Activity Detection**")
+    st.markdown(
+        """
+        <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3kxdzhxazJnOHZqY3FpdjZ6OW55dHY4Y25jMWk4bTVyaWRqbGU1byZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/duGB9Or2KTW4aB4KhY/giphy.gif" 
+             width="1500" height="400">
+        """,
+        unsafe_allow_html=True
+    )
+
+    st.markdown("**Sensor Data**")
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.markdown("**Accelerometer**")
+        accel_data = pd.DataFrame({
+            'X': np.random.normal(0, 0.5, 20),
+            'Y': np.random.normal(0, 0.5, 20),
+            'Z': np.random.normal(1, 0.3, 20)
+        }, index=range(20))
+        st.line_chart(accel_data)
+    with col2:
+        st.markdown("**Gyroscope**")
+        gyro_data = pd.DataFrame({
+            'X': np.random.normal(0, 0.2, 20),
+            'Y': np.random.normal(0, 0.2, 20),
+            'Z': np.random.normal(0, 0.1, 20)
+        }, index=range(20))
+        st.line_chart(gyro_data)
+    with col3:
+        st.markdown("**Additional Metrics**")
+        st.metric("Motion Intensity", "High", "2.5%")
+        st.metric("Activity Confidence", "89%", "1.2%")
+
+# Header section
+st.markdown("""
+    <style>
+        .header-container {
+            background: linear-gradient(135deg, #6e48aa 0%, #9d50bb 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .header-title {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+        }
+        .header-subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        .activity-tags {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        .activity-tag {
+            background: rgba(255,255,255,0.15);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: white;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+    </style>
+
+    <div class="header-container">
+        <div>
+            <div class="header-title">HUMAN ACTIVITY RECOGNITION DASHBOARD</div>
+            <div class="header-subtitle">Real-time motion pattern analysis from multi-sensor data</div>
+            <div class="activity-tags">
+                <div class="activity-tag">🏃 Walking</div>
+                <div class="activity-tag">🛌 Lying</div>
+                <div class="activity-tag">🧘 Sitting</div>
+                <div class="activity-tag">🏋️ Standing</div>
+                <div class="activity-tag">↗️ Upstairs</div>
+                <div class="activity-tag">↘️ Downstairs</div>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
 # from datetime import datetime
 
@@ -99,13 +171,16 @@ import glob
 # ===========================================
 
 
+
+
+
 def get_data_hash(train, test, options=None):
     """Generate unique hash for data and options"""
-    hash_obj = hashlib.md5()
-    hash_obj.update(pd.util.hash_pandas_object(train).values.tobytes())
-    hash_obj.update(pd.util.hash_pandas_object(test).values.tobytes())
-    if options:
-        hash_obj.update(str(options).encode())
+    # hash_obj = hashlib.md5()
+    # hash_obj.update(pd.util.hash_pandas_object(train).values.tobytes())
+    # hash_obj.update(pd.util.hash_pandas_object(test).values.tobytes())
+    # if options:
+    #     hash_obj.update(str(options).encode())
     # return hash_obj.hexdigest()
     return "v1"
 
@@ -183,7 +258,7 @@ def load_data(train_path, test_path):
     cached_data = load_from_cache(cache_dir, cache_name)
 
     if cached_data:
-       # st.success("Loaded data from stored file!")
+        # st.success("Loaded data from stored file!")
         return cached_data['train'], cached_data['test']
 
     train = pd.read_csv(train_path)
@@ -193,7 +268,7 @@ def load_data(train_path, test_path):
 
 
 # ===========================================
-# EDA with Caching
+# EDA
 # ===========================================
 
 
@@ -266,7 +341,7 @@ def perform_eda(train, test):
 
 
 # ===========================================
-# Preprocessing with Caching
+# Preprocessing
 # ===========================================
 
 
@@ -295,7 +370,7 @@ def preprocess_data(train, test, preprocess_options, force_redo=False):
     if not force_redo:
         cached_data = load_from_cache(cache_dir, cache_name)
         if cached_data:
-            st.success("Loaded preprocessed data from stored file!")
+            # st.success("Loaded preprocessed data from stored file!")
             # Update session state
             st.session_state.update({
                 'X_train': cached_data['X_train'],
@@ -376,7 +451,7 @@ def preprocess_data(train, test, preprocess_options, force_redo=False):
 
 
 # ===========================================
-# Model Training with Caching
+# Model Training
 # ===========================================
 
 
@@ -414,16 +489,11 @@ class WeightedSMOTEPipeline(Pipeline):
         super().fit(X_res, y_res, **fit_params)
         return self
 
-from imblearn.pipeline import Pipeline as ImbPipeline
-from sklearn.ensemble import RandomForestClassifier
-from imblearn.over_sampling import SMOTE
-from sklearn.model_selection import GridSearchCV, StratifiedKFold
-from sklearn.metrics import make_scorer, balanced_accuracy_score
-import numpy as np
 
 # Define custom classes at module level (not inside function)
 class SMOTEWrapper(SMOTE):
     """Custom SMOTE that handles sample weights"""
+
     def fit_resample(self, X, y, sample_weight=None):
         X_res, y_res = super().fit_resample(X, y)
         if sample_weight is not None:
@@ -432,8 +502,10 @@ class SMOTEWrapper(SMOTE):
             return X_res, y_res, sample_weight_res
         return X_res, y_res
 
+
 class SMOTEPipeline(ImbPipeline):
     """Custom pipeline that handles SMOTE with weights"""
+
     def fit(self, X, y, **fit_params):
         # Get sample weights if provided
         sample_weight = fit_params.get(f'{self.steps[-1][0]}__sample_weight')
@@ -455,6 +527,7 @@ class SMOTEPipeline(ImbPipeline):
             if k.startswith(f'{self.steps[-1][0]}__')
         })
         return self
+
 
 def train_random_forest(X_train, y_train, X_test, y_test, class_weights, model_params=None):
     """Working Random Forest with SMOTE and sample weights"""
@@ -793,7 +866,7 @@ def load_or_train_model(model_name, train_func, X_train, y_train, X_test, y_test
                     y_pred = model.predict(X_test_reshaped).argmax(axis=1)
                 else:
                     y_pred = np.argmax(model.predict(X_test), axis=1)
-                st.success(f"Loaded pre-trained {model_name} from {model_path}")
+               # st.success(f"Loaded pre-trained {model_name} from {model_path}")
                 return model, y_pred
             except Exception as e:
                 st.warning(f"Failed to load model: {str(e)}. Training new model...")
@@ -861,108 +934,9 @@ def evaluate_model(y_true, y_pred, encoder, model_name):
 # ===========================================
 
 def main():
-    # Initialize session state
-    if 'force_redo' not in st.session_state:
-        st.session_state.force_redo = False
 
-    # Set page config
-    st.set_page_config(
-        page_title="Human Activity Recognition",
-        page_icon="🏃‍♂️",
-        layout="wide",
-        initial_sidebar_state="expanded"
-    )
 
-    # Paths
-    train_path = "data/raw/train.csv"
-    test_path = "data/raw/test.csv"
 
-    # Header section
-    st.markdown("""
-    <style>
-        .header-container {
-            background: linear-gradient(135deg, #6e48aa 0%, #9d50bb 100%);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-            margin-bottom: 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-        .header-title {
-            color: white;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
-        }
-        .header-subtitle {
-            color: rgba(255,255,255,0.9);
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-        }
-        .activity-tags {
-            display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-            margin-top: 1rem;
-        }
-        .activity-tag {
-            background: rgba(255,255,255,0.15);
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: white;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-    </style>
-
-    <div class="header-container">
-        <div>
-            <div class="header-title">HUMAN ACTIVITY RECOGNITION DASHBOARD</div>
-            <div class="header-subtitle">Real-time motion pattern analysis from multi-sensor data</div>
-            <div class="activity-tags">
-                <div class="activity-tag">🏃 Walking</div>
-                <div class="activity-tag">🛌 Lying</div>
-                <div class="activity-tag">🧘 Sitting</div>
-                <div class="activity-tag">🏋️ Standing</div>
-                <div class="activity-tag">↗️ Upstairs</div>
-                <div class="activity-tag">↘️ Downstairs</div>
-            </div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    # Sensor visualization
-    with st.expander("📊 Live Sensor Feed Simulation", expanded=True):
-        st.markdown("**Current Activity Detection**")
-        st.image(
-            "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3kxdzhxazJnOHZqY3FpdjZ6OW55dHY4Y25jMWk4bTVyaWRqbGU1byZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/duGB9Or2KTW4aB4KhY/giphy.gif",
-            width=800)
-
-        st.markdown("**Sensor Data**")
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            st.markdown("**Accelerometer**")
-            accel_data = pd.DataFrame({
-                'X': np.random.normal(0, 0.5, 20),
-                'Y': np.random.normal(0, 0.5, 20),
-                'Z': np.random.normal(1, 0.3, 20)
-            }, index=range(20))
-            st.line_chart(accel_data)
-        with col2:
-            st.markdown("**Gyroscope**")
-            gyro_data = pd.DataFrame({
-                'X': np.random.normal(0, 0.2, 20),
-                'Y': np.random.normal(0, 0.2, 20),
-                'Z': np.random.normal(0, 0.1, 20)
-            }, index=range(20))
-            st.line_chart(gyro_data)
-        with col3:
-            st.markdown("**Additional Metrics**")
-            st.metric("Motion Intensity", "High", "2.5%")
-            st.metric("Activity Confidence", "89%", "1.2%")
 
     # Sidebar controls
     st.sidebar.header("DATA UPLOAD")
@@ -1006,26 +980,31 @@ def main():
     with tab2:
         st.header("Data Preprocessing")
 
-        # Advanced options
-        # with st.expander("Advanced Options"):
-        #     force_redo = st.checkbox(
-        #         "Force reprocessing (ignore cache)",
-        #         value=False,
-        #         key='force_reprocess'
-        #     )
+
 
         # Preprocessing options
         with st.expander("Standard Scaling", expanded=True):
             do_scaling = st.checkbox("Apply Standard Scaling", value=True, key='scale')
 
         with st.expander("Feature Removal by Correlation"):
-            remove_corr = st.checkbox("Remove Highly Correlated Features", value=False, key='corr')
+            remove_corr = st.checkbox(
+                "Remove Highly Correlated Features",
+                value=True,  # Default checked
+                key='corr'
+            )
+
             if remove_corr:
                 corr_threshold = st.slider(
-                    "Correlation Threshold", 0.7, 1.0, 0.95, 0.01, key="corr_thresh")
+                    "Correlation Threshold",
+                    min_value=0.7,
+                    max_value=1.0,
+                    value=0.99,  # Your preferred strict default
+                    step=0.01,
+                    key="corr_thresh"
+                )
 
         with st.expander("Feature Removal by VIF"):
-            remove_vif = st.checkbox("Remove High VIF Features", value=False, key='vif')
+            remove_vif = st.checkbox("Remove High VIF Features", value=True, key='vif')
             if remove_vif:
                 vif_threshold = st.slider(
                     "VIF Threshold", 50, 200, 100, 5, key="vif_thresh")
@@ -1086,29 +1065,16 @@ def main():
             if 'preprocessing_complete' not in st.session_state:
                 st.warning("Please complete preprocessing first")
             else:
-                # Show class distribution if available
-                # if 'class_weights' in st.session_state:
-                #     show_class_distribution_comparison(
-                #         st.session_state.y_train,
-                #         st.session_state.class_weights,
-                #         st.session_state.encoder
-                #     )
 
-                # Model selection dropdown
-                model_option = st.selectbox(
+
+                model_display_name = st.selectbox(
                     "Select Model",
-                    [
-                        "Logistic Regression Model",
-                        "Random Forest Model",
-                        "SVM Model",
-                        "XGBoost Model",
-                        "CNN-LSTM Hybrid Model",
-                        "DNN Model",
-                        "CNN Model",
-                        "CNN-Dense Hybrid Model"
-                    ],
+                    options=list(MODEL_OPTIONS.keys()),
+                    format_func=lambda x: x,  # Optional: can customize display further
                     key='model_select'
                 )
+
+                model_option = MODEL_OPTIONS[model_display_name]
 
                 # Model-specific parameters
                 model_params = {}
@@ -1144,7 +1110,7 @@ def main():
                                 "Random Forest Model": train_random_forest,
                                 "SVM Model": train_svm,
                                 "XGBoost Model": train_xgboost,
-                                "CNN-LSTM Hybrid Model": train_cnn_lstm,
+                                #  "CNN-LSTM Hybrid Model": train_cnn_lstm,
                                 "DNN Model": train_improved_dnn,
                                 "CNN Model": train_cnn,
                                 "CNN-Dense Hybrid Model": train_cnn_dense
