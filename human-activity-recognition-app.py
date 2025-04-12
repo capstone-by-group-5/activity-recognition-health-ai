@@ -952,16 +952,29 @@ def main():
         uploaded_train = st.sidebar.file_uploader("Upload Training Data (CSV)", type=["csv"])
         uploaded_test = st.sidebar.file_uploader("Upload Test Data (CSV) - Optional", type=["csv"])
 
-        if uploaded_train:
+        if not uploaded_train and uploaded_test:
+            test = pd.read_csv(uploaded_test)
+            train = test
+            st.session_state.test = test
+            st.info("Proceeding to model testing.")
+
+        elif uploaded_train:
             train = pd.read_csv(uploaded_train)
             if uploaded_test:
                 test = pd.read_csv(uploaded_test)
+                st.session_state['test_uploaded'] = True
             else:
                 if st.checkbox("Split training data for validation?"):
                     test_size = st.slider("Test size ratio", 0.1, 0.5, 0.2)
                     train, test = train_test_split(train, test_size=test_size, random_state=42)
                 else:
-                    test = train.copy()
+                #    test = train.copy()
+                    test = pd.DataFrame()
+                st.session_state['test_uploaded'] = False
+            # Store data in session state
+            st.session_state['train'] = train
+            st.session_state['test'] = test
+            st.session_state['data_loaded'] = True
         else:
             st.warning("Please upload at least training data")
             return
