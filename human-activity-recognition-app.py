@@ -279,7 +279,7 @@ def perform_eda(train, test):
     cached_eda = load_from_cache(cache_dir, cache_name)
 
     if cached_eda:
-        st.success("Loaded EDA from stored file!")
+        #st.success("Loaded EDA from stored file!")
         # Display cached results
         with st.expander("Dataset Overview (Cached)"):
             st.write("Train Data Shape:", cached_eda['shape']['train'])
