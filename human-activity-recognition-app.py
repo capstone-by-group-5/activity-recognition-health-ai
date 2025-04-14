@@ -144,15 +144,15 @@ st.markdown("""
 
     <div class="header-container">
         <div>
-            <div class="header-title">HUMAN ACTIVITY RECOGNITION DASHBOARD</div>
+            <div class="header-title">🏋HUMAN ACTIVITY RECOGNITION DASHBOARD</div>
             <div class="header-subtitle">Real-time motion pattern analysis from multi-sensor data</div>
             <div class="activity-tags">
                 <div class="activity-tag">🏃 Walking</div>
                 <div class="activity-tag">🛌 Lying</div>
-                <div class="activity-tag">🧘 Sitting</div>
-                <div class="activity-tag">🏋️ Standing</div>
-                <div class="activity-tag">↗️ Upstairs</div>
-                <div class="activity-tag">↘️ Downstairs</div>
+                <div class="activity-tag">🪑🧘 Sitting</div>
+                <div class="activity-tag">🧍Standing</div>
+                <div class="activity-tag">🧗↗️Upstairs</div>
+                <div class="activity-tag">🚶↘️ Downstairs</div>
             </div>
         </div>
     </div>
@@ -226,18 +226,18 @@ def show_class_distribution_comparison(y_train, class_weights, encoder):
     st.pyplot(fig)
 
 
-def show_prediction_samples(y_true, y_pred, encoder, num_samples=5, offsets=[0]):
-    """Display sample predictions"""
-    st.subheader("Prediction Samples")
+def show_prediction_samples(y_true, y_pred, encoder, indices=None):
+    """Display predictions at specific indices"""
+    if indices is None:
+        indices = [1, 44, 61, 91, 131]
+    st.subheader("🔍 Sample Predictions (Selected Indices)")
+
     y_true_names = encoder.inverse_transform(y_true)
     y_pred_names = encoder.inverse_transform(y_pred)
-
-    for offset in offsets:
-        st.write(f"Offset {offset} to {offset + num_samples - 1}:")
-        for i in range(offset, offset + num_samples):
-            if i < len(y_true):
-                st.write(f"Sample {i}: Predicted = {y_pred_names[i]}, Original = {y_true_names[i]}")
-        st.write("")
+    st.write(f"Sample Tested Activities :")
+    for i in indices:
+        if i < len(y_true):
+            st.write(f"\n Predicted = `{y_pred_names[i]}`, Original = `{y_true_names[i]}` ")
 
 
 # ===========================================
@@ -384,6 +384,61 @@ def perform_eda(train, test):
             save_to_cache(eda_results, cache_dir, cache_name)
         except Exception as e:
             st.warning(f"Could not save to cache: {str(e)}")
+
+
+    with st.expander("Feature Importance Analysis", expanded=False):
+        st.write("""
+        **Top 20 Most Important Features**  
+        Calculated using Random Forest feature importance
+        """)
+
+        try:
+            # Prepare data
+            X = train.drop(['Activity', 'subject'], axis=1, errors='ignore')
+            y = train['Activity']
+
+            # Handle categorical features if needed
+            if X.select_dtypes(include=['object', 'category']).shape[1] > 0:
+                X = pd.get_dummies(X)
+
+            # Train a quick Random Forest model
+            with st.spinner("Calculating feature importance..."):
+                model = RandomForestClassifier(
+                    n_estimators=100,
+                    random_state=42,
+                    n_jobs=-1
+                )
+                model.fit(X, y)
+
+                # Get feature importance
+                importance = pd.DataFrame({
+                    'Feature': X.columns,
+                    'Importance': model.feature_importances_
+                }).sort_values('Importance', ascending=False)
+
+                # Display top 20 features
+                fig, ax = plt.subplots(figsize=(10, 8))
+                sns.barplot(
+                    x='Importance',
+                    y='Feature',
+                    data=importance.head(20),
+                    ax=ax,
+                    palette='viridis'
+                )
+                ax.set_title('Top 20 Important Features')
+                st.pyplot(fig)
+
+                # Add download button
+                csv = importance.to_csv(index=False)
+                st.download_button(
+                    label="Download Full Feature Importance",
+                    data=csv,
+                    file_name='feature_importance.csv',
+                    mime='text/csv'
+                )
+
+        except Exception as e:
+            st.warning(f"Could not calculate feature importance: {str(e)}")
 
 
 # ===========================================
@@ -1216,22 +1271,22 @@ def main():
                             st.error(f"Error during model training: {str(e)}")
 
                 # Show feature importance if available
-                if 'model' in st.session_state and st.session_state.current_model == model_option:
-                    if hasattr(st.session_state.model, 'feature_importances_'):
-                        st.subheader("Feature Importance")
-                        if isinstance(st.session_state.model, Pipeline):
-                            importances = st.session_state.model.named_steps['rf'].feature_importances_
-                        else:
-                            importances = st.session_state.model.feature_importances_
-
-                        feat_imp = pd.DataFrame({
-                            'Feature': st.session_state.feature_names,
-                            'Importance': importances
-                        }).sort_values('Importance', ascending=False)
-
-                        fig, ax = plt.subplots(figsize=(10, 8))
-                        sns.barplot(x='Importance', y='Feature', data=feat_imp.head(20), ax=ax)
-                        st.pyplot(fig)
+                # if 'model' in st.session_state and st.session_state.current_model == model_option:
+                #     if hasattr(st.session_state.model, 'feature_importances_'):
+                #         st.subheader("Feature Importance")
+                #         if isinstance(st.session_state.model, Pipeline):
+                #             importances = st.session_state.model.named_steps['rf'].feature_importances_
+                #         else:
+                #             importances = st.session_state.model.feature_importances_
+                #
+                #         feat_imp = pd.DataFrame({
+                #             'Feature': st.session_state.feature_names,
+                #             'Importance': importances
+                #         }).sort_values('Importance', ascending=False)
+                #
+                #         fig, ax = plt.subplots(figsize=(10, 8))
+                #         sns.barplot(x='Importance', y='Feature', data=feat_imp.head(20), ax=ax)
+                #         st.pyplot(fig)
 
 
 if __name__ == "__main__":
