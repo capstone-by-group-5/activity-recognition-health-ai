@@ -428,14 +428,6 @@ def perform_eda(train, test):
                 ax.set_title('Top 20 Important Features')
                 st.pyplot(fig)
 
-                # Add download button
-                csv = importance.to_csv(index=False)
-                st.download_button(
-                    label="Download Full Feature Importance",
-                    data=csv,
-                    file_name='feature_importance.csv',
-                    mime='text/csv'
-                )
 
         except Exception as e:
             st.warning(f"Could not calculate feature importance: {str(e)}")
