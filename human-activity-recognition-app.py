@@ -42,7 +42,6 @@ load_model = tf.keras.models.load_model
 train_path = "data/raw/train.csv"
 test_path = "data/raw/test.csv"
 
-
 # Initialize session state
 if 'force_redo' not in st.session_state:
     st.session_state.force_redo = False
@@ -64,8 +63,6 @@ MODEL_OPTIONS = {
     "CNN Model (Convolutional Neural Networks)": "CNN Model",
     "CNN-Dense Hybrid Model": "CNN-Dense Hybrid Model"
 }
-
-
 
 # Sensor visualization
 with st.expander("📊 Live Sensor Feed Simulation", expanded=True):
@@ -360,31 +357,6 @@ def perform_eda(train, test):
             }
         st.write(f"Train Missing Values: {eda_results['missing_values']['train']}")
         st.write(f"Test Missing Values: {eda_results['missing_values']['test']}")
-
-    # Feature Correlation
-    # with st.expander("Feature Correlation"):
-    #     if not eda_results['meta']['cached']:
-    #         numeric_cols = train.select_dtypes(include=['float64', 'int64']).columns
-    #         corr_matrix = train[numeric_cols].corr()
-    #         eda_results['correlation'] = {
-    #             'data': corr_matrix.where(np.triu(np.ones(corr_matrix.shape), k=1).astype(bool)).stack().to_dict(),
-    #             'columns': numeric_cols.tolist()
-    #         }
-    #
-    #     # Check if correlation data exists properly
-    #     if isinstance(eda_results['correlation'], dict) and 'data' in eda_results['correlation']:
-    #         plt.close('all')
-    #         fig, ax = plt.subplots(figsize=(12, 10))
-    #
-    #         # Reconstruct correlation matrix
-    #         cols = eda_results['correlation']['columns']
-    #         corr_data = pd.Series(eda_results['correlation']['data']).unstack()
-    #         corr_data = corr_data.reindex(index=cols, columns=cols)
-    #
-    #         sns.heatmap(corr_data, ax=ax)
-    #         st.pyplot(fig)
-    #     else:
-    #         st.warning("No correlation data available")
 
     # Save results if this was a fresh analysis
     if not eda_results['meta']['cached']:
