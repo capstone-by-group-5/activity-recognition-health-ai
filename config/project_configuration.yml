@@ -63,8 +63,10 @@ eda:
   boxplot_features: 100  # Number of features per boxplot plot
 
 algorithms:
-  - RandomForest
+  - RANDOM-FOREST
   - SVM
   - XGBoost
   - CNN
-  - LSTM
+  - LOGISTIC REGRESSION
+  - DNN
+  - CNN-DENSE
