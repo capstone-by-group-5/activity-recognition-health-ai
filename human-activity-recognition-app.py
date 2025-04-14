@@ -9,6 +9,7 @@ import pandas as pd
 from tensorflow.keras import Sequential
 from tensorflow.keras.regularizers import l2
 from imblearn.pipeline import Pipeline
+from collections import defaultdict
 
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -35,24 +36,12 @@ from imblearn.over_sampling import SMOTE
 from sklearn.metrics import make_scorer, balanced_accuracy_score
 import numpy as np
 
-
-
 load_model = tf.keras.models.load_model
 
 # Paths
 train_path = "data/raw/train.csv"
 test_path = "data/raw/test.csv"
 
-
-MODEL_OPTIONS = {
-    "Logistic Regression Model": "Logistic Regression Model",
-    "Random Forest Model": "Random Forest Model",
-    "SVM Model (Support Vector Machine)": "SVM Model",
-    "XGBoost Model (eXtreme Gradient Boosting)": "XGBoost Model",
-    "DNN Model (Deep Neural Network)": "DNN Model",
-    "CNN Model (Convolutional Neural Networks)": "CNN Model",
-    "CNN-Dense Hybrid Model": "CNN-Dense Hybrid Model"
-}
 
 # Initialize session state
 if 'force_redo' not in st.session_state:
@@ -65,6 +54,17 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+MODEL_OPTIONS = {
+    "Logistic Regression Model": "Logistic Regression Model",
+    "Random Forest Model": "Random Forest Model",
+    "SVM Model (Support Vector Machine)": "SVM Model",
+    "XGBoost Model (eXtreme Gradient Boosting)": "XGBoost Model",
+    "DNN Model (Deep Neural Network)": "DNN Model",
+    "CNN Model (Convolutional Neural Networks)": "CNN Model",
+    "CNN-Dense Hybrid Model": "CNN-Dense Hybrid Model"
+}
+
 
 
 # Sensor visualization
@@ -158,6 +158,7 @@ st.markdown("""
     </div>
     """, unsafe_allow_html=True)
 
+
 # from datetime import datetime
 
 
@@ -165,8 +166,15 @@ st.markdown("""
 # Helper Functions
 # ===========================================
 
-
-
+def get_model_metrics(y_true, y_pred):
+    """Calculate all relevant metrics for model comparison"""
+    return {
+        'accuracy': accuracy_score(y_true, y_pred),
+        'precision': precision_score(y_true, y_pred, average='weighted'),
+        'recall': recall_score(y_true, y_pred, average='weighted'),
+        'f1': f1_score(y_true, y_pred, average='weighted'),
+        'balanced_accuracy': balanced_accuracy_score(y_true, y_pred)
+    }
 
 
 def get_data_hash(train, test, options=None):
@@ -384,7 +392,6 @@ def perform_eda(train, test):
             save_to_cache(eda_results, cache_dir, cache_name)
         except Exception as e:
             st.warning(f"Could not save to cache: {str(e)}")
-
 
     with st.expander("Feature Importance Analysis", expanded=False):
         st.write("""
@@ -959,7 +966,7 @@ def load_or_train_model(model_name, train_func, X_train, y_train, X_test, y_test
                     y_pred = model.predict(X_test_reshaped).argmax(axis=1)
                 else:
                     y_pred = np.argmax(model.predict(X_test), axis=1)
-               # st.success(f"Loaded pre-trained {model_name} from {model_path}")
+                # st.success(f"Loaded pre-trained {model_name} from {model_path}")
                 return model, y_pred
             except Exception as e:
                 st.warning(f"Failed to load model: {str(e)}. Training new model...")
@@ -1027,14 +1034,23 @@ def evaluate_model(y_true, y_pred, encoder, model_name):
 # ===========================================
 
 def main():
-
-
     # Sidebar controls
     st.sidebar.header("DATA UPLOAD")
     data_option = st.sidebar.radio("Data Source", ["Use sample data", "Upload your own"])
 
     # Main content tabs
-    tab1, tab2, tab3 = st.tabs(["EDA", "Preprocessing", "Model Training"])
+    # Add this at the beginning of your main() function or right before creating tabs
+    st.markdown("""
+    <style>
+        .stTabs [data-baseweb="tab-list"] button [data-testid="stMarkdownContainer"] p {
+            font-size: 20px !important;
+            font-weight: bold !important;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+
+    # Then create your tabs normally
+    tab1, tab2, tab3, tab4 = st.tabs(["EDA", "Preprocessing", "Model Training", "Model Comparison"])
 
     # Initialize variables first
     train = None
@@ -1065,7 +1081,7 @@ def main():
                     test_size = st.slider("Test size ratio", 0.1, 0.5, 0.2)
                     train, test = train_test_split(train, test_size=test_size, random_state=42)
                 else:
-                #    test = train.copy()
+                    #    test = train.copy()
                     test = pd.DataFrame()
                 st.session_state['test_uploaded'] = False
             # Store data in session state
@@ -1174,7 +1190,6 @@ def main():
                 st.warning("Please complete preprocessing first")
             else:
 
-
                 model_display_name = st.selectbox(
                     "Select Model",
                     options=list(MODEL_OPTIONS.keys()),
@@ -1262,23 +1277,112 @@ def main():
                         except Exception as e:
                             st.error(f"Error during model training: {str(e)}")
 
-                # Show feature importance if available
-                # if 'model' in st.session_state and st.session_state.current_model == model_option:
-                #     if hasattr(st.session_state.model, 'feature_importances_'):
-                #         st.subheader("Feature Importance")
-                #         if isinstance(st.session_state.model, Pipeline):
-                #             importances = st.session_state.model.named_steps['rf'].feature_importances_
-                #         else:
-                #             importances = st.session_state.model.feature_importances_
-                #
-                #         feat_imp = pd.DataFrame({
-                #             'Feature': st.session_state.feature_names,
-                #             'Importance': importances
-                #         }).sort_values('Importance', ascending=False)
-                #
-                #         fig, ax = plt.subplots(figsize=(10, 8))
-                #         sns.barplot(x='Importance', y='Feature', data=feat_imp.head(20), ax=ax)
-                #         st.pyplot(fig)
+                if 'model' in st.session_state and st.session_state.current_model == model_option:
+                    # Store results for comparison
+                    model_name = st.session_state.current_model
+                    st.session_state.model_results[model_name] = get_model_metrics(
+                        st.session_state.y_test,
+                        st.session_state.y_pred
+                    )
+                    # Store predictions for later use
+                    st.session_state[f"{model_name}_y_pred"] = st.session_state.y_pred
+
+            with tab4:
+                st.header("Model Performance Comparison")
+
+                if 'preprocessing_complete' not in st.session_state:
+                    st.warning("Please complete preprocessing and train model")
+                else:
+                    # Initialize model results in session state if not present
+                    if 'model_results' not in st.session_state:
+                        st.session_state.model_results = {}
+
+                    # Comparison options
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        compare_metric = st.selectbox(
+                            "Primary Metric for Comparison",
+                            options=['accuracy', 'f1', 'precision', 'recall', 'balanced_accuracy'],
+                            format_func=lambda x: x.replace('_', ' ').title(),
+                            index=0
+                        )
+                    with col2:
+                        show_top = st.slider("Number of Top Models to Highlight", 1, len(MODEL_OPTIONS), 3)
+
+                    # Button to refresh comparison
+                    if st.button("Update Comparison", key='update_compare'):
+                        st.rerun()
+
+                    # Display comparison if we have results
+                    if st.session_state.model_results:
+                        # Prepare data for visualization
+                        metrics_df = pd.DataFrame.from_dict(st.session_state.model_results, orient='index')
+
+                        # Sort by selected metric
+                        metrics_df = metrics_df.sort_values(compare_metric, ascending=False)
+
+                        # Highlight top models
+                        st.subheader(f"Model Performance ({compare_metric.replace('_', ' ').title()})")
+
+                        # Create a styled dataframe
+                        styled_df = metrics_df.style \
+                            .background_gradient(subset=[compare_metric], cmap='YlGnBu') \
+                            .format("{:.4f}")
+
+                        st.dataframe(styled_df)
+
+                        # Visual comparison
+                        st.subheader("Performance Metrics Comparison")
+
+                        # Melt for seaborn
+                        plot_df = metrics_df.reset_index().melt(id_vars='index',
+                                                                value_vars=['accuracy', 'precision', 'recall', 'f1',
+                                                                            'balanced_accuracy'],
+                                                                var_name='metric',
+                                                                value_name='score')
+
+                        # Plot
+                        plt.figure(figsize=(12, 6))
+                        ax = sns.barplot(data=plot_df, x='index', y='score', hue='metric')
+                        plt.xticks(rotation=45)
+                        plt.title("Model Performance Comparison")
+                        plt.ylabel("Score")
+                        plt.xlabel("Model")
+                        plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+                        st.pyplot(plt)
+
+                        # Detailed metrics for top models
+                        st.subheader(f"Detailed Metrics for Top {show_top} Models")
+                        top_models = metrics_df.head(show_top).index.tolist()
+
+                        for model_name in top_models:
+                            with st.expander(f"🔍 {model_name} Details", expanded=False):
+                                # Get the model's confusion matrix
+                                if f"{model_name}_y_pred" in st.session_state:
+                                    cm = confusion_matrix(
+                                        st.session_state.y_test,
+                                        st.session_state[f"{model_name}_y_pred"]
+                                    )
+
+                                    fig, ax = plt.subplots(figsize=(8, 6))
+                                    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+                                                xticklabels=st.session_state.encoder.classes_,
+                                                yticklabels=st.session_state.encoder.classes_,
+                                                ax=ax)
+                                    ax.set_title(f"{model_name} Confusion Matrix")
+                                    st.pyplot(fig)
+
+                                    # Show classification report
+                                    st.write("Classification Report:")
+                                    report = classification_report(
+                                        st.session_state.y_test,
+                                        st.session_state[f"{model_name}_y_pred"],
+                                        target_names=st.session_state.encoder.classes_,
+                                        output_dict=True
+                                    )
+                                    st.dataframe(pd.DataFrame(report).transpose())
+                    else:
+                        st.info("Please Train models to see comparison results.")
 
 
 if __name__ == "__main__":
