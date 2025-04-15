@@ -62,3 +62,6 @@ Dataset from Kaggle:
 
 ## To Run the application
 Command to Execute in terminal :  `python main.py`
+
+## Deployment  
+[Human Activity Recognition with Smartphones - Deployment](https://activity-recognition-health-ai.streamlit.app/))  
