@@ -169,8 +169,9 @@ def get_model_metrics(y_true, y_pred):
         'accuracy': accuracy_score(y_true, y_pred),
         'precision': precision_score(y_true, y_pred, average='weighted'),
         'recall': recall_score(y_true, y_pred, average='weighted'),
-        'f1': f1_score(y_true, y_pred, average='weighted'),
-        'balanced_accuracy': balanced_accuracy_score(y_true, y_pred)
+        'f1': f1_score(y_true, y_pred, average='weighted')
+        #,
+       # 'balanced_accuracy': balanced_accuracy_score(y_true, y_pred)
     }
 
 
@@ -991,13 +992,19 @@ def evaluate_model(y_true, y_pred, encoder, model_name):
     # Confusion matrix
     st.subheader("Confusion Matrix")
     cm = confusion_matrix(y_true, y_pred)
-    fig, ax = plt.subplots(figsize=(10, 8))
-    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+    fig, ax = plt.subplots(figsize=(6, 4))
+    heatmap = sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
                 xticklabels=encoder.classes_,
                 yticklabels=encoder.classes_,
-                ax=ax)
+                ax=ax, annot_kws={"size": 6})
+    ax.set_xticklabels(ax.get_xticklabels(), fontsize=5)  # Model names on x-axis
+    ax.set_yticklabels(ax.get_yticklabels(), fontsize=5)  # Model names on y-axis
     ax.set_xlabel('Predicted')
     ax.set_ylabel('Actual')
+    ax.set_title('Confusion Matrix', fontsize=8)
+    cbar = heatmap.collections[0].colorbar
+    if cbar:
+        cbar.ax.tick_params(labelsize=6)
     st.pyplot(fig)
 
 
@@ -1260,7 +1267,8 @@ def main():
                     st.session_state[f"{model_name}_y_pred"] = st.session_state.y_pred
 
             with tab4:
-                st.header("Model Performance Comparison")
+                st.markdown("<h2 style='font-size: 20px;'>Model Performance Comparison</h2>", unsafe_allow_html=True)
+             #   st.header("Model Performance Comparison")
 
                 if 'preprocessing_complete' not in st.session_state:
                     st.warning("Please complete preprocessing and train model")
@@ -1274,7 +1282,7 @@ def main():
                     with col1:
                         compare_metric = st.selectbox(
                             "Primary Metric for Comparison",
-                            options=['accuracy', 'f1', 'precision', 'recall', 'balanced_accuracy'],
+                            options=['accuracy', 'f1', 'precision', 'recall'], # 'balanced_accuracy'],
                             format_func=lambda x: x.replace('_', ' ').title(),
                             index=0
                         )
@@ -1308,15 +1316,15 @@ def main():
 
                         # Melt for seaborn
                         plot_df = metrics_df.reset_index().melt(id_vars='index',
-                                                                value_vars=['accuracy', 'precision', 'recall', 'f1',
-                                                                            'balanced_accuracy'],
+                                                                value_vars=['accuracy', 'precision', 'recall', 'f1'], #,'balanced_accuracy'],
                                                                 var_name='metric',
                                                                 value_name='score')
 
                         # Plot
-                        plt.figure(figsize=(12, 6))
+                        plt.figure(figsize=(4, 2))
                         ax = sns.barplot(data=plot_df, x='index', y='score', hue='metric')
-                        plt.xticks(rotation=45)
+                        plt.xticks(rotation=45, fontsize=6)
+                        plt.yticks(fontsize=6)
                         plt.title("Model Performance Comparison")
                         plt.ylabel("Score")
                         plt.xlabel("Model")
@@ -1336,12 +1344,17 @@ def main():
                                         st.session_state[f"{model_name}_y_pred"]
                                     )
 
-                                    fig, ax = plt.subplots(figsize=(8, 6))
-                                    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+                                    fig, ax = plt.subplots(figsize=(3, 2))
+                                    heatmap = sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
                                                 xticklabels=st.session_state.encoder.classes_,
                                                 yticklabels=st.session_state.encoder.classes_,
-                                                ax=ax)
-                                    ax.set_title(f"{model_name} Confusion Matrix")
+                                                ax=ax, annot_kws={"size": 6})
+                                    ax.set_xticklabels(ax.get_xticklabels(), fontsize=3)  # Model names on x-axis
+                                    ax.set_yticklabels(ax.get_yticklabels(), fontsize=3)  # Model names on y-axis
+                                    cbr = heatmap.collections[0].colorbar
+                                    if cbr:
+                                        cbr.ax.tick_params(labelsize=5)
+                                    ax.set_title(f"{model_name} Confusion Matrix", fontsize=5)
                                     st.pyplot(fig)
 
                                     # Show classification report
