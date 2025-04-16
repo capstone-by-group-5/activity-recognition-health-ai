@@ -1325,9 +1325,9 @@ def main():
                         ax = sns.barplot(data=plot_df, x='index', y='score', hue='metric')
                         plt.xticks(rotation=45, fontsize=6)
                         plt.yticks(fontsize=6)
-                        plt.title("Model Performance Comparison")
-                        plt.ylabel("Score")
-                        plt.xlabel("Model")
+                        plt.title("Model Performance Comparison", fontsize=8)
+                        plt.ylabel("Score", fontsize=6)
+                        plt.xlabel("Model", fontsize=6)
                         plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
                         st.pyplot(plt)
 
