@@ -1357,7 +1357,7 @@ def main():
                                     ax.set_title(f"{model_name} Confusion Matrix", fontsize=5)
                                     st.pyplot(fig)
 
-                                    #  classification report
+                                    # Show classification report
                                     st.write("Classification Report:")
                                     report = classification_report(
                                         st.session_state.y_test,
