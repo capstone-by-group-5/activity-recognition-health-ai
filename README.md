@@ -1,5 +1,13 @@
 # Human Activity Recognition for Health Monitoring Using Wearable Devices  
 
+## 🚀 Key Features
+- 7+ ML/DL Models (Logistic Regression, Random Forest, XGBoost, CNN, LSTM, Hybrid Models)
+- Interactive Streamlit Dashboard
+- Comprehensive Performance Metrics
+- End-to-End Pipeline
+
+## 📂 Project Structure
+
 ## 📌 Overview  
 This project focuses on **Human Activity Recognition (HAR)** for **health monitoring** using wearable devices. It leverages **machine learning** and **deep learning** techniques to classify various human activities based on sensor data.  
 
@@ -65,3 +73,26 @@ Command to Execute in terminal :  `python human-activity-recognition-app.py`
 
 ## Deployment  
 [Human Activity Recognition with Smartphones - Deployment](https://activity-recognition-health-ai.streamlit.app/))  
+
+
+
+## 🛠️ Setup & Execution
+```bash
+# 1. Clone repository  
+git clone https://github.com/capstone-by-group-5/activity-recognition-health-ai.git  
+cd activity-recognition-health-ai 
+
+# 2. Create virtual environment  
+python -m venv venv  
+source venv/bin/activate       # Linux/Mac  
+.\venv\Scripts\activate        # Windows  
+
+# 3. Install dependencies  
+pip install -r requirements.txt  
+
+# 4. Download dataset (place in data/raw/)
+# Get from: https://www.kaggle.com/datasets/uciml/human-activity-recognition-with-smartphones
+
+# 5. Run Streamlit app  
+streamlit run human-activity-recognition-app.py  
+
