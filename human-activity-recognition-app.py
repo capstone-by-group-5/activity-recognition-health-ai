@@ -1369,6 +1369,29 @@ def main():
                     else:
                         st.info("Please Train models to see comparison results.")
 
+st.markdown(
+    """
+    <style>
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        font-size: 14px;
+        color: #555;
+        background-color: rgba(255,255,255,0.9);
+        z-index: 1000;
+        border-top: 1px solid #eee;
+    }
+    </style>
+    <div class="footer">
+        Developed by <strong>DHEERAJ KUMAR</strong>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 if __name__ == "__main__":
     main()
